@@ -16,7 +16,6 @@ public class BlogApplication {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Hello World");
-        new HuvudMeny().setVisible(true);
     }
 
     public void metod1() {
