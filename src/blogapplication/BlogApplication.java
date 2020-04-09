@@ -8,6 +8,7 @@ hej alla farhiya saäger hej;
 /**
  *
  * @author HHHLO
+ * Pontus säger Hej hej
  */
 public class BlogApplication {
 
