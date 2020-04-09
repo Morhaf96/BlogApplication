@@ -8,6 +8,7 @@ package blogapplication;
 /**
  *
  * @author HHHLO
+ * Pontus säger Hej hej
  */
 public class BlogApplication {
 
