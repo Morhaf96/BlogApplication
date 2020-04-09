@@ -6,7 +6,7 @@
 package blogapplication;
 /**
  *
- * @author Team14
+ * @author Team 14
  */
 public class BlogApplication {
 
