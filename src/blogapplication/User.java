@@ -4,14 +4,26 @@
  * and open the template in the editor.
  */
 package blogapplication;
-
+import java.util.ArrayList;
 /**
  *
  * @author HHHLO
  */
 public class User {
-    private String eMail;
+    private int userId;
     private String firstName;
     private String lastname;
+    private String eMail;
+    private String password;
+    private boolean adminStatus;
+    
+   public User(String fornamn, String efternamn, String email, String losenord){
+   firstName = fornamn;
+   lastname = efternamn;
+   eMail = email;
+   password = losenord;
+   adminStatus = false;
+   
+   }
     
 }
