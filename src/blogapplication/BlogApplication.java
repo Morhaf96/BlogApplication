@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package blogapplication;
-
+hej alla farhiya saäger hej;
 /**
  *
  * @author HHHLO
