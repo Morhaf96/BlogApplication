@@ -6,8 +6,7 @@
 package blogapplication;
 /**
  *
- * @author HHHLO
- * Pontus säger Hej hej
+ * @author Team14
  */
 public class BlogApplication {
 
@@ -18,7 +17,6 @@ public class BlogApplication {
         // TODO code application logic here
         System.out.println("Hello World");
         new HuvudMeny().setVisible(true);
-        
     }
 
     public void metod1() {
