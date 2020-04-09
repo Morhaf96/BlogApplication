@@ -3,7 +3,6 @@ gitignore.io help:
   :types: - creates .gitignore files for types of operating systems, programming languages or IDEs
 /build/
 /dist/
-
 # Created by https://www.gitignore.io/api/netbeans
 # Edit at https://www.gitignore.io/?templates=netbeans
 
@@ -18,3 +17,15 @@ nbdist/
 .nb-gradle/
 
 # End of https://www.gitignore.io/api/netbeans
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+.nb-gradle/
+nbproject/
+build.xml
+manifest.mf
+test/
+ErrorLog.txt
+dbConfig.ini
