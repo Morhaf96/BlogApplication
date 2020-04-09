@@ -7,7 +7,7 @@ package blogapplication;
 import java.util.ArrayList;
 /**
  *
- * @author HHHLO
+ * @author Morhaf
  */
 public class User {
     private int userId;
