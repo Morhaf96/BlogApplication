@@ -37,4 +37,41 @@ public class DataHanterare {
         }
         return databasen;
     }
+    
+    public int getUserId(String mejl) {
+        int userId = 0;
+        try {
+            String query = databasen.fetchSingle("Select AnvandarId from Anvandare where Mejl='" + mejl + "';");
+            userId = Integer.parseInt(query);
+        } catch (InfException e) {
+            System.out.println("getUserId felmeddelande1: " + e.getMessage());
+            System.out.println(userId);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Användaren hiitades ej! \n"
+                    + "Vänligen dubbelkolla mejlet du angav och försök igen.");
+            System.out.println("getUserId felmeddelande2: " + e.getMessage());
+        }
+
+        return userId;
+    }
+    
+    public static boolean kontrolleraInloggning(int userId, char[] losenord) {
+        boolean stammer = false;
+        String userLosenord = "";
+        try {
+            userLosenord = databasen.fetchSingle("Select Losenord from Anvandare where AnvandarId='" + userId + "'");
+        } catch (InfException e) {
+            System.out.println("kollaInloggning felmeddelande: " + e);
+        }
+        if (Arrays.equals(losenord, userLosenord.toCharArray())) {
+            stammer = true;
+        }
+        return stammer;
+    }
+    
+    
+    
+    
 }
+    
+
