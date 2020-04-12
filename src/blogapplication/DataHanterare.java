@@ -23,7 +23,6 @@ public class DataHanterare {
      private static InfDB databasen;
 
     public static InfDB dataHanterare() {
-
         if (databasen == null) {
             try {
                 File dbFil = new File("BLOGDB.FDB");
@@ -69,8 +68,40 @@ public class DataHanterare {
         return stammer;
     }
     
+    public int getNextAnvandarId() {
+        String id = "";
+        try {
+            id = databasen.getAutoIncrement("Anvandare", "AnvandarId");
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Databasfel!");
+            System.out.println("getNextAnvandarId felmeddelande: " + e.getMessage());
+        }
+        return Integer.parseInt(id);
+    }
     
+    public boolean registreraNyAnvandare(String fornamn, String efternamn, String email, char[] losenord, String telefonnummer) {
+        boolean anvandareRegistrerad = false;
+        String fornamnet=stringFormat(fornamn);
+        String efternamnet=stringFormat(efternamn);
+        String mejlet=stringFormat(email);
+        
+        try {
+            databasen.insert("insert into anvandare(anvandarid, fornamn, efternamn, mejl, telefonnummer, losenord, profilbildurl) "
+                    + "values ('" + getNextAnvandarId() + "', '" + fornamnet + "', '" + efternamnet + "', '" + mejlet + "', '"+losenord+"', '"+telefonnummer+"', 'Profilepic.jpg');");
+            anvandareRegistrerad = true;
+            JOptionPane.showMessageDialog(null, "Registreringen lyckades!");
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "");
+            System.out.println("Registreringen misslyckades!\n"
+                    + "RegistreraNyElev felmeddelande: " + e.getMessage());
+        }
+        return anvandareRegistrerad;
+    }
     
+    public String stringFormat(String enString) {
+        String nyString = enString.substring(0, 1).toUpperCase() + enString.substring(1, enString.length()).toLowerCase();
+        return nyString;
+    }
     
 }
     

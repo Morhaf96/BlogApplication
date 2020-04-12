@@ -12,7 +12,7 @@ import oru.inf.InfDB;
  *
  * @author Morhaf
  */
-public class MainMenu extends javax.swing.JFrame {
+public class HuvudMeny extends javax.swing.JFrame {
 
     private DataHanterare dataHanterare;
     private InfDB databasen;
@@ -20,7 +20,7 @@ public class MainMenu extends javax.swing.JFrame {
     /**
      * Creates new form MainMenu
      */
-    public MainMenu() {
+    public HuvudMeny() {
         dataHanterare = new DataHanterare();
         databasen = DataHanterare.dataHanterare();
         initComponents();
@@ -211,7 +211,6 @@ public class MainMenu extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
                         .addComponent(lfInlogLos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
                 .addComponent(btnLogin)
                 .addGap(65, 65, 65))
         );
@@ -241,24 +240,27 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-         if (Validering.FaltArTom(tfInlogMail)) {
+        if (Validering.FaltArTom(tfInlogMail)) {
             System.out.println("Mejlfältet är tomt");
+        } else if (!Validering.arMejl(tfInlogMail)) {
+        JOptionPane.showMessageDialog(null, "Vänligen ange ett giltigt mejl!");
+         tfInlogMail.requestFocus();
         } else if (Validering.pwFaltArTom(lfInlogLos)) {
             System.out.println("Losenordfältet är tomt");
         } else {
             String usermail = tfInlogMail.getText();
-            char[] larareLosenord = lfInlogLos.getPassword();
+            char[] anvandarLosenord = lfInlogLos.getPassword();
 
             int userId = dataHanterare.getUserId(usermail);
             if (userId != 0) {
-                if (DataHanterare.kontrolleraInloggning(userId, larareLosenord)) {
+                if (DataHanterare.kontrolleraInloggning(userId, anvandarLosenord)) {
 
                     JOptionPane.showMessageDialog(null, "Du är nu inloggad!");
                     tomInlogFalten();
                     new InloggadAnvandare().setVisible(true);
                     //this.dispose();
 
-                } else if (!DataHanterare.kontrolleraInloggning(userId, larareLosenord)) {
+                } else if (!DataHanterare.kontrolleraInloggning(userId, anvandarLosenord)) {
                     JOptionPane.showMessageDialog(null, "Inloggningen lyckades ej! Vänligen försök igen!");
                 }
             }
@@ -269,19 +271,30 @@ public class MainMenu extends javax.swing.JFrame {
         tfInlogMail.setText(null);
         lfInlogLos.setText(null);
     }
-    
+
     public void tomRegFalten() {
         tfFornamn.setText(null);
         tfEfternamn.setText(null);
         tfRegMail.setText(null);
         lfRegLos.setText(null);
         tfTel.setText(null);
-        
+
     }
-    
+
     private void btnRegNyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegNyActionPerformed
-       
-    
+        String fornamn = tfFornamn.getText();
+        String efternamn = tfEfternamn.getText();
+        String email = tfRegMail.getText();
+        char[] anvandarLos = lfRegLos.getPassword();
+        String tnr = tfTel.getText();
+
+        if (dataHanterare.registreraNyAnvandare(fornamn, efternamn, email, anvandarLos, tnr)) {
+            JOptionPane.showMessageDialog(null, "Registreringen lyckades!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Registreringen lyckades ej!");
+        }
+
+
     }//GEN-LAST:event_btnRegNyActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

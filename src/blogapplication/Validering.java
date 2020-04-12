@@ -113,6 +113,20 @@ public class Validering {
         }
         return resultat;
     }
+    
+    
+    public static boolean arMejl(JTextField ettTextFalt) {
+        boolean resultat = false;
+        try {
+            String textAttKolla = ettTextFalt.getText();
+            if (textAttKolla.contains("@") && textAttKolla.contains(".")){
+            resultat=true;
+            }
+        } catch (Exception e) {
+            System.out.println("arHeltal felmeddelande: " + e.getMessage());
+        }
+        return resultat;
+    }
 
     /**
      * Metoden kontrollerar om dagen som användaren har matat in är verklig
@@ -184,5 +198,15 @@ public class Validering {
             System.out.println("datumOrdning felmeddelande");
         }
         return resultat;
+    }
+    
+    public static boolean arTelefonnummer(JTextField textfalt){
+    boolean arTNummer = true;
+    String tf= textfalt.getText().toString();
+   
+    if ((!arHeltal(textfalt) || (tf.length()!=12))){
+    arTNummer=false;
+    }
+    return arTNummer;
     }
 }

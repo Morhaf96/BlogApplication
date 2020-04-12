@@ -13,7 +13,7 @@ public class Start {
     
       public static void main(String[] args) {
         DataHanterare.dataHanterare();
-         new MainMenu().setVisible(true);
+         new HuvudMeny().setVisible(true);
         
     }
 
