@@ -8,5 +8,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+*BLOGDB.FDB
 *.FDB
 *.log
