@@ -79,7 +79,7 @@ public class DataHanterare {
         return Integer.parseInt(id);
     }
     
-    public boolean registreraNyAnvandare(String fornamn, String efternamn, String email, char[] losenord, String telefonnummer) {
+    public boolean registreraNyAnvandare(String fornamn, String efternamn, String email, String losenord, String telefonnummer) {
         boolean anvandareRegistrerad = false;
         String fornamnet=stringFormat(fornamn);
         String efternamnet=stringFormat(efternamn);
@@ -87,11 +87,12 @@ public class DataHanterare {
         
         try {
             databasen.insert("insert into anvandare(anvandarid, fornamn, efternamn, mejl, telefonnummer, losenord, profilbildurl) "
-                    + "values ('" + getNextAnvandarId() + "', '" + fornamnet + "', '" + efternamnet + "', '" + mejlet + "', '"+losenord+"', '"+telefonnummer+"', 'Profilepic.jpg');");
+                    + "values ('" + getNextAnvandarId() + "', '" + fornamnet + "', '" + efternamnet + "', '" + mejlet + "', '"+
+                    telefonnummer +"', '"+losenord+"', 'Profilepic.jpg');");
             anvandareRegistrerad = true;
             JOptionPane.showMessageDialog(null, "Registreringen lyckades!");
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "");
+            JOptionPane.showMessageDialog(null, "Registreringen misslyckades");
             System.out.println("Registreringen misslyckades!\n"
                     + "RegistreraNyElev felmeddelande: " + e.getMessage());
         }

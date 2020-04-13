@@ -15,8 +15,8 @@ import javax.swing.JTextField;
  * @author Morhaf
  */
 public class Validering {
-    
-     /**
+
+    /**
      * Metoden kontrollerar ett textfält och returnerar true ifall det är tomt,
      * och false annars. Om fältet är tomt dyker ett felmeddelande upp för att
      * varna användaren om felet och det tömma fältet får fokus.
@@ -114,13 +114,28 @@ public class Validering {
         return resultat;
     }
     
-    
+    public static boolean arHeltalN(JTextField ettTextFalt) {
+        String stringAttKolla= ettTextFalt.getText();
+        boolean resultat = true;
+        try {
+           Double num = Double.parseDouble(stringAttKolla);
+        } catch (NumberFormatException e) {
+            resultat = false;
+            JOptionPane.showMessageDialog(null, "Textfältet får bara innehålla siffror!");
+            System.out.println("arHeltal felmeddelande: " + e.getMessage());
+            ettTextFalt.requestFocus();
+        }
+        return resultat;
+    }
+
     public static boolean arMejl(JTextField ettTextFalt) {
-        boolean resultat = false;
+        boolean resultat = true;
         try {
             String textAttKolla = ettTextFalt.getText();
-            if (textAttKolla.contains("@") && textAttKolla.contains(".")){
-            resultat=true;
+            if (!textAttKolla.contains("@") || !textAttKolla.contains(".")) {
+                resultat = false;
+                JOptionPane.showMessageDialog(null, "Vänligen ange ett giltigt mejl!");
+                ettTextFalt.requestFocus();
             }
         } catch (Exception e) {
             System.out.println("arHeltal felmeddelande: " + e.getMessage());
@@ -199,14 +214,18 @@ public class Validering {
         }
         return resultat;
     }
-    
-    public static boolean arTelefonnummer(JTextField textfalt){
-    boolean arTNummer = true;
-    String tf= textfalt.getText().toString();
-   
-    if ((!arHeltal(textfalt) || (tf.length()!=12))){
-    arTNummer=false;
-    }
-    return arTNummer;
+
+    public static boolean arTelefonnummer(JTextField textfalt) {
+        boolean arTNummer = true;
+        int tfLangd = textfalt.getText().toString().length();
+
+      if (tfLangd!=10){
+         arTNummer = false;
+         System.out.println("arHeltal är false");
+         JOptionPane.showMessageDialog(null, "Vänligen ange telefonnumret i formatet bredvid!");
+         textfalt.requestFocus();
+        }
+        
+        return arTNummer;
     }
 }

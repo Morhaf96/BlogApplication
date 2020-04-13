@@ -68,7 +68,7 @@ public class HuvudMeny extends javax.swing.JFrame {
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -83,7 +83,7 @@ public class HuvudMeny extends javax.swing.JFrame {
 
         jLabel9.setText("Telefonnummer");
 
-        jLabel10.setText("e.g. \"07XXXXXXXX\"");
+        jLabel10.setText("07XXXXXXXX");
 
         jLabel6.setText("Efternamn");
 
@@ -103,13 +103,14 @@ public class HuvudMeny extends javax.swing.JFrame {
                 .addComponent(btnRegNy, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel9)
+                        .addGap(3, 3, 3)
                         .addComponent(tfTel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel10)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -122,7 +123,7 @@ public class HuvudMeny extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(tfFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,7 +202,7 @@ public class HuvudMeny extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -212,7 +213,7 @@ public class HuvudMeny extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addComponent(lfInlogLos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addComponent(btnLogin)
-                .addGap(65, 65, 65))
+                .addGap(59, 59, 59))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -222,7 +223,7 @@ public class HuvudMeny extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -243,12 +244,11 @@ public class HuvudMeny extends javax.swing.JFrame {
         if (Validering.FaltArTom(tfInlogMail)) {
             System.out.println("Mejlfältet är tomt");
         } else if (!Validering.arMejl(tfInlogMail)) {
-        JOptionPane.showMessageDialog(null, "Vänligen ange ett giltigt mejl!");
-         tfInlogMail.requestFocus();
+            System.out.println("Mejlfältet är ogiltigt");
         } else if (Validering.pwFaltArTom(lfInlogLos)) {
             System.out.println("Losenordfältet är tomt");
         } else {
-            String usermail = tfInlogMail.getText();
+            String usermail = dataHanterare.stringFormat(tfInlogMail.getText());
             char[] anvandarLosenord = lfInlogLos.getPassword();
 
             int userId = dataHanterare.getUserId(usermail);
@@ -282,19 +282,23 @@ public class HuvudMeny extends javax.swing.JFrame {
     }
 
     private void btnRegNyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegNyActionPerformed
-        String fornamn = tfFornamn.getText();
-        String efternamn = tfEfternamn.getText();
-        String email = tfRegMail.getText();
-        char[] anvandarLos = lfRegLos.getPassword();
-        String tnr = tfTel.getText();
-
-        if (dataHanterare.registreraNyAnvandare(fornamn, efternamn, email, anvandarLos, tnr)) {
-            JOptionPane.showMessageDialog(null, "Registreringen lyckades!");
+        if (Validering.FaltArTom(tfFornamn) || Validering.FaltArTom(tfEfternamn) || Validering.FaltArTom(tfRegMail) || !Validering.arMejl(tfRegMail) 
+               || Validering.pwFaltArTom(lfRegLos) || Validering.FaltArTom(tfTel) || !Validering.arHeltalN(tfTel) || !Validering.arTelefonnummer(tfTel)) {
+            System.out.println("Problem med angiven data");
         } else {
-            JOptionPane.showMessageDialog(null, "Registreringen lyckades ej!");
+
+            String fornamn = tfFornamn.getText();
+            String efternamn = tfEfternamn.getText();
+            String email = tfRegMail.getText();
+            String anvandarLos = lfRegLos.getText();
+            String tnr = tfTel.getText();
+
+            if (dataHanterare.registreraNyAnvandare(fornamn, efternamn, email, anvandarLos, tnr)) {
+                System.out.println("Registreringen lyckades!");
+                tomRegFalten();
+
+            } 
         }
-
-
     }//GEN-LAST:event_btnRegNyActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
