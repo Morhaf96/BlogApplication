@@ -2,13 +2,11 @@
 **/nbproject/private/
 **/nbproject/Makefile-*.mk
 **/nbproject/Package-*.bash
+*.FDB
 build/
 nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-
-# End of https://www.gitignore.io/api/netbeans
-*.log
-BLOGDB.FDB
 *.FDB
+*.log
