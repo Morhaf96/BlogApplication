@@ -31,17 +31,17 @@ public class SkapaMote extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
-    public void tomFalten(){
-    tfTitel.setText("");
-    tfPlats.setText("");
-    tfStartTid1.setText("");
-    tfSluttid1.setText("");
-    tfStartTid2.setText("");
-    tfStartTid3.setText("");
-    tfSluttid2.setText("");
-    tfSluttid3.setText("");
-    
+
+    public void tomFalten() {
+        tfTitel.setText("");
+        tfPlats.setText("");
+        tfStartTid1.setText("");
+        tfSluttid1.setText("");
+        tfStartTid2.setText("");
+        tfStartTid3.setText("");
+        tfSluttid2.setText("");
+        tfSluttid3.setText("");
+
     }
 
     /**
@@ -226,12 +226,12 @@ public class SkapaMote extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        if (Validering.FaltArTom(tfTitel) || Validering.FaltArTom(tfPlats) ||Validering.FaltArTom(tfStartTid1) ||
-                Validering.FaltArTom(tfSluttid1)|| Validering.FaltArTom(tfStartTid2) || Validering.FaltArTom(tfStartTid3) ||
-                Validering.FaltArTom(tfSluttid3)|| Validering.FaltArTom(tfSluttid2)){
+        if (Validering.FaltArTom(tfTitel) || Validering.FaltArTom(tfPlats) || Validering.FaltArTom(tfStartTid1)
+                || Validering.FaltArTom(tfSluttid1) || Validering.FaltArTom(tfStartTid2) || Validering.FaltArTom(tfStartTid3)
+                || Validering.FaltArTom(tfSluttid3) || Validering.FaltArTom(tfSluttid2)) {
             System.out.println("Ett eller flera fält är tomma!");
         }
+
         //dataHanterare.stringFormat(tfInlogMail.getText());
         String datumformat1 = "";
         String datumformat2 = "";

@@ -283,7 +283,7 @@ public class HuvudMeny extends javax.swing.JFrame {
 
     private void btnRegNyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegNyActionPerformed
         if (Validering.FaltArTom(tfFornamn) || Validering.FaltArTom(tfEfternamn) || Validering.FaltArTom(tfRegMail) || !Validering.arMejl(tfRegMail) 
-               || Validering.pwFaltArTom(lfRegLos) || Validering.FaltArTom(tfTel) || !Validering.arHeltalN(tfTel) || !Validering.arTelefonnummer(tfTel)) {
+               || Validering.pwFaltArTom(lfRegLos) || Validering.FaltArTom(tfTel) || !Validering.arHeltal(tfTel) || !Validering.arTelefonnummer(tfTel)) {
             System.out.println("Problem med angiven data");
         } else {
 

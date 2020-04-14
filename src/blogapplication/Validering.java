@@ -5,10 +5,13 @@
  */
 package blogapplication;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import java.util.Date;
 
 /**
  *
@@ -91,6 +94,22 @@ public class Validering {
         return resultat;
     }
 
+    public static boolean arTid(JTextField txtfalt){
+    boolean lyckats=false;
+    try{
+    String time = txtfalt.getText();
+
+        DateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+    Date date = sdf.parse(time);
+    lyckats= true;
+    }
+    catch (Exception e){
+        JOptionPane.showMessageDialog(null, "Är inte koreekt tid");
+    System.out.println(e.getMessage());
+    }
+
+    return lyckats;
+    }
     /**
      * Metoden kontrollerar att imatning består av enbart siffror och returnerar
      * true isåfall, och false annars. Om fältet innehåller annat än siffror
@@ -100,21 +119,9 @@ public class Validering {
      * @param ettTextFalt
      * @return
      */
-    public static boolean arHeltal(JTextField ettTextFalt) {
-        boolean resultat = true;
-        try {
-            String textAttKolla = ettTextFalt.getText();
-            Integer.parseInt(textAttKolla);
-        } catch (NumberFormatException e) {
-            resultat = false;
-            JOptionPane.showMessageDialog(null, "Textfältet får bara innehålla siffror!");
-            System.out.println("arHeltal felmeddelande: " + e.getMessage());
-            ettTextFalt.requestFocus();
-        }
-        return resultat;
-    }
     
-    public static boolean arHeltalN(JTextField ettTextFalt) {
+    
+    public static boolean arHeltal(JTextField ettTextFalt) {
         String stringAttKolla= ettTextFalt.getText();
         boolean resultat = true;
         try {
