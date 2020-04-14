@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import sun.util.calendar.BaseCalendar;
 
 /**
  *
@@ -29,6 +30,18 @@ public class SkapaMote extends javax.swing.JFrame {
         this.userId = userId;
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    
+    public void tomFalten(){
+    tfTitel.setText("");
+    tfPlats.setText("");
+    tfStartTid1.setText("");
+    tfSluttid1.setText("");
+    tfStartTid2.setText("");
+    tfStartTid3.setText("");
+    tfSluttid2.setText("");
+    tfSluttid3.setText("");
+    
     }
 
     /**
@@ -136,12 +149,9 @@ public class SkapaMote extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfSluttid2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfSluttid1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfSluttid3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(tfSluttid2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfSluttid1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfSluttid3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(130, 130, 130)
@@ -197,13 +207,10 @@ public class SkapaMote extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(254, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(137, 137, 137))
+                .addContainerGap(429, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,6 +227,11 @@ public class SkapaMote extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        if (Validering.FaltArTom(tfTitel) || Validering.FaltArTom(tfPlats) ||Validering.FaltArTom(tfStartTid1) ||
+                Validering.FaltArTom(tfSluttid1)|| Validering.FaltArTom(tfStartTid2) || Validering.FaltArTom(tfStartTid3) ||
+                Validering.FaltArTom(tfSluttid3)|| Validering.FaltArTom(tfSluttid2)){
+            System.out.println("Ett eller flera fält är tomma!");
+        }
         //dataHanterare.stringFormat(tfInlogMail.getText());
         String datumformat1 = "";
         String datumformat2 = "";
@@ -240,11 +252,9 @@ public class SkapaMote extends javax.swing.JFrame {
         String sluttid1 = tfSluttid1.getText();
         String sluttid2 = tfSluttid2.getText();
         String sluttid3 = tfSluttid3.getText();
-        System.out.println(titel+", "+plats+", "+motesId+", "+ datumformat1+", "+datumformat2+", "+datumformat3+", "+starttid1+", "+starttid2+", "+starttid3
-       +", "+sluttid1+", "+sluttid2+", "+sluttid3);
 
         new BjudInTillMote(motesId, datumformat1, datumformat2, datumformat3, starttid1, starttid2, starttid3, sluttid1, sluttid2, sluttid3).setVisible(true);
-
+        tomFalten();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
