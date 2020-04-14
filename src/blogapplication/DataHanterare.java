@@ -28,7 +28,7 @@ public class DataHanterare {
                 File dbFil = new File("BLOGDB.FDB");
                 String path = dbFil.getAbsolutePath();
                 databasen = new InfDB(path);
-                JOptionPane.showMessageDialog(null, "Uppkopplingen lyckades!");
+                System.out.println("Uppkopplingen lyckades!");
             } catch (InfException e) {
                 JOptionPane.showMessageDialog(null, "Systemet kan inte nå databasen!");
                 System.out.println("Databasfelet som har inträffat: " + e.getMessage());
@@ -79,6 +79,61 @@ public class DataHanterare {
         return Integer.parseInt(id);
     }
     
+    public int getNextInlaggId() {
+        String id = "";
+        try {
+            id = databasen.getAutoIncrement("Inlagg", "InlaggId");
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Databasfel!");
+            System.out.println("getNextAnvandarId felmeddelande: " + e.getMessage());
+        }
+        return Integer.parseInt(id);
+    }
+    
+    public int getNextMotesId() {
+        String id = "";
+        try {
+            id = databasen.getAutoIncrement("Moten", "MotesId");
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Databasfel!");
+            System.out.println("getNextAnvandarId felmeddelande: " + e.getMessage());
+        }
+        return Integer.parseInt(id);
+    }
+    
+    public int getNextFilkategoriId() {
+        String id = "";
+        try {
+            id = databasen.getAutoIncrement("Filkategorier", "FKID");
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Databasfel!");
+            System.out.println("getNextAnvandarId felmeddelande: " + e.getMessage());
+        }
+        return Integer.parseInt(id);
+    }
+    
+    public int getNextFilId() {
+        String id = "";
+        try {
+            id = databasen.getAutoIncrement("Filer", "FILID");
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Databasfel!");
+            System.out.println("getNextAnvandarId felmeddelande: " + e.getMessage());
+        }
+        return Integer.parseInt(id);
+    }
+    
+    public int getNextForslagId(){
+    String id = "";
+        try {
+            id = databasen.getAutoIncrement("Anvandare_moten", "ForslagId");
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Databasfel!");
+            System.out.println("getNextAnvandarId felmeddelande: " + e.getMessage());
+        }
+        return Integer.parseInt(id);
+    }
+         
     public boolean registreraNyAnvandare(String fornamn, String efternamn, String email, String losenord, String telefonnummer) {
         boolean anvandareRegistrerad = false;
         String fornamnet=stringFormat(fornamn);
@@ -102,6 +157,87 @@ public class DataHanterare {
     public String stringFormat(String enString) {
         String nyString = enString.substring(0, 1).toUpperCase() + enString.substring(1, enString.length()).toLowerCase();
         return nyString;
+    }
+    
+    public boolean skapaNyttMote(int motesId, int arrangor, String datum, String starttid, String sluttid, String titel, String plats){
+    boolean lyckats=false;
+     try {
+         databasen.insert("insert into moten values ('" + motesId + "', '" + arrangor + "', '" + datum + "', '" + starttid + "', '"+
+                    sluttid +"', '"+titel+"', 'Profilepic.jpg');");
+         lyckats = true;
+         JOptionPane.showMessageDialog(null, "Nytt möte har registrerats");
+         
+     }
+     
+     catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Registreringen misslyckades");
+            lyckats = false;
+            System.out.println("Nytt möte registrering lyckades ej. \n"
+                    + e.getMessage());
+        }
+    return lyckats;
+    }
+    
+    public void fyllCmbxAnvandarnamn(JComboBox cmbAnvandarnamn) {
+        try {
+            ArrayList anvandarIdLista = new ArrayList();
+            anvandarIdLista = databasen.fetchColumn("SELECT anvandarId FROM ANVANDARE");
+            ArrayList<String> allaAnvandare = new ArrayList<>();
+            
+            for (Object anvandarId : anvandarIdLista) {
+                String fornamn = databasen.fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE anvandarId='" + anvandarId + "'");
+                String efternamn = databasen.fetchSingle("SELECT EFTERNAMN FROM ANVANDARE WHERE anvandarId='" + anvandarId + "'");
+                String anvandare = fornamn + " " + efternamn;
+                allaAnvandare.add(anvandare);
+            }
+            allaAnvandare.sort(String::compareToIgnoreCase);
+            
+            for (String namn : allaAnvandare) {
+                cmbAnvandarnamn.addItem(namn);
+            }
+            cmbAnvandarnamn.setSelectedIndex(-1);
+            
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ex.getMessage());           
+        }
+    }
+    
+    public int getAnvandarId(String fornamn, String efternamn){
+          int id =0;
+          try{
+          String stringId= databasen.fetchSingle("Select anvandarId from Anvandare where fornamn='"+fornamn + "' and efternamn='"+ efternamn+"';");
+          id= Integer.parseInt(stringId);
+          System.out.println(id);
+    }
+          catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("Internt felmeddelande" + ex.getMessage());           
+        }
+          return id;
+    }
+    
+    public boolean laggTillMotesForslag(int anvandarId, int motesId, int forslagId, int andraforslagId, int tredjeforlsagId,
+            String datum1, String starttid1, String slutid1, String datum2, String starttid2,  String slutid2,
+            String datum3,  String starttid3, String slutid3){
+    boolean lyckats= false;
+    try{
+    databasen.insert("insert into anvandare_moten values ('" + anvandarId + "', '" + motesId + "', 'U', '" + forslagId + "', 'U', '"+
+                    datum1+" " + starttid1 +  "', '"+slutid1+"');");
+    databasen.insert("insert into anvandare_moten values ('" + anvandarId + "', '" + motesId + "', 'U', '" + andraforslagId + "', 'U', '"+
+                    datum2+" " + starttid2 + "', '"+slutid2+"');");
+    databasen.insert("insert into anvandare_moten values ('" + anvandarId + "', '" + motesId + "', 'U', '" + tredjeforlsagId + "', 'U', '"+
+                    datum3+" " + starttid3 + "', '"+slutid3+"');");
+                    
+    lyckats=true;
+    }
+    
+    catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel här!!");
+            System.out.println("Internt felmeddelande" + ex.getMessage());           
+        }
+    
+    return lyckats;
     }
     
 }

@@ -14,6 +14,7 @@ public class Start {
       public static void main(String[] args) {
         DataHanterare.dataHanterare();
          new HuvudMeny().setVisible(true);
+         //new BjudInTillMote().setVisible(true);
         
     }
 
