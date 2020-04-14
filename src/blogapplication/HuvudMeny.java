@@ -257,7 +257,7 @@ public class HuvudMeny extends javax.swing.JFrame {
 
                     JOptionPane.showMessageDialog(null, "Du är nu inloggad!");
                     tomInlogFalten();
-                    new InloggadAnvandare().setVisible(true);
+                    new InloggadAnvandare(userId).setVisible(true);
                     //this.dispose();
 
                 } else if (!DataHanterare.kontrolleraInloggning(userId, anvandarLosenord)) {

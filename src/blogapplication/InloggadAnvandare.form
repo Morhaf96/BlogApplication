@@ -23,10 +23,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="206" max="-2" attributes="0"/>
-              <EmptySpace pref="115" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <Component id="btnBlogg" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="405" max="32767" attributes="0"/>
+              <Component id="btnMotesBokning" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -35,7 +42,12 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="41" max="-2" attributes="0"/>
-              <EmptySpace pref="253" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnBlogg" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnMotesBokning" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="388" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -45,6 +57,19 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Inloggad anv&#xe4;ndare"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnBlogg">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Blogg"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnMotesBokning">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="M&#xf6;tesbokning"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMotesBokningActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

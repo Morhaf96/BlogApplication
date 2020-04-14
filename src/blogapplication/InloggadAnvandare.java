@@ -11,10 +11,13 @@ package blogapplication;
  */
 public class InloggadAnvandare extends javax.swing.JFrame {
 
+    public int userId;
+    
     /**
      * Creates new form InloggadAnvandare
      */
-    public InloggadAnvandare() {
+    public InloggadAnvandare(int userId) {
+        this.userId=userId;
         initComponents();
     }
 
@@ -28,10 +31,21 @@ public class InloggadAnvandare extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        btnBlogg = new javax.swing.JButton();
+        btnMotesBokning = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Inloggad användare");
+
+        btnBlogg.setText("Blogg");
+
+        btnMotesBokning.setText("Mötesbokning");
+        btnMotesBokning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMotesBokningActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -40,22 +54,38 @@ public class InloggadAnvandare extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(btnBlogg)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 405, Short.MAX_VALUE)
+                .addComponent(btnMotesBokning)
+                .addGap(109, 109, 109))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBlogg)
+                    .addComponent(btnMotesBokning))
+                .addContainerGap(388, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnMotesBokningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotesBokningActionPerformed
+        new MotesBokning(userId).setVisible(true);
+    }//GEN-LAST:event_btnMotesBokningActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBlogg;
+    private javax.swing.JButton btnMotesBokning;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

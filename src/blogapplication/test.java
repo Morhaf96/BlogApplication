@@ -7,8 +7,8 @@ package blogapplication;
 
 /**
  *
- * @author xxx
+ * @author HanaA
  */
-public class SQL {
+public class test {
     
 }
