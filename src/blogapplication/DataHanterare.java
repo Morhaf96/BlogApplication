@@ -290,14 +290,30 @@ public class DataHanterare {
     }
 
    
-    public void skapaInlagg(int inlaggID, int skribent, String inlagg, int bsektion, String titel){
+    public boolean skapaInlagg(int inlaggID, int skribent, String inlagg, int bsektion, String titel, String datum, String tid){
+        boolean lyckats=false;
         try{
-        String fraga = "INSERT INTO INLAGG(INLAGGID, SKRIBENT, TEXT, BSEKTION) VALUES("+inlaggID+",'"+skribent+"','"+inlagg+"',"+bsektion+ ", "+ titel +")";
+        String fraga = "INSERT INTO INLAGG VALUES('"+inlaggID+"','"+skribent+"','"+inlagg+"','"+bsektion+ "', '"+ titel + "', '"+datum +"', '"+ tid +"');";
         databasen.insert(fraga);
+         lyckats=true;
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Gick inte att skapa inlägg!");
+            System.out.println("Internt felmeddelande från skapaInlägg:" + e.getMessage()); 
         }
+        return lyckats;
+    }
+    
+    public boolean laggTillFil(String namn, String filUrl, int inlaggId){
+    boolean lyckats=false;
+    int filid=getNextFilId();
+    try{
+    databasen.insert("insert into filer values('"+ filid+"', '"+namn+"', '"+filUrl+"', '"+inlaggId+"');");
+    lyckats=true;
+    }
+    catch(InfException e){
+    
+    }
+    return lyckats;
     }
 
     
