@@ -368,6 +368,21 @@ public class DataHanterare {
     }
     return filFinns;
     }
+
+    public ArrayList getFormellaInlaggId(){
+         ArrayList enLista = new ArrayList();
+        try{
+         enLista =databasen.fetchColumn("SELECT INLAGGID FROM INLAGG WHERE BSEKTION='1' ORDER BY DATUM DESC, TID DESC");
+        }
+       catch (Exception e){
+          JOptionPane.showMessageDialog(null, "Något gick fel!");
+          System.out.println("getFormellInlaggId error:" + e.getMessage());
+      }
+        return enLista;
+    }
+
+    
+    
 }
     
 

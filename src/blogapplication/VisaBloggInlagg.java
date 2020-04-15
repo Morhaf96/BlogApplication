@@ -4,23 +4,34 @@
  * and open the template in the editor.
  */
 package blogapplication;
+
+import java.util.ArrayList;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import oru.inf.InfDB;
+
 /**
  *
  * @author Morhaf
  */
 public class VisaBloggInlagg extends javax.swing.JFrame {
+
     private DataHanterare dataHanterare;
     private InfDB databasen;
+    private Box box;
+
     /**
      * Creates new form VisaInlagg
      */
     public VisaBloggInlagg() {
+        initComponents();
         dataHanterare = new DataHanterare();
         databasen = DataHanterare.dataHanterare();
         this.setLocationRelativeTo(null);
-        initComponents();
+        box = new Box(BoxLayout.Y_AXIS);
+        jScrollPane1.setViewportView(box);
     }
 
     /**
@@ -80,44 +91,26 @@ public class VisaBloggInlagg extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
+        jScrollPane1.repaint();
+        box.removeAll();
+        ArrayList IIDlista = dataHanterare.getFormellaInlaggId();
+        if (IIDlista.size() > 0) {
+            for (Object inlagg : IIDlista) {
+
+                JPanel importeradPanel = new EttInlagg(inlagg.toString());
+                importeradPanel.setVisible(true);
+                box.add(importeradPanel);
+                box.revalidate();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Det finns inga inlägg på denna blogg än!");
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisaBloggInlagg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisaBloggInlagg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisaBloggInlagg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisaBloggInlagg.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VisaBloggInlagg().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
