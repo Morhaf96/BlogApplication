@@ -247,6 +247,13 @@ public class AngeTillganglighet extends javax.swing.JFrame {
        fyllDatumTid();
     }//GEN-LAST:event_formWindowOpened
 
+    private void uncheckaBoxen(){
+    kan1.setSelected(false);
+        kan2.setSelected(false);
+            kan3.setSelected(false);
+            
+    }
+    
     private void btnAngeTillganglighetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAngeTillganglighetActionPerformed
         boolean ett = kan1.isSelected();
         boolean tva = kan2.isSelected();
@@ -254,55 +261,56 @@ public class AngeTillganglighet extends javax.swing.JFrame {
         
         if(ett){
             try{
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '"+lblD1.getText() + " " + lblStt1.getText()+"%' AND Sluttud='"+lblSlt1.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '"+lblD1.getText() + " " + lblStt1.getText()+"%' AND Sluttid='"+lblSlt1.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
             }
             catch(InfException e){
-                JOptionPane.showMessageDialog(null, "1");
+                JOptionPane.showMessageDialog(null, "1N");
             }
         }
         else{
             try{
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '"+lblD1.getText() + " " + lblStt1.getText()+"%' AND Sluttud='"+lblSlt1.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '"+lblD1.getText() + " " + lblStt1.getText()+"%' AND Sluttid='"+lblSlt1.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
             }
             catch(InfException e){
-                JOptionPane.showMessageDialog(null, "2");
+                JOptionPane.showMessageDialog(null, "1N");
             }
         }
         
         if(tva){
             try{
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '"+lblD2.getText() + " " + lblStt2.getText()+"%' AND Sluttud='"+lblSlt2.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '"+lblD2.getText() + " " + lblStt2.getText()+"%' AND Sluttid='"+lblSlt2.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
             }
             catch(InfException e){
-                JOptionPane.showMessageDialog(null, "1");
+                JOptionPane.showMessageDialog(null, "2Y");
             }
         }
         else{
             try{
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '"+lblD2.getText() + " " + lblStt2.getText()+"%' AND Sluttud='"+lblSlt2.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '"+lblD2.getText() + " " + lblStt2.getText()+"%' AND Sluttid='"+lblSlt2.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
             }
             catch(InfException e){
-                JOptionPane.showMessageDialog(null, "2");
+                JOptionPane.showMessageDialog(null, "2N");
             }
         }
         
         if(tre){
         try{
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '"+lblD3.getText() + " " + lblStt3.getText()+"%' AND Sluttud='"+lblSlt3.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '"+lblD3.getText() + " " + lblStt3.getText()+"%' AND Sluttid='"+lblSlt3.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
             }
             catch(InfException e){
-                JOptionPane.showMessageDialog(null, "1");
+                JOptionPane.showMessageDialog(null, "3Y");
             }
         }
         else{
             try{
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '"+lblD3.getText() + " " + lblStt3.getText()+"%' AND Sluttud='"+lblSlt3.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '"+lblD3.getText() + " " + lblStt3.getText()+"%' AND Sluttid='"+lblSlt3.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
             }
             catch(InfException e){
-                JOptionPane.showMessageDialog(null, "2");
+                JOptionPane.showMessageDialog(null, "3N");
             }
         }
         JOptionPane.showMessageDialog(null, "Dina svar har nu skickats till mötesarrangören.");
+        uncheckaBoxen();
     }//GEN-LAST:event_btnAngeTillganglighetActionPerformed
 
     
