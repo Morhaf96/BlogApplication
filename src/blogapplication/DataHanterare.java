@@ -288,7 +288,16 @@ public class DataHanterare {
              JOptionPane.showMessageDialog(null, "Du har inga inplanerade möten");
         }
     }
-    
+   
+    public void skapaInlagg(int inlaggID, int skribent, String inlagg, int bsektion){
+        try{
+        String fraga = "INSERT INTO INLAGG(INLAGGID, SKRIBENT, TEXT, BSEKTION) VALUES("+inlaggID+",'"+skribent+"','"+inlagg+"',"+bsektion+")";
+        databasen.insert(fraga);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Gick inte att skapa inlägg!");
+        }
+    }
 }
     
 

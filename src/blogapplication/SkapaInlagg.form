@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -47,9 +47,8 @@
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="JLSkapainlagg" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTTitel" min="-2" pref="163" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="197" max="32767" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -61,10 +60,8 @@
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="JLSkapainlagg" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="jTTitel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="317" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="367" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="36" max="32767" attributes="0"/>
@@ -77,12 +74,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Skapa inl&#xe4;gg"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTTitel">
-          <Events>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTTitelFocusGained"/>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTTitelFocusLost"/>
-          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
 
