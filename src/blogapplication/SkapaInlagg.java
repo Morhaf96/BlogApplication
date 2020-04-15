@@ -92,6 +92,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
         });
 
         tfFilUrl.setEditable(false);
+        tfFilUrl.setFocusable(false);
         tfFilUrl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfFilUrlActionPerformed(evt);
@@ -105,6 +106,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
             }
         });
 
+        lblFilUrl.setFocusable(false);
         lblFilUrl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblFilUrlMouseClicked(evt);
@@ -243,7 +245,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
             tfFilUrl.setText(filnamn);
             tfFilNamn.setEditable(true);
             
-            lblFilUrl.setText(filnamn);
+            lblFilUrl.setText("Förhandsgranska vald fil");
             lblFilUrl.setForeground(Color.BLUE.darker());
             lblFilUrl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             
@@ -276,6 +278,9 @@ public class SkapaInlagg extends javax.swing.JFrame {
             tfTitel.setText("");
             tfFilUrl.setText("");
             tfFilNamn.setText("");
+            filnamn=null;
+            lblFilUrl.setText("");
+            
         }
         else{
             System.out.print("Misslyckades");
@@ -317,14 +322,14 @@ public class SkapaInlagg extends javax.swing.JFrame {
     }//GEN-LAST:event_lblFilUrlMouseClicked
 
     private void lblFilUrlMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFilUrlMouseEntered
-        if(!lblFilUrl.toString().equals("")){
-        lblFilUrl.setText("<html><a href=''>" + filnamn + "</a></html>");
+        if(!filnamn.equals(null)){
+        lblFilUrl.setText("<html><a href=''>" + "Förhandsgranska vald fil" + "</a></html>");
         }
     }//GEN-LAST:event_lblFilUrlMouseEntered
 
     private void lblFilUrlMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFilUrlMouseExited
-           if(!lblFilUrl.toString().equals("")){
-        lblFilUrl.setText(filnamn);
+       if(!filnamn.equals(null)){
+        lblFilUrl.setText("Förhandsgranska vald fil");
            }
     }//GEN-LAST:event_lblFilUrlMouseExited
 

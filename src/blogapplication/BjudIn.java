@@ -7,6 +7,7 @@ package blogapplication;
  */
 public class BjudIn extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form BjudIn
      */
