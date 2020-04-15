@@ -9,12 +9,10 @@ import java.awt.Color;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import oru.inf.InfDB;
-import oru.inf.InfException;
 
 /**
  *
@@ -47,16 +45,17 @@ public class SkapaInlagg extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        lblFilUrl = new javax.swing.JPanel();
         JLSkapainlagg = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTInlagg = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
         tfTitel = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnBifogaFil = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         tfFilUrl = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,13 +74,6 @@ public class SkapaInlagg extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTInlagg);
 
-        jButton1.setText("Publicera");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Titel:");
 
         jLabel2.setText("Inlägg:");
@@ -95,52 +87,66 @@ public class SkapaInlagg extends javax.swing.JFrame {
 
         tfFilUrl.setEditable(false);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jButton1.setText("Publicera");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout lblFilUrlLayout = new javax.swing.GroupLayout(lblFilUrl);
+        lblFilUrl.setLayout(lblFilUrlLayout);
+        lblFilUrlLayout.setHorizontalGroup(
+            lblFilUrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblFilUrlLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(105, 105, 105)
-                                .addComponent(jButton1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(JLSkapainlagg)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(tfTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(108, 108, 108)
-                                        .addComponent(btnBifogaFil)))
+                .addGroup(lblFilUrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lblFilUrlLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(lblFilUrlLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(lblFilUrlLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(303, 303, 303))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lblFilUrlLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(lblFilUrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(JLSkapainlagg)
+                            .addGroup(lblFilUrlLayout.createSequentialGroup()
+                                .addComponent(tfTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(tfFilUrl)))
-                        .addContainerGap(17, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(btnBifogaFil)))
+                        .addGap(18, 18, 18)
+                        .addComponent(tfFilUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(lblFilUrlLayout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        lblFilUrlLayout.setVerticalGroup(
+            lblFilUrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblFilUrlLayout.createSequentialGroup()
                 .addComponent(JLSkapainlagg)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(10, 10, 10)
+                .addGroup(lblFilUrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBifogaFil)
                     .addComponent(tfFilUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4)
-                .addComponent(jLabel2)
+                .addGroup(lblFilUrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -150,66 +156,18 @@ public class SkapaInlagg extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblFilUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(29, 29, 29))
+                .addComponent(lblFilUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTInlaggFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTInlaggFocusGained
-        if(jTInlagg.getText().equals("Vad tänker du på?"))
-        {
-            jTInlagg.setText("");
-        }
-        jTInlagg.setForeground(Color.black);
-    }//GEN-LAST:event_jTInlaggFocusGained
-
-    private void jTInlaggFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTInlaggFocusLost
-        if(jTInlagg.getText().equals(""))
-        {
-            jTInlagg.setText("Vad tänker du på?");
-            jTInlagg.setForeground(Color.gray);
-        }
-        
-        else if (!jTInlagg.getText().equals(""))
-        {    
-        jTInlagg.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_jTInlaggFocusLost
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime nu = LocalDateTime.now();
-        String datum = nu.toString().substring(0, 10);
-        String tid = nu.toString().substring(11, 16);
-        
-        int inlaggID = dataHanterare.getNextInlaggId();
-        int skribent = userId;
-        String inlagg = jTInlagg.getText();
-        int bsektion = 1;
-        String titel=tfTitel.getText();
-        
-            if(dataHanterare.skapaInlagg(inlaggID, skribent, inlagg, bsektion, titel,datum, tid)){
-                if(!tfFilUrl.getText().equals("")){
-                dataHanterare.laggTillFil("", filnamn, inlaggID);
-                }
-            JOptionPane.showMessageDialog(null, "Ditt inlägg har skapats!");
-            jTInlagg.setText("");
-            tfTitel.setText("");
-            tfFilUrl.setText("");
-            }
-            else{
-            System.out.print("Misslyckades");
-            }
-    }//GEN-LAST:event_jButton1ActionPerformed
 
 //        private void fyllCmbKategoriNamn() {
 //            try {
@@ -223,18 +181,68 @@ public class SkapaInlagg extends javax.swing.JFrame {
     
     private void btnBifogaFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBifogaFilActionPerformed
         JFileChooser fc = new JFileChooser();
+        //FileSystemView.getFileSystemView().getHomeDirectory() (Gets desktop url)
+        //"C:\\Users\\HHHLO\\OneDrive\\Documents"
+        fc.setDialogTitle("Välj en fil att bifoga");
         FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
         fc.setFileFilter(filter);
-        fc.showOpenDialog(null);
-        File f = fc.getSelectedFile();
-        filnamn = f.getAbsolutePath();
-        File fil = new File(filnamn);
-        this.fil=fil;
-        tfFilUrl.setText(filnamn);
-        
-        
-        
+        int returnValue = fc.showSaveDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File f = fc.getSelectedFile();
+            filnamn = f.getAbsolutePath();
+            File fil = new File(filnamn);
+            this.fil=fil;
+            tfFilUrl.setText(filnamn);
+        }
+
     }//GEN-LAST:event_btnBifogaFilActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime nu = LocalDateTime.now();
+        String datum = nu.toString().substring(0, 10);
+        String tid = nu.toString().substring(11, 16);
+
+        int inlaggID = dataHanterare.getNextInlaggId();
+        int skribent = userId;
+        String inlagg = jTInlagg.getText();
+        int bsektion = 1;
+        String titel=tfTitel.getText();
+
+        if(dataHanterare.skapaInlagg(inlaggID, skribent, inlagg, bsektion, titel,datum, tid)){
+            if(!tfFilUrl.getText().equals("")){
+                dataHanterare.laggTillFil("", filnamn, inlaggID);
+            }
+            JOptionPane.showMessageDialog(null, "Ditt inlägg har skapats!");
+            jTInlagg.setText("");
+            tfTitel.setText("");
+            tfFilUrl.setText("");
+        }
+        else{
+            System.out.print("Misslyckades");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTInlaggFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTInlaggFocusLost
+        if(jTInlagg.getText().equals(""))
+        {
+            jTInlagg.setText("Vad tänker du på?");
+            jTInlagg.setForeground(Color.gray);
+        }
+
+        else if (!jTInlagg.getText().equals(""))
+        {
+            jTInlagg.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jTInlaggFocusLost
+
+    private void jTInlaggFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTInlaggFocusGained
+        if(jTInlagg.getText().equals("Vad tänker du på?"))
+        {
+            jTInlagg.setText("");
+        }
+        jTInlagg.setForeground(Color.black);
+    }//GEN-LAST:event_jTInlaggFocusGained
 
     
     
@@ -246,9 +254,10 @@ public class SkapaInlagg extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTInlagg;
+    private javax.swing.JPanel lblFilUrl;
     private javax.swing.JTextField tfFilUrl;
     private javax.swing.JTextField tfTitel;
     // End of variables declaration//GEN-END:variables
