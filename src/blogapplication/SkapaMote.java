@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 import sun.util.calendar.BaseCalendar;
 
 /**
@@ -20,6 +21,8 @@ public class SkapaMote extends javax.swing.JFrame {
     private DataHanterare dataHanterare;
     private InfDB databasen;
     public int userId;
+    public int valdMote;
+    public int valdMotesInbjudanId;
 
     /**
      * Creates new form MotesBokning
@@ -146,15 +149,15 @@ public class SkapaMote extends javax.swing.JFrame {
                                 .addComponent(jLabel6))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfPlats, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfPlats, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                                    .addComponent(tfTitel))))
                         .addGap(0, 47, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -175,10 +178,10 @@ public class SkapaMote extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tfTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tfPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -215,17 +218,37 @@ public class SkapaMote extends javax.swing.JFrame {
                 .addComponent(jButton1))
         );
 
+        lMotesInbjud.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lMotesInbjudMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(lMotesInbjud);
 
         jLabel10.setText("Mötesinbjudningar");
 
         jLabel11.setText("Inplanerade möten");
 
+        lIplaneradeMoten.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lIplaneradeMotenMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(lIplaneradeMoten);
 
         jButton2.setText("Visa inbjudningar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Visa Inplanerade");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -314,6 +337,47 @@ public class SkapaMote extends javax.swing.JFrame {
        dataHanterare.fyllListInplaneradeMoten(userId, lIplaneradeMoten);
        dataHanterare.fyllListMotesInbjudningar(userId, lMotesInbjud);
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int MID = 0;
+        String datum = "";
+        String starttid = "";
+        String sluttid = "";
+        String plats="";
+        String arrangorFornamn = "";
+        String arrangorEfternamn = "";
+        String titel="";
+        try{
+            MID = valdMote;
+            datum = databasen.fetchSingle("SELECT DATUM FROM MOTEN WHERE MotesId ='"+MID+"';");
+            starttid = databasen.fetchSingle("SELECT starttid FROM MOTEN WHERE MotesId ='"+MID+"';");
+            sluttid= databasen.fetchSingle("SELECT sluttid FROM MOTEN WHERE MotesId ='"+MID+"';");
+            arrangorFornamn = databasen.fetchSingle("SELECT FORNAMN FROM ANVANDARE JOIN MOTEN ON ANVANDARE.ANVANDARID = MOTEN.ARRANGOR AND MOTE.MOTESID ='"+MID+"';");
+            arrangorEfternamn = databasen.fetchSingle("SELECT EFTERNAMN FROM ANVANDARE JOIN MOTEN ON ANVANDARE.ANVANDARID = MOTEN.ARRANGOR AND MOTE.MOTESID ='"+MID+"';");
+            titel = databasen.fetchSingle("SELECT titel FROM MOTEN WHERE MotesId ='"+MID+"';");
+            plats= databasen.fetchSingle("SELECT plats FROM MOTEN WHERE MotesId ='"+MID+"';");
+        }
+        catch(InfException e){
+            
+        } 
+        JOptionPane.showMessageDialog(null, "Mötet: "+titel + " hålls av " + arrangorFornamn + " "+ arrangorEfternamn+ " "+ datum + " " + starttid + "-"+sluttid + "på platsen: " + "\""+plats+"\"");
+       
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void lMotesInbjudMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lMotesInbjudMouseClicked
+        String motesnamn=  lMotesInbjud.getSelectedValue();
+        this.valdMotesInbjudanId = dataHanterare.getMotesId(motesnamn);
+              
+    }//GEN-LAST:event_lMotesInbjudMouseClicked
+
+    private void lIplaneradeMotenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lIplaneradeMotenMouseClicked
+         String motesnamn=  lIplaneradeMoten.getSelectedValue();
+        this.valdMote = dataHanterare.getMotesId(motesnamn);
+    }//GEN-LAST:event_lIplaneradeMotenMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       new AngeTillganglighet(userId,valdMotesInbjudanId).setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

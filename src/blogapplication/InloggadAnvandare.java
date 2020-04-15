@@ -5,6 +5,9 @@
  */
 package blogapplication;
 
+import javax.swing.JOptionPane;
+import oru.inf.InfDB;
+
 /**
  *
  * @author Morhaf
@@ -12,12 +15,14 @@ package blogapplication;
 public class InloggadAnvandare extends javax.swing.JFrame {
 
     public int userId;
-    
+    private DataHanterare dataHanterare;
+    private InfDB databasen;
+
     /**
      * Creates new form InloggadAnvandare
      */
     public InloggadAnvandare(int userId) {
-        this.userId=userId;
+        this.userId = userId;
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -31,14 +36,19 @@ public class InloggadAnvandare extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblInloggad = new javax.swing.JLabel();
         btnBlogg = new javax.swing.JButton();
         btnMotesBokning = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        jLabel1.setText("Inloggad användare");
+        lblInloggad.setText("Inloggad användare");
 
         btnBlogg.setText("Blogg");
         btnBlogg.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +77,7 @@ public class InloggadAnvandare extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(79, 79, 79)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblInloggad, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -85,7 +95,7 @@ public class InloggadAnvandare extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblInloggad, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBlogg)
@@ -110,12 +120,15 @@ public class InloggadAnvandare extends javax.swing.JFrame {
         new SkapaInlagg(userId).setVisible(true);
     }//GEN-LAST:event_btnBloggActionPerformed
 
-    
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        lblInloggad.setText("Hej " + dataHanterare.getFullNamn(userId) + "!");
+    }//GEN-LAST:event_formWindowOpened
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBlogg;
     private javax.swing.JButton btnMotesBokning;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblInloggad;
     // End of variables declaration//GEN-END:variables
 }
