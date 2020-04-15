@@ -6,7 +6,10 @@
 package blogapplication;
 
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Desktop;
 import java.io.File;
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JFileChooser;
@@ -45,7 +48,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblFilUrl = new javax.swing.JPanel();
+        Jpanel = new javax.swing.JPanel();
         JLSkapainlagg = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTInlagg = new javax.swing.JTextArea();
@@ -56,6 +59,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         tfFilUrl = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        lblFilUrl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,6 +90,11 @@ public class SkapaInlagg extends javax.swing.JFrame {
         });
 
         tfFilUrl.setEditable(false);
+        tfFilUrl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfFilUrlActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Publicera");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -94,60 +103,80 @@ public class SkapaInlagg extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout lblFilUrlLayout = new javax.swing.GroupLayout(lblFilUrl);
-        lblFilUrl.setLayout(lblFilUrlLayout);
-        lblFilUrlLayout.setHorizontalGroup(
-            lblFilUrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lblFilUrlLayout.createSequentialGroup()
+        lblFilUrl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblFilUrlMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblFilUrlMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblFilUrlMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout JpanelLayout = new javax.swing.GroupLayout(Jpanel);
+        Jpanel.setLayout(JpanelLayout);
+        JpanelLayout.setHorizontalGroup(
+            JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JpanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(lblFilUrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(lblFilUrlLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(lblFilUrlLayout.createSequentialGroup()
+                .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JpanelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(lblFilUrlLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(JpanelLayout.createSequentialGroup()
+                        .addGap(217, 217, 217)
+                        .addComponent(JLSkapainlagg)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JpanelLayout.createSequentialGroup()
+                        .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(JpanelLayout.createSequentialGroup()
+                                .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JpanelLayout.createSequentialGroup()
+                                        .addComponent(tfTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(JpanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(128, 128, 128)))
+                                .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(JpanelLayout.createSequentialGroup()
+                                        .addComponent(btnBifogaFil)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(tfFilUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(JpanelLayout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(lblFilUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
-                        .addGap(303, 303, 303))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lblFilUrlLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(lblFilUrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(JLSkapainlagg)
-                            .addGroup(lblFilUrlLayout.createSequentialGroup()
-                                .addComponent(tfTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBifogaFil)))
-                        .addGap(18, 18, 18)
-                        .addComponent(tfFilUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-            .addGroup(lblFilUrlLayout.createSequentialGroup()
+                        .addGap(32, 32, 32))))
+            .addGroup(JpanelLayout.createSequentialGroup()
                 .addGap(178, 178, 178)
                 .addComponent(jButton1)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        lblFilUrlLayout.setVerticalGroup(
-            lblFilUrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lblFilUrlLayout.createSequentialGroup()
+        JpanelLayout.setVerticalGroup(
+            JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JpanelLayout.createSequentialGroup()
                 .addComponent(JLSkapainlagg)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(10, 10, 10)
-                .addGroup(lblFilUrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBifogaFil)
                     .addComponent(tfFilUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4)
-                .addGroup(lblFilUrlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(lblFilUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -156,14 +185,13 @@ public class SkapaInlagg extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblFilUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(Jpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblFilUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Jpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -193,6 +221,11 @@ public class SkapaInlagg extends javax.swing.JFrame {
             File fil = new File(filnamn);
             this.fil=fil;
             tfFilUrl.setText(filnamn);
+            
+            lblFilUrl.setText(filnamn);
+            lblFilUrl.setForeground(Color.BLUE.darker());
+            lblFilUrl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            
         }
 
     }//GEN-LAST:event_btnBifogaFilActionPerformed
@@ -244,12 +277,38 @@ public class SkapaInlagg extends javax.swing.JFrame {
         jTInlagg.setForeground(Color.black);
     }//GEN-LAST:event_jTInlaggFocusGained
 
+    private void tfFilUrlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfFilUrlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfFilUrlActionPerformed
+
+    private void lblFilUrlMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFilUrlMouseClicked
+        try {
+             Runtime.getRuntime().exec("explorer \"" + filnamn + "\"");
+                    
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+    }//GEN-LAST:event_lblFilUrlMouseClicked
+
+    private void lblFilUrlMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFilUrlMouseEntered
+        if(!lblFilUrl.toString().equals("")){
+        lblFilUrl.setText("<html><a href=''>" + filnamn + "</a></html>");
+        }
+    }//GEN-LAST:event_lblFilUrlMouseEntered
+
+    private void lblFilUrlMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFilUrlMouseExited
+           if(!lblFilUrl.toString().equals("")){
+        lblFilUrl.setText(filnamn);
+           }
+    }//GEN-LAST:event_lblFilUrlMouseExited
+
     
     
     
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLSkapainlagg;
+    private javax.swing.JPanel Jpanel;
     private javax.swing.JButton btnBifogaFil;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -257,7 +316,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTInlagg;
-    private javax.swing.JPanel lblFilUrl;
+    private javax.swing.JLabel lblFilUrl;
     private javax.swing.JTextField tfFilUrl;
     private javax.swing.JTextField tfTitel;
     // End of variables declaration//GEN-END:variables
