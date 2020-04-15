@@ -288,6 +288,7 @@ public class DataHanterare {
              JOptionPane.showMessageDialog(null, "Du har inga inplanerade möten");
         }
     }
+
    
     public void skapaInlagg(int inlaggID, int skribent, String inlagg, int bsektion){
         try{
@@ -298,6 +299,49 @@ public class DataHanterare {
             JOptionPane.showMessageDialog(null, "Gick inte att skapa inlägg!");
         }
     }
+
+    
+    public int getMotesId(String motesNamn){
+    int svar=0;
+    try{
+    String idString = databasen.fetchSingle("select motesid from moten where titel='" + motesNamn + "';");
+    svar=Integer.parseInt(idString);
+    }
+    catch (InfException e){
+        System.out.println("Det gick inte att hämta mötesId");
+                }
+    return svar;
+    }
+    
+    public String getFullNamn(int userId){
+    String namnet="";
+    String fornamn="";
+    String efternamn="";
+    try{
+    fornamn = databasen.fetchSingle("select fornamn from anvandare where anvandarId='"+userId+"';");
+    efternamn = databasen.fetchSingle("select efternamn from anvandare where anvandarId='"+userId+"';");
+    namnet = fornamn + " " + efternamn;
+    }
+    
+    catch(InfException e){
+        System.out.println("Det gick inte att hämta namnet på personen!");
+    }
+    return namnet;
+    }
+    
+    public String getMotesnamn(int motesId){
+   String namnet="";
+    
+    try{
+    namnet = databasen.fetchSingle("select titel from moten where motesid='"+motesId+"';");
+    }
+    catch(InfException e){
+        System.out.println("Det gick inte att hämta namnet på personen!");
+    }
+    return namnet;
+    }
 }
+    
+
     
 
