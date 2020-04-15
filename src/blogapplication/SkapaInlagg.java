@@ -16,12 +16,14 @@ public class SkapaInlagg extends javax.swing.JFrame {
  
     private DataHanterare dataHanterare;
     private InfDB databasen;
+    private int userId;
     /**
      * Creates new form SkapaInlagg
      */
-    public SkapaInlagg() {
+    public SkapaInlagg(int userId) {
         dataHanterare = new DataHanterare();
         databasen = DataHanterare.dataHanterare();
+        this.userId=userId;
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -69,6 +71,11 @@ public class SkapaInlagg extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTInlagg);
 
         jButton1.setText("Publicera");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -154,6 +161,10 @@ public class SkapaInlagg extends javax.swing.JFrame {
         jTInlagg.setForeground(Color.black);
         }
     }//GEN-LAST:event_jTInlaggFocusLost
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     
     

@@ -19,6 +19,7 @@ public class InloggadAnvandare extends javax.swing.JFrame {
     public InloggadAnvandare(int userId) {
         this.userId=userId;
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -40,6 +41,11 @@ public class InloggadAnvandare extends javax.swing.JFrame {
         jLabel1.setText("Inloggad användare");
 
         btnBlogg.setText("Blogg");
+        btnBlogg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBloggActionPerformed(evt);
+            }
+        });
 
         btnMotesBokning.setText("Mötesbokning");
         btnMotesBokning.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +105,10 @@ public class InloggadAnvandare extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnBloggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBloggActionPerformed
+        new SkapaInlagg(userId).setVisible(true);
+    }//GEN-LAST:event_btnBloggActionPerformed
 
     
 
