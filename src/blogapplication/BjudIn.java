@@ -30,7 +30,7 @@ public class BjudIn extends javax.swing.JFrame {
         cmbxMöte = new javax.swing.JComboBox<>();
         btnBjudIn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jTextField1.setText("Bjud in personer till ditt möte.");
 

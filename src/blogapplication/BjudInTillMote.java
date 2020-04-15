@@ -65,7 +65,7 @@ public class BjudInTillMote extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -136,7 +136,7 @@ public class BjudInTillMote extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         cmbAnvandare.removeAllItems();
-        dataHanterare.fyllCmbxAnvandarnamn(cmbAnvandare);
+        dataHanterare.fyllCmbAnvandarnamn(cmbAnvandare);
 
     }//GEN-LAST:event_formWindowOpened
 

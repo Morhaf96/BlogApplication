@@ -8,7 +8,9 @@ package blogapplication;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -178,7 +180,7 @@ public class DataHanterare {
     return lyckats;
     }
     
-    public void fyllCmbxAnvandarnamn(JComboBox cmbAnvandarnamn) {
+    public void fyllCmbAnvandarnamn(JComboBox cmbAnvandarnamn) {
         try {
             ArrayList anvandarIdLista = new ArrayList();
             anvandarIdLista = databasen.fetchColumn("SELECT anvandarId FROM ANVANDARE");
@@ -238,6 +240,53 @@ public class DataHanterare {
         }
     
     return lyckats;
+    }
+    
+    public void fyllListMotesInbjudningar(int anvandarId,JList lista){
+        DefaultListModel model = new DefaultListModel();
+        DefaultListModel model1 = new DefaultListModel();
+        ArrayList<String> enLista = null;
+        ArrayList<String> enLista2 = null;
+        
+        try{
+            enLista = databasen.fetchColumn("SELECT DISTINCT Titel FROM MOTEN JOIN Anvandare_Moten ON Anvandare_Moten.MostesId = MOTEN.MotesId WHERE Anvandare_Moten.Deltagare = '"+anvandarId+"';");
+            }
+        catch(InfException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        
+        try {
+            String svar = "";
+            for (int i = 0; i < enLista.size(); i++) {
+                svar = enLista.get(i);
+                model.addElement(svar);
+            }
+            
+            lista.setModel(model);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Du har inga aktuella mötesinjudningar");
+        }
+    }
+    
+    public void fyllListInplaneradeMoten(int anvandarId,JList lista){
+        DefaultListModel model = new DefaultListModel();
+        ArrayList<String> enLista = null;
+        ArrayList<String> enLista2 = null;
+        
+        try{
+             ArrayList<String> listan = databasen.fetchColumn("SELECT MOTE.titel FROM MOTEN "
+                                    + "JOIN Anvandare_Moten ON MOTEN.motesId=Anvandare_Moten.MostesId "
+                                    + "WHERE Deltagare='" + anvandarId + "'");
+             String svar = "";
+             for(int i = 0; i < listan.size(); i++){
+                 svar = listan.get(i);
+                 model.addElement(svar);
+             }
+             lista.setModel(model);
+        }
+        catch(Exception e){
+             JOptionPane.showMessageDialog(null, "Du har inga inplanerade möten");
+        }
     }
     
 }
