@@ -356,6 +356,18 @@ public class DataHanterare {
     }
     return namnet;
     }
+    
+    public boolean inlaggetHarFil(int inlaggId){
+    boolean filFinns=false;
+    try{
+    databasen.fetchSingle("select filurl from filer where inalggId='"+inlaggId+"';");
+            }
+    
+    catch(Exception e){
+        System.out.println( "inlaggetHarFil error:" +e.getMessage());
+    }
+    return filFinns;
+    }
 }
     
 
