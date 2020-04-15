@@ -290,9 +290,9 @@ public class DataHanterare {
     }
 
    
-    public void skapaInlagg(int inlaggID, int skribent, String inlagg, int bsektion){
+    public void skapaInlagg(int inlaggID, int skribent, String inlagg, int bsektion, String titel){
         try{
-        String fraga = "INSERT INTO INLAGG(INLAGGID, SKRIBENT, TEXT, BSEKTION) VALUES("+inlaggID+",'"+skribent+"','"+inlagg+"',"+bsektion+")";
+        String fraga = "INSERT INTO INLAGG(INLAGGID, SKRIBENT, TEXT, BSEKTION) VALUES("+inlaggID+",'"+skribent+"','"+inlagg+"',"+bsektion+ ", "+ titel +")";
         databasen.insert(fraga);
         }
         catch(Exception e){
