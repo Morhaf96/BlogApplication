@@ -14,7 +14,7 @@ import oru.inf.InfDB;
 
 /**
  *
- * @author Morhaf
+ * @author Team 14
  */
 public class VisaBloggInlagg extends javax.swing.JFrame {
 

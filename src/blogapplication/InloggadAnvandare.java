@@ -10,7 +10,7 @@ import oru.inf.InfDB;
 
 /**
  *
- * @author Morhaf
+ * @author Team 14
  */
 public class InloggadAnvandare extends javax.swing.JFrame {
 
@@ -27,8 +27,8 @@ public class InloggadAnvandare extends javax.swing.JFrame {
         databasen = DataHanterare.dataHanterare();
         initComponents();
         this.setLocationRelativeTo(null);
-        lblInloggad.setText("Välkommen "+dataHanterare.getAnvandarFornamn(this.userId)+"!");
-        this.setTitle("Inloggad som "+dataHanterare.getFullNamn(userId));
+        lblInloggad.setText("Välkommen " + dataHanterare.getAnvandarFornamn(this.userId) + "!");
+        this.setTitle("Inloggad som " + dataHanterare.getFullNamn(userId));
     }
 
     /**
@@ -188,7 +188,7 @@ public class InloggadAnvandare extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBloggActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       new VisaBloggInlagg().setVisible(true);
+        new VisaBloggInlagg().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

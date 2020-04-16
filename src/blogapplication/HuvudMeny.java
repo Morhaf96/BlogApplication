@@ -10,7 +10,7 @@ import oru.inf.InfDB;
 
 /**
  *
- * @author Morhaf
+ * @author Team 14
  */
 public class HuvudMeny extends javax.swing.JFrame {
 
@@ -260,7 +260,6 @@ public class HuvudMeny extends javax.swing.JFrame {
                     tomInlogFalten();
                     new InloggadAnvandare(userId).setVisible(true);
                     this.dispose();
-                    
 
                 } else if (!DataHanterare.kontrolleraInloggning(userId, anvandarLosenord)) {
                     JOptionPane.showMessageDialog(null, "Inloggningen lyckades ej! Vänligen försök igen!");
@@ -284,8 +283,8 @@ public class HuvudMeny extends javax.swing.JFrame {
     }
 
     private void btnRegNyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegNyActionPerformed
-        if (Validering.FaltArTom(tfFornamn) || Validering.FaltArTom(tfEfternamn) || Validering.FaltArTom(tfRegMail) || !Validering.arMejl(tfRegMail) 
-               || Validering.pwFaltArTom(lfRegLos) || Validering.FaltArTom(tfTel) || !Validering.arHeltal(tfTel) || !Validering.arTelefonnummer(tfTel)) {
+        if (Validering.FaltArTom(tfFornamn) || Validering.FaltArTom(tfEfternamn) || Validering.FaltArTom(tfRegMail) || !Validering.arMejl(tfRegMail)
+                || Validering.pwFaltArTom(lfRegLos) || Validering.FaltArTom(tfTel) || !Validering.arHeltal(tfTel) || !Validering.arTelefonnummer(tfTel)) {
             System.out.println("Problem med angiven data");
         } else {
 
@@ -299,7 +298,7 @@ public class HuvudMeny extends javax.swing.JFrame {
                 System.out.println("Registreringen lyckades!");
                 tomRegFalten();
 
-            } 
+            }
         }
     }//GEN-LAST:event_btnRegNyActionPerformed
 

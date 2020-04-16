@@ -4,21 +4,25 @@
  * and open the template in the editor.
  */
 package blogapplication;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+
 /**
  *
- * @author Morhaf
+ * @author Team 14
  */
 public class EttInlagg extends javax.swing.JPanel {
+
     private DataHanterare dataHanterare;
     private InfDB databasen;
     private String inlagg;
     private String filUrl;
+
     /**
      * Creates new form EttInlagg
      */
@@ -26,34 +30,36 @@ public class EttInlagg extends javax.swing.JPanel {
         initComponents();
         dataHanterare = new DataHanterare();
         databasen = DataHanterare.dataHanterare();
-        this.inlagg=inlagg;
+        this.inlagg = inlagg;
         setText();
     }
 
-    
-      private void setText() {
-          lblBifogadFil.setText("Inlägget har inga bifogade filer.");
-          lblInlaggId.setText("Inlagg nr " +inlagg );
-          lblTitel.setText("Titel: "+dataHanterare.getInlaggTitel(inlagg));
-          String skribentNamn=dataHanterare.getInlaggSkribentNamn(inlagg);
-          String datum=dataHanterare.getInlaggDatum(inlagg);
-          String tid=dataHanterare.getInlaggTid(inlagg);
-          lblSkribentOchDatum.setText("Skriven av: "+skribentNamn+". "+datum+" "+tid);
-          
-          if(dataHanterare.inlaggetHarFil(inlagg)){
-          int filId=dataHanterare.getInlaggFilId(inlagg);
-          if(filId!=0){
-          String filnamn= dataHanterare.getFilNamn(filId);
-          String filUrl=dataHanterare.getFilUrl(filId);
-          this.filUrl=filUrl;
-          lblBifogadFil.setText("Bifogade filer: "+ filnamn);
-          lblBifogadFil.setForeground(Color.BLUE.darker());
-          lblBifogadFil.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-          }}
-          String inlaggText=dataHanterare.getInlaggText(inlagg);
-          jTextArea1.append(inlaggText);
-          
-      }
+    private void setText() {
+        lblBifogadFil.setText("Inlägget har inga bifogade filer.");
+        lblInlaggId.setText("Inlagg nr " + inlagg);
+        String inlaggTitel = dataHanterare.getInlaggTitel(inlagg);
+        lblTitel.setText("Titel: " + inlaggTitel);
+        String skribentNamn = dataHanterare.getInlaggSkribentNamn(inlagg);
+        String datum = dataHanterare.getInlaggDatum(inlagg);
+        String tid = dataHanterare.getInlaggTid(inlagg);
+        lblSkribentOchDatum.setText("Skriven av: " + skribentNamn + ". " + datum + " " + tid);
+
+        if (dataHanterare.inlaggetHarFil(inlagg)) {
+            int filId = dataHanterare.getInlaggFilId(inlagg);
+            if (filId != 0) {
+                String filnamn = dataHanterare.getFilNamn(filId);
+                String filUrl = dataHanterare.getFilUrl(filId);
+                this.filUrl = filUrl;
+                lblBifogadFil.setText("Bifogade filer: " + filnamn);
+                lblBifogadFil.setForeground(Color.BLUE.darker());
+                lblBifogadFil.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+        }
+        String inlaggText = dataHanterare.getInlaggText(inlagg);
+        jTextArea1.append(inlaggText);
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,6 +75,7 @@ public class EttInlagg extends javax.swing.JPanel {
         jTextArea1 = new javax.swing.JTextArea();
         lblSkribentOchDatum = new javax.swing.JLabel();
         lblBifogadFil = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
         lblTitel.setText("Titel:");
 
@@ -91,12 +98,14 @@ public class EttInlagg extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblBifogadFil, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblInlaggId, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSkribentOchDatum)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(lblTitel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblBifogadFil, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)))
                 .addContainerGap(16, Short.MAX_VALUE))
+            .addComponent(jSeparator1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,25 +117,28 @@ public class EttInlagg extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSkribentOchDatum)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblBifogadFil, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
+                .addComponent(lblBifogadFil, javax.swing.GroupLayout.DEFAULT_SIZE, 9, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblBifogadFilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBifogadFilMouseClicked
-       try{
-        Runtime.getRuntime().exec("explorer \"" + filUrl + "\"");
-                    
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
+        try {
+            Runtime.getRuntime().exec("explorer \"" + filUrl + "\"");
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_lblBifogadFilMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblBifogadFil;
     private javax.swing.JLabel lblInlaggId;

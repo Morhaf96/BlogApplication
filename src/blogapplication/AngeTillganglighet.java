@@ -12,7 +12,7 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Morhaf
+ * @author Team 14
  */
 public class AngeTillganglighet extends javax.swing.JFrame {
 
@@ -22,6 +22,7 @@ public class AngeTillganglighet extends javax.swing.JFrame {
     private ArrayList<String> lista;
     private ArrayList<String> listaSTid;
     private int userId;
+
     /**
      * Creates new form AngeTillganglighet
      */
@@ -31,37 +32,35 @@ public class AngeTillganglighet extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         initComponents();
         this.motesId = motesId;
-        this.userId=userId;
+        this.userId = userId;
     }
-    
-    
-    private void fyllDatumTid(){
-        try{
-           String namn=dataHanterare.getFullNamn(userId);
-           lblanvnamn.setText(namn);
-           String motesnamn= dataHanterare.getMotesnamn(motesId);
-           lblmotesNamn.setText(motesnamn);
-           lista = databasen.fetchColumn("SELECT DATUM FROM Anvandare_moten WHERE mostesid = "+motesId);
-           listaSTid=databasen.fetchColumn("SELECT sluttid FROM Anvandare_moten WHERE mostesid = "+motesId);
-           String slt1=listaSTid.get(0);
-           String slt2=listaSTid.get(1);
-           String slt3=listaSTid.get(2);
-           for(int i = 0; i < lista.size(); i++){
-              String datum = lista.get(i).substring(0,10);
-              String tid = lista.get(i).substring(11,16);
-              lblD1.setText(lista.get(0).substring(0,10));
-              lblD2.setText(lista.get(1).substring(0,10));
-              lblD3.setText(lista.get(2).substring(0,10));
-              lblStt1.setText(lista.get(0).substring(11,16));
-              lblStt2.setText(lista.get(1).substring(11,16));
-              lblStt3.setText(lista.get(2).substring(11,16));
-           }
-           lblSlt1.setText(slt1);
-           lblSlt2.setText(slt2);
-           lblSlt3.setText(slt3);
-        }
-        catch(InfException e){
-           JOptionPane.showMessageDialog(null, "det gick inte att hämta datumen från databasen");
+
+    private void fyllDatumTid() {
+        try {
+            String namn = dataHanterare.getFullNamn(userId);
+            lblanvnamn.setText(namn);
+            String motesnamn = dataHanterare.getMotesnamn(motesId);
+            lblmotesNamn.setText(motesnamn);
+            lista = databasen.fetchColumn("SELECT DATUM FROM Anvandare_moten WHERE mostesid = " + motesId);
+            listaSTid = databasen.fetchColumn("SELECT sluttid FROM Anvandare_moten WHERE mostesid = " + motesId);
+            String slt1 = listaSTid.get(0);
+            String slt2 = listaSTid.get(1);
+            String slt3 = listaSTid.get(2);
+            for (int i = 0; i < lista.size(); i++) {
+                String datum = lista.get(i).substring(0, 10);
+                String tid = lista.get(i).substring(11, 16);
+                lblD1.setText(lista.get(0).substring(0, 10));
+                lblD2.setText(lista.get(1).substring(0, 10));
+                lblD3.setText(lista.get(2).substring(0, 10));
+                lblStt1.setText(lista.get(0).substring(11, 16));
+                lblStt2.setText(lista.get(1).substring(11, 16));
+                lblStt3.setText(lista.get(2).substring(11, 16));
+            }
+            lblSlt1.setText(slt1);
+            lblSlt2.setText(slt2);
+            lblSlt3.setText(slt3);
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "det gick inte att hämta datumen från databasen");
         }
     }
 
@@ -244,68 +243,59 @@ public class AngeTillganglighet extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       fyllDatumTid();
+        fyllDatumTid();
     }//GEN-LAST:event_formWindowOpened
 
-    private void uncheckaBoxen(){
-    kan1.setSelected(false);
+    private void uncheckaBoxen() {
+        kan1.setSelected(false);
         kan2.setSelected(false);
-            kan3.setSelected(false);
-            
+        kan3.setSelected(false);
+
     }
-    
+
     private void btnAngeTillganglighetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAngeTillganglighetActionPerformed
         boolean ett = kan1.isSelected();
         boolean tva = kan2.isSelected();
-        boolean tre = kan3.isSelected();  
-        
-        if(ett){
-            try{
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '"+lblD1.getText() + " " + lblStt1.getText()+"%' AND Sluttid='"+lblSlt1.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
+        boolean tre = kan3.isSelected();
+
+        if (ett) {
+            try {
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '" + lblD1.getText() + " " + lblStt1.getText() + "%' AND Sluttid='" + lblSlt1.getText() + "' And MostesId = '" + motesId + "' AND deltagare = '" + userId + "';");
+            } catch (InfException e) {
+                JOptionPane.showMessageDialog(null, "1N");
             }
-            catch(InfException e){
+        } else {
+            try {
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '" + lblD1.getText() + " " + lblStt1.getText() + "%' AND Sluttid='" + lblSlt1.getText() + "' And MostesId = '" + motesId + "' AND deltagare = '" + userId + "';");
+            } catch (InfException e) {
                 JOptionPane.showMessageDialog(null, "1N");
             }
         }
-        else{
-            try{
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '"+lblD1.getText() + " " + lblStt1.getText()+"%' AND Sluttid='"+lblSlt1.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
-            }
-            catch(InfException e){
-                JOptionPane.showMessageDialog(null, "1N");
-            }
-        }
-        
-        if(tva){
-            try{
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '"+lblD2.getText() + " " + lblStt2.getText()+"%' AND Sluttid='"+lblSlt2.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
-            }
-            catch(InfException e){
+
+        if (tva) {
+            try {
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '" + lblD2.getText() + " " + lblStt2.getText() + "%' AND Sluttid='" + lblSlt2.getText() + "' And MostesId = '" + motesId + "' AND deltagare = '" + userId + "';");
+            } catch (InfException e) {
                 JOptionPane.showMessageDialog(null, "2Y");
             }
-        }
-        else{
-            try{
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '"+lblD2.getText() + " " + lblStt2.getText()+"%' AND Sluttid='"+lblSlt2.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
-            }
-            catch(InfException e){
+        } else {
+            try {
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '" + lblD2.getText() + " " + lblStt2.getText() + "%' AND Sluttid='" + lblSlt2.getText() + "' And MostesId = '" + motesId + "' AND deltagare = '" + userId + "';");
+            } catch (InfException e) {
                 JOptionPane.showMessageDialog(null, "2N");
             }
         }
-        
-        if(tre){
-        try{
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '"+lblD3.getText() + " " + lblStt3.getText()+"%' AND Sluttid='"+lblSlt3.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
-            }
-            catch(InfException e){
+
+        if (tre) {
+            try {
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '" + lblD3.getText() + " " + lblStt3.getText() + "%' AND Sluttid='" + lblSlt3.getText() + "' And MostesId = '" + motesId + "' AND deltagare = '" + userId + "';");
+            } catch (InfException e) {
                 JOptionPane.showMessageDialog(null, "3Y");
             }
-        }
-        else{
-            try{
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '"+lblD3.getText() + " " + lblStt3.getText()+"%' AND Sluttid='"+lblSlt3.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
-            }
-            catch(InfException e){
+        } else {
+            try {
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '" + lblD3.getText() + " " + lblStt3.getText() + "%' AND Sluttid='" + lblSlt3.getText() + "' And MostesId = '" + motesId + "' AND deltagare = '" + userId + "';");
+            } catch (InfException e) {
                 JOptionPane.showMessageDialog(null, "3N");
             }
         }
@@ -313,7 +303,6 @@ public class AngeTillganglighet extends javax.swing.JFrame {
         uncheckaBoxen();
     }//GEN-LAST:event_btnAngeTillganglighetActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAngeTillganglighet;

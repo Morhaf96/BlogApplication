@@ -22,21 +22,22 @@ import oru.inf.InfDB;
  * @author xxx
  */
 public class SkapaInlagg extends javax.swing.JFrame {
- 
+
     private DataHanterare dataHanterare;
     private InfDB databasen;
     private int userId;
     private static String filnamn;
     private File fil;
+
     /**
      * Creates new form SkapaInlagg
      */
     public SkapaInlagg(int userId) {
         dataHanterare = new DataHanterare();
         databasen = DataHanterare.dataHanterare();
-        this.userId=userId;
+        this.userId = userId;
         initComponents();
-        filnamn="";
+        filnamn = "";
         this.setLocationRelativeTo(null);
     }
 
@@ -72,7 +73,6 @@ public class SkapaInlagg extends javax.swing.JFrame {
 
         jTInlagg.setColumns(20);
         jTInlagg.setRows(5);
-        jTInlagg.setText("\n");
         jTInlagg.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTInlaggFocusGained(evt);
@@ -224,7 +224,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
 //            } catch (InfException e) {
 //            }
 //        }
-    
+
     private void btnBifogaFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBifogaFilActionPerformed
         JFileChooser fc = new JFileChooser();
         //FileSystemView.getFileSystemView().getHomeDirectory() (Gets desktop url)
@@ -237,69 +237,70 @@ public class SkapaInlagg extends javax.swing.JFrame {
             File f = fc.getSelectedFile();
             filnamn = f.getAbsolutePath();
             File fil = new File(filnamn);
-            this.fil=fil;
+            this.fil = fil;
             tfFilUrl.setText(filnamn);
             tfFilNamn.setEditable(true);
-            
+
             lblFilUrl.setText("Förhandsgranska vald fil");
             lblFilUrl.setForeground(Color.BLUE.darker());
             lblFilUrl.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            
+
         }
 
     }//GEN-LAST:event_btnBifogaFilActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime nu = LocalDateTime.now();
         String datum = nu.toString().substring(0, 10);
         String tid = nu.toString().substring(11, 16);
 
-        int inlaggID = dataHanterare.getNextInlaggId();
-        int skribent = userId;
-        String inlagg = dataHanterare.stringFormat(jTInlagg.getText());
-        int bsektion = 1;
-        String titel=dataHanterare.stringFormat(tfTitel.getText());
-
-        if(dataHanterare.skapaInlagg(inlaggID, skribent, inlagg, bsektion, titel,datum, tid)){
-            if(!tfFilUrl.getText().equals("")){
-                String filNamn="Unnamed File";
-                if(!tfFilNamn.equals(null)){
-                filNamn=dataHanterare.stringFormat(tfFilNamn.getText());
-                }
-                dataHanterare.laggTillFil(filNamn, filnamn, inlaggID);
+        if (jTInlagg.getText().equals(null)) {
+            JOptionPane.showMessageDialog(null, "Vänligen skriv ett inlägg först!");
+        } else {
+            int inlaggID = dataHanterare.getNextInlaggId();
+            int skribent = userId;
+            String inlagg = dataHanterare.stringFormat(jTInlagg.getText());
+            int bsektion = 1;
+            String titel = tfTitel.getText();
+            if (titel.equals("")) {
+                titel = "Unnamed post";
             }
-            JOptionPane.showMessageDialog(null, "Ditt inlägg har skapats!");
-            jTInlagg.setText("");
-            tfTitel.setText("");
-            tfFilUrl.setText("");
-            tfFilNamn.setText("");
-            filnamn=null;
-            lblFilUrl.setText("");
-            this.dispose();
-            
-        }
-        else{
-            System.out.print("Misslyckades");
+            titel = dataHanterare.stringFormat(titel);
+
+            if (dataHanterare.skapaInlagg(inlaggID, skribent, inlagg, bsektion, titel, datum, tid)) {
+                if (!tfFilUrl.getText().equals("")) {
+                    String filNamn = "Unnamed File";
+                    if (!tfFilNamn.equals(null)) {
+                        filNamn = dataHanterare.stringFormat(tfFilNamn.getText());
+                    }
+                    dataHanterare.laggTillFil(filNamn, filnamn, inlaggID);
+                }
+                JOptionPane.showMessageDialog(null, "Ditt inlägg har skapats!");
+                jTInlagg.setText("");
+                tfTitel.setText("");
+                tfFilUrl.setText("");
+                tfFilNamn.setText("");
+                filnamn = null;
+                lblFilUrl.setText("");
+                this.dispose();
+
+            } else {
+                System.out.print("Misslyckades");
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTInlaggFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTInlaggFocusLost
-        if(jTInlagg.getText().equals(""))
-        {
+        if (jTInlagg.getText().equals("")) {
             jTInlagg.setText("Vad tänker du på?");
             jTInlagg.setForeground(Color.gray);
-        }
-
-        else if (!jTInlagg.getText().equals(""))
-        {
+        } else if (!jTInlagg.getText().equals("")) {
             jTInlagg.setForeground(Color.black);
         }
     }//GEN-LAST:event_jTInlaggFocusLost
 
     private void jTInlaggFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTInlaggFocusGained
-        if(jTInlagg.getText().equals("Vad tänker du på?"))
-        {
+        if (jTInlagg.getText().equals("Vad tänker du på?")) {
             jTInlagg.setText("");
         }
         jTInlagg.setForeground(Color.black);
@@ -311,33 +312,30 @@ public class SkapaInlagg extends javax.swing.JFrame {
 
     private void lblFilUrlMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFilUrlMouseClicked
         try {
-             Runtime.getRuntime().exec("explorer \"" + filnamn + "\"");
-                    
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
+            Runtime.getRuntime().exec("explorer \"" + filnamn + "\"");
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_lblFilUrlMouseClicked
 
     private void lblFilUrlMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFilUrlMouseEntered
-        if(!filnamn.equals("")){
-        lblFilUrl.setText("<html><a href=''>" + "Förhandsgranska vald fil" + "</a></html>");
+        if (!filnamn.equals("")) {
+            lblFilUrl.setText("<html><a href=''>" + "Förhandsgranska vald fil" + "</a></html>");
         }
     }//GEN-LAST:event_lblFilUrlMouseEntered
 
     private void lblFilUrlMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblFilUrlMouseExited
-       if(!filnamn.equals("")){
-        lblFilUrl.setText("Förhandsgranska vald fil");
-           }
+        if (!filnamn.equals("")) {
+            lblFilUrl.setText("Förhandsgranska vald fil");
+        }
     }//GEN-LAST:event_lblFilUrlMouseExited
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-      this.filnamn="";
+        this.filnamn = "";
     }//GEN-LAST:event_formWindowClosed
 
-    
-    
-    
- 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLSkapainlagg;
     private javax.swing.JPanel Jpanel;
