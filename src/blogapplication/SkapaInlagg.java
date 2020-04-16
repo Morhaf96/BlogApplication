@@ -262,15 +262,15 @@ public class SkapaInlagg extends javax.swing.JFrame {
 
         int inlaggID = dataHanterare.getNextInlaggId();
         int skribent = userId;
-        String inlagg = jTInlagg.getText();
+        String inlagg = dataHanterare.stringFormat(jTInlagg.getText());
         int bsektion = 1;
-        String titel=tfTitel.getText();
+        String titel=dataHanterare.stringFormat(tfTitel.getText());
 
         if(dataHanterare.skapaInlagg(inlaggID, skribent, inlagg, bsektion, titel,datum, tid)){
             if(!tfFilUrl.getText().equals("")){
                 String filNamn="Unnamed File";
                 if(!tfFilNamn.equals(null)){
-                filNamn=tfFilNamn.getText();
+                filNamn=dataHanterare.stringFormat(tfFilNamn.getText());
                 }
                 dataHanterare.laggTillFil(filNamn, filnamn, inlaggID);
             }
@@ -281,6 +281,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
             tfFilNamn.setText("");
             filnamn=null;
             lblFilUrl.setText("");
+            this.dispose();
             
         }
         else{

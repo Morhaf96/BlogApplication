@@ -396,9 +396,9 @@ public class DataHanterare {
     }
     
     public String getInlaggTitel(String inlaggId){
-        String titel="";
+        String titel="Untitled post";
      try{
-            titel=databasen.fetchSingle("select text from inlagg where inlaggid='"+inlaggId+"';");
+            titel=databasen.fetchSingle("select titel from inlagg where inlaggid='"+inlaggId+"';");
             }
             
             catch(Exception e){

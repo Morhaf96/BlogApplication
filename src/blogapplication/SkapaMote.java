@@ -28,11 +28,13 @@ public class SkapaMote extends javax.swing.JFrame {
      * Creates new form MotesBokning
      */
     public SkapaMote(int userId) {
+        
         dataHanterare = new DataHanterare();
         databasen = DataHanterare.dataHanterare();
         this.userId = userId;
         initComponents();
         this.setLocationRelativeTo(null);
+        valdMotesInbjudanId=-1;
     }
 
     public void tomFalten() {
@@ -236,7 +238,7 @@ public class SkapaMote extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(lIplaneradeMoten);
 
-        jButton2.setText("Visa inbjudningar");
+        jButton2.setText("Visa inbjudan");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -259,14 +261,17 @@ public class SkapaMote extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jButton2)))
-                .addGap(47, 47, 47)
+                        .addGap(76, 76, 76)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
+                        .addGap(64, 64, 64)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -376,7 +381,11 @@ public class SkapaMote extends javax.swing.JFrame {
     }//GEN-LAST:event_lIplaneradeMotenMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       new AngeTillganglighet(userId,valdMotesInbjudanId).setVisible(true);
+        if(valdMotesInbjudanId!=-1){
+        new AngeTillganglighet(userId,valdMotesInbjudanId).setVisible(true);}
+        else{
+        JOptionPane.showMessageDialog(null, "Du måste välja en mötesinbjudan från listan!");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

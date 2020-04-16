@@ -25,6 +25,7 @@ public class HuvudMeny extends javax.swing.JFrame {
         databasen = DataHanterare.dataHanterare();
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setTitle("Logga in/Registrera dig");
     }
 
     /**
@@ -258,7 +259,8 @@ public class HuvudMeny extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Du är nu inloggad!");
                     tomInlogFalten();
                     new InloggadAnvandare(userId).setVisible(true);
-                    //this.dispose();
+                    this.dispose();
+                    
 
                 } else if (!DataHanterare.kontrolleraInloggning(userId, anvandarLosenord)) {
                     JOptionPane.showMessageDialog(null, "Inloggningen lyckades ej! Vänligen försök igen!");
