@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package blogapplication;
+import java.awt.Color;
+import java.awt.Cursor;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
@@ -16,6 +18,7 @@ public class EttInlagg extends javax.swing.JPanel {
     private DataHanterare dataHanterare;
     private InfDB databasen;
     private String inlagg;
+    private String filUrl;
     /**
      * Creates new form EttInlagg
      */
@@ -24,8 +27,33 @@ public class EttInlagg extends javax.swing.JPanel {
         dataHanterare = new DataHanterare();
         databasen = DataHanterare.dataHanterare();
         this.inlagg=inlagg;
+        setText();
     }
 
+    
+      private void setText() {
+          lblBifogadFil.setText("Inlägget har inga bifogade filer.");
+          lblInlaggId.setText("Inlagg nr " +inlagg );
+          lblTitel.setText("Titel: "+dataHanterare.getInlaggTitel(inlagg));
+          String skribentNamn=dataHanterare.getInlaggSkribentNamn(inlagg);
+          String datum=dataHanterare.getInlaggDatum(inlagg);
+          String tid=dataHanterare.getInlaggTid(inlagg);
+          lblSkribentOchDatum.setText("Skriven av: "+skribentNamn+". "+datum+" "+tid);
+          
+          if(dataHanterare.inlaggetHarFil(inlagg)){
+          int filId=dataHanterare.getInlaggFilId(inlagg);
+          if(filId!=0){
+          String filnamn= dataHanterare.getFilNamn(filId);
+          String filUrl=dataHanterare.getFilUrl(filId);
+          this.filUrl=filUrl;
+          lblBifogadFil.setText("Bifogade filer: "+ filnamn);
+          lblBifogadFil.setForeground(Color.BLUE.darker());
+          lblBifogadFil.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+          }}
+          String inlaggText=dataHanterare.getInlaggText(inlagg);
+          jTextArea1.append(inlaggText);
+          
+      }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,19 +63,74 @@ public class EttInlagg extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblInlaggId = new javax.swing.JLabel();
+        lblTitel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        lblSkribentOchDatum = new javax.swing.JLabel();
+        lblBifogadFil = new javax.swing.JLabel();
+
+        lblTitel.setText("Titel:");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        lblSkribentOchDatum.setText("Skirven av");
+
+        lblBifogadFil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBifogadFilMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblBifogadFil, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblInlaggId, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSkribentOchDatum)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblInlaggId, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSkribentOchDatum)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblBifogadFil, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lblBifogadFilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBifogadFilMouseClicked
+       try{
+        Runtime.getRuntime().exec("explorer \"" + filUrl + "\"");
+                    
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+    }//GEN-LAST:event_lblBifogadFilMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblBifogadFil;
+    private javax.swing.JLabel lblInlaggId;
+    private javax.swing.JLabel lblSkribentOchDatum;
+    private javax.swing.JLabel lblTitel;
     // End of variables declaration//GEN-END:variables
 }

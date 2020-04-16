@@ -212,7 +212,7 @@ public class DataHanterare {
           id= Integer.parseInt(stringId);
           System.out.println(id);
     }
-          catch (InfException ex) {
+          catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());           
         }
@@ -357,16 +357,30 @@ public class DataHanterare {
     return namnet;
     }
     
-    public boolean inlaggetHarFil(int inlaggId){
+    public boolean inlaggetHarFil(String inlaggId){
     boolean filFinns=false;
     try{
-    databasen.fetchSingle("select filurl from filer where inalggId='"+inlaggId+"';");
+    databasen.fetchSingle("select filurl from filer where InlaggId='"+inlaggId+"';");
+    filFinns=true;
             }
     
     catch(Exception e){
         System.out.println( "inlaggetHarFil error:" +e.getMessage());
     }
     return filFinns;
+    }
+    
+    public int getInlaggFilId(String inlaggId){
+    int filId=0;
+            try{
+            String filIdS=databasen.fetchSingle("select FilId from filer where inlaggid='"+inlaggId+"';");
+            filId=Integer.parseInt(filIdS);
+            }
+            
+            catch(Exception e){
+               System.out.println( "getInlaggFilId error:" +e.getMessage());
+            }
+    return filId;
     }
 
     public ArrayList getFormellaInlaggId(){
@@ -380,8 +394,113 @@ public class DataHanterare {
       }
         return enLista;
     }
-
     
+    public String getInlaggTitel(String inlaggId){
+        String titel="";
+     try{
+            titel=databasen.fetchSingle("select text from inlagg where inlaggid='"+inlaggId+"';");
+            }
+            
+            catch(Exception e){
+               System.out.println( "getInlaggFilId error:" +e.getMessage());
+            }
+     return titel;
+    }
+    
+    public String getInlaggSkribentNamn(String inlaggId){
+        String fornamn="";
+        String efternamn="";
+        try{
+            fornamn=databasen.fetchSingle("select fornamn from Anvandare join Inlagg on inlagg.skribent = anvandare.anvandarid where inlagg.inlaggid='"+inlaggId+"';");
+            efternamn=databasen.fetchSingle("select efternamn from Anvandare join Inlagg on inlagg.skribent = anvandare.anvandarid where inlagg.inlaggid='"+inlaggId+"';");
+            }
+            
+            catch(Exception e){
+               System.out.println( "getInlaggSkribentNamn error:" +e.getMessage());
+            }
+        
+        
+        String fullnamn=fornamn + " "+ efternamn;
+     return fullnamn;
+    }
+    
+    public String getInlaggDatum(String inlaggId){
+        String datum="";
+        try{
+            datum=databasen.fetchSingle("select datum from inlagg where inlaggid='"+inlaggId+"';");
+            }
+            
+            catch(Exception e){
+               System.out.println( "getInlaggDatum error:" +e.getMessage());
+            }
+           
+     return datum;
+    }
+    
+    public String getInlaggTid(String inlaggId){
+        String tid="";
+        try{
+            tid=databasen.fetchSingle("select tid from inlagg where inlaggid='"+inlaggId+"';");
+            }
+            
+            catch(Exception e){
+               System.out.println( "getInlaggTid error:" +e.getMessage());
+            }
+           
+     return tid;
+    }
+    
+    public String getFilNamn(int filId){
+    String filnamn="";
+        try{
+            filnamn=databasen.fetchSingle("select filnamn from filer where filid='"+filId+"';");
+            }
+            
+            catch(Exception e){
+               System.out.println( "getInlaggTid error:" +e.getMessage());
+            }
+           
+     return filnamn;
+    }
+    
+    public String getFilUrl(int filId){
+    String url="";
+        try{
+            url=databasen.fetchSingle("select filurl from filer where filid='"+filId+"';");
+            }
+            
+            catch(Exception e){
+               System.out.println( "getInlaggTid error:" +e.getMessage());
+            }
+           
+     return url;
+    }
+    
+    public String getInlaggText(String inlaggId){
+    String text="";
+        try{
+            text=databasen.fetchSingle("select text from inlagg where inlaggid='"+inlaggId+"';");
+            }
+            
+            catch(Exception e){
+               System.out.println( "getInlaggTid error:" +e.getMessage());
+            }
+           
+     return text;
+    }
+    
+    public String getAnvandarFornamn(int userId){
+    String namn="";
+        try{
+            namn=databasen.fetchSingle("select fornamn from anvandare where anvandarId='"+userId+"';");
+            }
+            
+            catch(Exception e){
+               System.out.println( "getInlaggTid error:" +e.getMessage());
+            }
+           
+     return namn;
+    }
     
 }
     
