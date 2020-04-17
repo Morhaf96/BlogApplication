@@ -299,6 +299,7 @@ public class AngeTillganglighet extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(null, "Dina svar har nu skickats till mötesarrangören.");
         uncheckaBoxen();
+        this.dispose();
     }//GEN-LAST:event_btnAngeTillganglighetActionPerformed
 
 

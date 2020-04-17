@@ -23,6 +23,7 @@ public class SkapaMote extends javax.swing.JFrame {
     public int userId;
     public int valdMote;
     public int valdMotesInbjudanId;
+    public int valdMoteMinaMoten;
 
     /**
      * Creates new form MotesBokning
@@ -35,6 +36,7 @@ public class SkapaMote extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         valdMotesInbjudanId = -1;
+        valdMoteMinaMoten=-1;
     }
 
     public void tomFalten() {
@@ -89,6 +91,10 @@ public class SkapaMote extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lMinaSkapadeMoten = new javax.swing.JList<>();
+        btnMotesStatus = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -109,7 +115,16 @@ public class SkapaMote extends javax.swing.JFrame {
 
         jLabel5.setText("Datum ");
 
+        dcDatum1.setFocusable(false);
+        dcDatum1.setRequestFocusEnabled(false);
+
         jLabel6.setText("Starttid");
+
+        dcDatum3.setFocusable(false);
+        dcDatum3.setRequestFocusEnabled(false);
+
+        dcDatum2.setFocusable(false);
+        dcDatum2.setRequestFocusEnabled(false);
 
         jLabel7.setText("HH.MM");
 
@@ -253,6 +268,22 @@ public class SkapaMote extends javax.swing.JFrame {
             }
         });
 
+        jLabel13.setText("Mina skapade möten");
+
+        lMinaSkapadeMoten.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lMinaSkapadeMotenMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(lMinaSkapadeMoten);
+
+        btnMotesStatus.setText("Visa Mötesuppdatering");
+        btnMotesStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMotesStatusActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -260,19 +291,25 @@ public class SkapaMote extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                         .addComponent(jLabel12)
-                        .addGap(147, 147, 147)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel13)
+                        .addGap(73, 73, 73))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMotesStatus))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
                         .addGap(17, 17, 17)))
                 .addGap(28, 28, 28)
@@ -292,11 +329,16 @@ public class SkapaMote extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(jLabel12))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addComponent(btnMotesStatus)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -349,6 +391,8 @@ public class SkapaMote extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         dataHanterare.fyllListInplaneradeMoten(userId, lIplaneradeMoten);
         dataHanterare.fyllListMotesInbjudningar(userId, lMotesInbjud);
+        dataHanterare.fyllListaMinaSkapadeMoten(userId, lMinaSkapadeMoten);
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -395,8 +439,22 @@ public class SkapaMote extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void lMinaSkapadeMotenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lMinaSkapadeMotenMouseClicked
+        String motesnamn = lMinaSkapadeMoten.getSelectedValue();
+        this.valdMoteMinaMoten = dataHanterare.getMotesId(motesnamn);
+    }//GEN-LAST:event_lMinaSkapadeMotenMouseClicked
+
+    private void btnMotesStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotesStatusActionPerformed
+        if (valdMoteMinaMoten != -1) {
+            new MinaSkapadeMoten(userId, valdMoteMinaMoten).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Du måste välja ett befentligt möte från listan!");
+        }
+    }//GEN-LAST:event_btnMotesStatusActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMotesStatus;
     private com.toedter.calendar.JDateChooser dcDatum1;
     private com.toedter.calendar.JDateChooser dcDatum2;
     private com.toedter.calendar.JDateChooser dcDatum3;
@@ -407,6 +465,7 @@ public class SkapaMote extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -418,7 +477,9 @@ public class SkapaMote extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<String> lIplaneradeMoten;
+    private javax.swing.JList<String> lMinaSkapadeMoten;
     private javax.swing.JList<String> lMotesInbjud;
     private javax.swing.JTextField tfPlats;
     private javax.swing.JTextField tfSluttid1;
