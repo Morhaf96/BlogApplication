@@ -40,7 +40,8 @@ public class AngeTillganglighet extends javax.swing.JFrame {
             String namn = dataHanterare.getFullNamn(userId);
             lblanvnamn.setText(namn);
             String motesnamn = dataHanterare.getMotesnamn(motesId);
-            lblmotesNamn.setText(motesnamn);
+            String moteskapare= dataHanterare.getMotetsSkapareNamn(motesId);
+            lblMotesRubrik.setText(moteskapare + " bjuder in dig till mötet: " +motesnamn);
             lista = databasen.fetchColumn("SELECT DATUM FROM Anvandare_moten WHERE mostesid = " + motesId);
             listaSTid = databasen.fetchColumn("SELECT sluttid FROM Anvandare_moten WHERE mostesid = " + motesId);
             String slt1 = listaSTid.get(0);
@@ -88,7 +89,7 @@ public class AngeTillganglighet extends javax.swing.JFrame {
         lblStt3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnAngeTillganglighet = new javax.swing.JButton();
-        lblmotesNamn = new javax.swing.JLabel();
+        lblMotesRubrik = new javax.swing.JLabel();
         lblanvnamn = new javax.swing.JLabel();
         kan1 = new javax.swing.JCheckBox();
         kan2 = new javax.swing.JCheckBox();
@@ -103,7 +104,7 @@ public class AngeTillganglighet extends javax.swing.JFrame {
 
         lblNamn.setText("Välkommen");
 
-        jLabel1.setText(" Välj de tiderna som passar dig för mötet:");
+        jLabel1.setText("Välj de tiderna som passar dig för mötet");
 
         lblD1.setText("Datum1");
 
@@ -136,7 +137,7 @@ public class AngeTillganglighet extends javax.swing.JFrame {
             }
         });
 
-        lblmotesNamn.setText("motesnamn");
+        lblMotesRubrik.setText("motesnamn");
 
         lblanvnamn.setText("användarnamn");
 
@@ -146,62 +147,59 @@ public class AngeTillganglighet extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblD2))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblD2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblStt2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblSlt2))
-                    .addComponent(lblD1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblStt2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblSlt2))
+                            .addComponent(lblD1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblStt1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblSlt1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lblStt3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblSlt3))
+                            .addComponent(lblD3))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(kan3)
+                            .addComponent(kan1)
+                            .addComponent(kan2)
+                            .addComponent(btnAngeTillganglighet)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblStt1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblSlt1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lblStt3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblSlt3))
-                    .addComponent(lblD3))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(kan3)
-                    .addComponent(kan1)
-                    .addComponent(kan2)
-                    .addComponent(btnAngeTillganglighet)))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblmotesNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel1)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblNamn)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblanvnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(lblNamn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblanvnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblMotesRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNamn)
                     .addComponent(lblanvnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMotesRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblmotesNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(lblD1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -223,6 +221,10 @@ public class AngeTillganglighet extends javax.swing.JFrame {
                         .addComponent(kan2)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                        .addComponent(kan3)
+                        .addGap(66, 66, 66))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(lblD3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -230,11 +232,7 @@ public class AngeTillganglighet extends javax.swing.JFrame {
                             .addComponent(lblStt3)
                             .addComponent(jLabel4)
                             .addComponent(lblSlt3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(kan3)
-                        .addGap(66, 66, 66)))
+                        .addGap(41, 41, 41)))
                 .addComponent(btnAngeTillganglighet)
                 .addGap(23, 23, 23))
         );
@@ -316,6 +314,7 @@ public class AngeTillganglighet extends javax.swing.JFrame {
     private javax.swing.JLabel lblD1;
     private javax.swing.JLabel lblD2;
     private javax.swing.JLabel lblD3;
+    private javax.swing.JLabel lblMotesRubrik;
     private javax.swing.JLabel lblNamn;
     private javax.swing.JLabel lblSlt1;
     private javax.swing.JLabel lblSlt2;
@@ -324,6 +323,5 @@ public class AngeTillganglighet extends javax.swing.JFrame {
     private javax.swing.JLabel lblStt2;
     private javax.swing.JLabel lblStt3;
     private javax.swing.JLabel lblanvnamn;
-    private javax.swing.JLabel lblmotesNamn;
     // End of variables declaration//GEN-END:variables
 }

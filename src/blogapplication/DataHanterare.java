@@ -463,5 +463,18 @@ public class DataHanterare {
 
         return namn;
     }
+    
+    public String getMotetsSkapareNamn(int motesId){
+     String fornamn = "";
+     String efternamn = "";
+     try {
+            fornamn = databasen.fetchSingle("select fornamn from anvandare join moten on anvandare.anvandarId=moten.arrangor where moten.motesid='" + motesId + "';");
+            efternamn=fornamn = databasen.fetchSingle("select efternamn from anvandare join moten on anvandare.anvandarId=moten.arrangor where moten.motesid='" + motesId + "';");
+        } catch (Exception e) {
+            System.out.println("getInlaggTid error:" + e.getMessage());
+        }
+     String fullnamn=fornamn + " " + efternamn;
+     return fullnamn;
+    }
 
 }
