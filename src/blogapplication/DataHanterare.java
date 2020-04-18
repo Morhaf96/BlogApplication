@@ -263,12 +263,10 @@ public class DataHanterare {
 
     public void fyllListaMinaSkapadeMoten(int anvandarId, JList lista) {
         DefaultListModel model = new DefaultListModel();
-        DefaultListModel model1 = new DefaultListModel();
         ArrayList<String> enLista = null;
-        ArrayList<String> enLista2 = null;
 
         try {
-            enLista = databasen.fetchColumn("SELECT DISTINCT Titel FROM MOTEN WHERE Arrangor = '" + anvandarId + "';");
+            enLista = databasen.fetchColumn("SELECT DISTINCT Titel FROM MOTEN WHERE Arrangor = '" + anvandarId + "' and datum='2000-01-01';");
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
