@@ -602,5 +602,15 @@ public class DataHanterare {
 
         return lyckats;
     }
+    
+    public ArrayList getForslagId(int motesId){
+        ArrayList Lista=new ArrayList();
+      try {
+            Lista=databasen.fetchColumn("select forslagid from anvandare_moten where mostesid='"+motesId+"';");
+        } catch (Exception e) {
+            System.out.println("getForslagId error:" + e.getMessage());
+        }
+      return Lista;
+    }
 
 }

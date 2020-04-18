@@ -54,6 +54,7 @@ public class MinaSkapadeMoten extends javax.swing.JFrame {
     }
 
     public void setTider() {
+        forslagidLista=dataHanterare.getForslagId(motesId);
         String f1 = forslagidLista.get(0);
         String datumlang1 = dataHanterare.getMotesTid(f1);
         String datum1 = datumlang1.substring(0, 10);
