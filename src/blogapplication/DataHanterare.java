@@ -610,5 +610,56 @@ public class DataHanterare {
         }
       return Lista;
     }
+    
+    public ArrayList getPlaneradeMoten(String datum){
+       ArrayList Lista=new ArrayList();
+      try {
+            Lista=databasen.fetchColumn("select motesid from moten where datum='"+datum+"';");
+        } catch (Exception e) {
+            System.out.println("getForslagId error:" + e.getMessage());
+        }
+      return Lista;
+    }
+    
+    public String getMotetsDatum(String motesId){
+        String svar = "";
+        try {
+            svar = databasen.fetchSingle("select datum from moten where motesId='" + motesId + "';");
+        } catch (Exception e) {
+            System.out.println("getMotetsDatum error:" + e.getMessage());
+        }
+        return svar;
+    }
+    
+    public String getMotetsStarttid(String motesId){
+        String svar = "";
+        try {
+            svar = databasen.fetchSingle("select starttid from moten where motesId='" + motesId + "';");
+        } catch (Exception e) {
+            System.out.println("getMotetsStarttid error:" + e.getMessage());
+        }
+        return svar;
+    }
+    
+    public String getMotetsSluttid(String motesId){
+        String svar = "";
+        try {
+            svar = databasen.fetchSingle("select sluttid from moten where motesId='" + motesId + "';");
+        } catch (Exception e) {
+            System.out.println("getMotetsSluttid error:" + e.getMessage());
+        }
+        return svar;
+    }
+    
+    public String getMotetsnamn(String motesId) {
+        String namnet = "";
+
+        try {
+            namnet = databasen.fetchSingle("select titel from moten where motesid='" + motesId + "';");
+        } catch (InfException e) {
+            System.out.println("Det gick inte att hämta namnet på personen!");
+        }
+        return namnet;
+    }
 
 }
