@@ -21,7 +21,7 @@ public class SkapaMote extends javax.swing.JFrame {
     private DataHanterare dataHanterare;
     private InfDB databasen;
     public int userId;
-    public int valdMote;
+    public int valdInplnaerade;
     public int valdMotesInbjudanId;
     public int valdMoteMinaMoten;
 
@@ -36,7 +36,8 @@ public class SkapaMote extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         valdMotesInbjudanId = -1;
-        valdMoteMinaMoten=-1;
+        valdMoteMinaMoten = -1;
+        valdInplnaerade = -1;
     }
 
     public void tomFalten() {
@@ -89,7 +90,7 @@ public class SkapaMote extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         lIplaneradeMoten = new javax.swing.JList<>();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnVisaInplanerade = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -98,6 +99,9 @@ public class SkapaMote extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -261,10 +265,10 @@ public class SkapaMote extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Visa Inplanerade");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnVisaInplanerade.setText("Visa Inplanerade");
+        btnVisaInplanerade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnVisaInplaneradeActionPerformed(evt);
             }
         });
 
@@ -318,7 +322,7 @@ public class SkapaMote extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jButton3)))
+                        .addComponent(btnVisaInplanerade)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -344,7 +348,7 @@ public class SkapaMote extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3))
+                        .addComponent(btnVisaInplanerade))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -392,33 +396,8 @@ public class SkapaMote extends javax.swing.JFrame {
         dataHanterare.fyllListInplaneradeMoten(userId, lIplaneradeMoten);
         dataHanterare.fyllListMotesInbjudningar(userId, lMotesInbjud);
         dataHanterare.fyllListaMinaSkapadeMoten(userId, lMinaSkapadeMoten);
-        
+
     }//GEN-LAST:event_formWindowOpened
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int MID = 0;
-        String datum = "";
-        String starttid = "";
-        String sluttid = "";
-        String plats = "";
-        String arrangorFornamn = "";
-        String arrangorEfternamn = "";
-        String titel = "";
-        try {
-            MID = valdMote;
-            datum = databasen.fetchSingle("SELECT DATUM FROM MOTEN WHERE MotesId ='" + MID + "';");
-            starttid = databasen.fetchSingle("SELECT starttid FROM MOTEN WHERE MotesId ='" + MID + "';");
-            sluttid = databasen.fetchSingle("SELECT sluttid FROM MOTEN WHERE MotesId ='" + MID + "';");
-            arrangorFornamn = databasen.fetchSingle("SELECT FORNAMN FROM ANVANDARE JOIN MOTEN ON ANVANDARE.ANVANDARID = MOTEN.ARRANGOR AND MOTE.MOTESID ='" + MID + "';");
-            arrangorEfternamn = databasen.fetchSingle("SELECT EFTERNAMN FROM ANVANDARE JOIN MOTEN ON ANVANDARE.ANVANDARID = MOTEN.ARRANGOR AND MOTE.MOTESID ='" + MID + "';");
-            titel = databasen.fetchSingle("SELECT titel FROM MOTEN WHERE MotesId ='" + MID + "';");
-            plats = databasen.fetchSingle("SELECT plats FROM MOTEN WHERE MotesId ='" + MID + "';");
-        } catch (InfException e) {
-
-        }
-        JOptionPane.showMessageDialog(null, "Mötet: " + titel + " hålls av " + arrangorFornamn + " " + arrangorEfternamn + " " + datum + " " + starttid + "-" + sluttid + "på platsen: " + "\"" + plats + "\"");
-
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void lMotesInbjudMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lMotesInbjudMouseClicked
         String motesnamn = lMotesInbjud.getSelectedValue();
@@ -428,7 +407,7 @@ public class SkapaMote extends javax.swing.JFrame {
 
     private void lIplaneradeMotenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lIplaneradeMotenMouseClicked
         String motesnamn = lIplaneradeMoten.getSelectedValue();
-        this.valdMote = dataHanterare.getMotesId(motesnamn);
+        this.valdInplnaerade = dataHanterare.getMotesId(motesnamn);
     }//GEN-LAST:event_lIplaneradeMotenMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -452,15 +431,63 @@ public class SkapaMote extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnMotesStatusActionPerformed
 
+    private void btnVisaInplaneradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaInplaneradeActionPerformed
+        if (valdInplnaerade != -1) {
+            int MID = 0;
+            String datum = "";
+            String starttid = "";
+            String sluttid = "";
+            String plats = "";
+            String arrangorFornamn = "";
+            String arrangorEfternamn = "";
+            String titel = "";
+            String tid = "";
+            String datumochtid = "";
+            try {
+                MID = valdInplnaerade;
+                datum = databasen.fetchSingle("SELECT DATUM FROM MOTEN WHERE MotesId ='" + MID + "';");
+                starttid = databasen.fetchSingle("SELECT starttid FROM MOTEN WHERE MotesId ='" + MID + "';");
+                sluttid = databasen.fetchSingle("SELECT sluttid FROM MOTEN WHERE MotesId ='" + MID + "';");
+                tid = starttid.trim() + "-" + sluttid.trim();
+                datumochtid = datum + " " + tid;
+                if (datum.equals("2000-01-01")) {
+                    datum = "ob";
+                }
+                if (starttid.equalsIgnoreCase("00.00") || (sluttid.equalsIgnoreCase("00.00"))) {
+                    tid = "ob";
+                }
+                if (datum.equalsIgnoreCase("ob") || tid.equalsIgnoreCase("ob")) {
+                    datumochtid = " datum och tid är inte bestämda än,";
+                }
+                arrangorFornamn = databasen.fetchSingle("SELECT FORNAMN FROM ANVANDARE JOIN MOTEN ON ANVANDARE.ANVANDARID = MOTEN.ARRANGOR AND MOTEN.MOTESID ='" + MID + "';");
+                arrangorEfternamn = databasen.fetchSingle("SELECT EFTERNAMN FROM ANVANDARE JOIN MOTEN ON ANVANDARE.ANVANDARID = MOTEN.ARRANGOR AND MOTEN.MOTESID ='" + MID + "';");
+                titel = databasen.fetchSingle("SELECT titel FROM MOTEN WHERE MotesId ='" + MID + "';");
+                plats = databasen.fetchSingle("SELECT plats FROM MOTEN WHERE MotesId ='" + MID + "';");
+
+            } catch (InfException e) {
+
+            }
+            JOptionPane.showMessageDialog(null, "Mötet: " + titel + " hålls av " + arrangorFornamn + " " + arrangorEfternamn + " \n" + datumochtid + " på platsen: " + plats);
+        } else {
+            JOptionPane.showMessageDialog(null, "Du måste välja ett inplanerat möte från listan först!");
+        }
+    }//GEN-LAST:event_btnVisaInplaneradeActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        dataHanterare.fyllListInplaneradeMoten(userId, lIplaneradeMoten);
+        dataHanterare.fyllListMotesInbjudningar(userId, lMotesInbjud);
+        dataHanterare.fyllListaMinaSkapadeMoten(userId, lMinaSkapadeMoten);
+    }//GEN-LAST:event_formWindowActivated
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMotesStatus;
+    private javax.swing.JButton btnVisaInplanerade;
     private com.toedter.calendar.JDateChooser dcDatum1;
     private com.toedter.calendar.JDateChooser dcDatum2;
     private com.toedter.calendar.JDateChooser dcDatum3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

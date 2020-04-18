@@ -119,7 +119,6 @@ public class Validering {
      * @param ettTextFalt
      * @return
      */
-
     public static boolean arHeltal(JTextField ettTextFalt) {
         String stringAttKolla = ettTextFalt.getText();
         boolean resultat = true;

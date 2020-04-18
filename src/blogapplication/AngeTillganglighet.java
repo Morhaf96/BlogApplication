@@ -40,8 +40,8 @@ public class AngeTillganglighet extends javax.swing.JFrame {
             String namn = dataHanterare.getFullNamn(userId);
             lblanvnamn.setText(namn);
             String motesnamn = dataHanterare.getMotesnamn(motesId);
-            String moteskapare= dataHanterare.getMotetsSkapareNamn(motesId);
-            lblMotesRubrik.setText(moteskapare + " bjuder in dig till mötet: " +motesnamn);
+            String moteskapare = dataHanterare.getMotetsSkapareNamn(motesId);
+            lblMotesRubrik.setText(moteskapare + " bjuder in dig till mötet: " + motesnamn);
             lista = databasen.fetchColumn("SELECT DATUM FROM Anvandare_moten WHERE mostesid = " + motesId);
             listaSTid = databasen.fetchColumn("SELECT sluttid FROM Anvandare_moten WHERE mostesid = " + motesId);
             String slt1 = listaSTid.get(0);

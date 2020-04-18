@@ -164,7 +164,7 @@ public class DataHanterare {
         boolean lyckats = false;
         try {
             databasen.insert("insert into moten values ('" + motesId + "', '" + arrangor + "', '" + datum + "', '" + starttid + "', '"
-                    + sluttid + "', '" + titel + "', 'Profilepic.jpg');");
+                    + sluttid + "', '" + titel + "', '" + plats + "');");
             lyckats = true;
             JOptionPane.showMessageDialog(null, "Nytt möte har registrerats");
 
@@ -292,9 +292,9 @@ public class DataHanterare {
         ArrayList<String> enLista2 = null;
 
         try {
-            ArrayList<String> listan = databasen.fetchColumn("SELECT MOTE.titel FROM MOTEN "
+            ArrayList<String> listan = databasen.fetchColumn("SELECT distinct MOTEN.titel FROM MOTEN "
                     + "JOIN Anvandare_Moten ON MOTEN.motesId=Anvandare_Moten.MostesId "
-                    + "WHERE Deltagare='" + anvandarId + "'");
+                    + "WHERE Deltagare='" + anvandarId + "' or arrangor='" + anvandarId + "';");
             String svar = "";
             for (int i = 0; i < listan.size(); i++) {
                 svar = listan.get(i);
@@ -525,29 +525,27 @@ public class DataHanterare {
     public boolean harSvaratInbjudan(int motesId, String anvId) {
         boolean svarat = false;
         try {
-            String svar = databasen.fetchSingle("Select kan from anvandare_moten where mostesId='" + motesId + "' and deltagare='"+anvId+"';");
-            
-            if (svar.trim().equalsIgnoreCase("Y")||svar.trim().equalsIgnoreCase("N")) {
-                svarat=true;
+            String svar = databasen.fetchSingle("Select kan from anvandare_moten where mostesId='" + motesId + "' and deltagare='" + anvId + "';");
+
+            if (svar.trim().equalsIgnoreCase("Y") || svar.trim().equalsIgnoreCase("N")) {
+                svarat = true;
             }
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("harSvaratInbjudan error:" + e.getMessage());
         }
         return svarat;
     }
-    
-    public String getInteSvaratRespons(String anvId){
-        String svar="";
-        int idI=Integer.parseInt(anvId);
-        try{
-        svar=getFullNamn(idI)+" har inte meddelat tillgänglighet än.";
+
+    public String getInteSvaratRespons(String anvId) {
+        String svar = "";
+        int idI = Integer.parseInt(anvId);
+        try {
+            svar = getFullNamn(idI) + " har inte meddelat tillgänglighet än. \n";
+        } catch (Exception e) {
+            System.out.println("getInteSvaratRespons error:" + e.getMessage());
         }
-        catch(Exception e){
-        System.out.println("getInteSvaratRespons error:" + e.getMessage());
-        }
-       
-    return svar;
+
+        return svar;
     }
 
     public String getAnvandarRespons(String forslagId) {
@@ -563,14 +561,46 @@ public class DataHanterare {
             String kan = databasen.fetchSingle("Select kan from ANVANDARE_MOTEN where forslagid='" + forslagId + "';");
 
             if (kan.trim().equalsIgnoreCase("Y")) {
-                svar=fullnamn+" kan komma den "+datum+" kl "+starttid+"-"+sluttid+".\n";
-            } else if(kan.trim().equalsIgnoreCase("N")) {
-                 svar=fullnamn+" kan inte komma den "+datum+" kl "+starttid+"-"+sluttid+".\n";
+                svar = fullnamn + " kan komma den " + datum + " kl " + starttid + "-" + sluttid + ".\n";
+            } else if (kan.trim().equalsIgnoreCase("N")) {
+                svar = fullnamn + " kan inte komma den " + datum + " kl " + starttid + "-" + sluttid + ".\n";
             }
         } catch (Exception e) {
             System.out.println("getAnvandarRespons error:" + e.getMessage());
         }
         return svar;
+    }
+
+    public String getMotesTid(String forlsagId) {
+        String svar = "";
+        try {
+            svar = databasen.fetchSingle("select datum from anvandare_moten where forslagid='" + forlsagId + "';");
+        } catch (Exception e) {
+            System.out.println("getMotesTider error:" + e.getMessage());
+        }
+        return svar;
+    }
+
+    public String getMotesSluttid(String forlsagId) {
+        String svar = "";
+        try {
+            svar = databasen.fetchSingle("select sluttid from anvandare_moten where forslagid='" + forlsagId + "';");
+        } catch (Exception e) {
+            System.out.println("getMotesSluttid error:" + e.getMessage());
+        }
+        return svar;
+    }
+
+    public boolean bestamMotestid(int motesId, int userId, String datum, String starttid, String sluttid) {
+        boolean lyckats = false;
+        try {
+            databasen.update("update moten set datum='" + datum + "', starttid='" + starttid + "', sluttid='" + sluttid + "' where motesid='" + motesId + "' and arrangor='" + userId + "';");
+            lyckats = true;
+        } catch (Exception e) {
+            System.out.println("bestamMotestid error:" + e.getMessage());
+        }
+
+        return lyckats;
     }
 
 }
