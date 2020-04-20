@@ -203,7 +203,7 @@ public class InloggadAnvandare extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBloggActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new VisaBloggInlagg().setVisible(true);
+        new VisaBloggInlagg(userId).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnMotesKalenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotesKalenderActionPerformed

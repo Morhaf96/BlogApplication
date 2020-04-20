@@ -600,28 +600,28 @@ public class DataHanterare {
 
         return lyckats;
     }
-    
-    public ArrayList getForslagId(int motesId){
-        ArrayList Lista=new ArrayList();
-      try {
-            Lista=databasen.fetchColumn("select forslagid from anvandare_moten where mostesid='"+motesId+"';");
+
+    public ArrayList getForslagId(int motesId) {
+        ArrayList Lista = new ArrayList();
+        try {
+            Lista = databasen.fetchColumn("select forslagid from anvandare_moten where mostesid='" + motesId + "';");
         } catch (Exception e) {
             System.out.println("getForslagId error:" + e.getMessage());
         }
-      return Lista;
+        return Lista;
     }
-    
-    public ArrayList getPlaneradeMoten(String datum){
-       ArrayList Lista=new ArrayList();
-      try {
-            Lista=databasen.fetchColumn("select motesid from moten where datum='"+datum+"';");
+
+    public ArrayList getPlaneradeMoten(String datum) {
+        ArrayList Lista = new ArrayList();
+        try {
+            Lista = databasen.fetchColumn("select motesid from moten where datum='" + datum + "';");
         } catch (Exception e) {
             System.out.println("getForslagId error:" + e.getMessage());
         }
-      return Lista;
+        return Lista;
     }
-    
-    public String getMotetsDatum(String motesId){
+
+    public String getMotetsDatum(String motesId) {
         String svar = "";
         try {
             svar = databasen.fetchSingle("select datum from moten where motesId='" + motesId + "';");
@@ -630,8 +630,8 @@ public class DataHanterare {
         }
         return svar;
     }
-    
-    public String getMotetsStarttid(String motesId){
+
+    public String getMotetsStarttid(String motesId) {
         String svar = "";
         try {
             svar = databasen.fetchSingle("select starttid from moten where motesId='" + motesId + "';");
@@ -640,8 +640,8 @@ public class DataHanterare {
         }
         return svar;
     }
-    
-    public String getMotetsSluttid(String motesId){
+
+    public String getMotetsSluttid(String motesId) {
         String svar = "";
         try {
             svar = databasen.fetchSingle("select sluttid from moten where motesId='" + motesId + "';");
@@ -650,7 +650,7 @@ public class DataHanterare {
         }
         return svar;
     }
-    
+
     public String getMotetsnamn(String motesId) {
         String namnet = "";
 
@@ -660,6 +660,88 @@ public class DataHanterare {
             System.out.println("Det gick inte att hämta namnet på personen!");
         }
         return namnet;
+    }
+
+    public ArrayList getInformellaInlaggId() {
+        ArrayList enLista = new ArrayList();
+        try {
+            enLista = databasen.fetchColumn("SELECT INLAGGID FROM INLAGG WHERE BSEKTION='2' ORDER BY DATUM DESC, TID DESC");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("getInformellaInlaggId error:" + e.getMessage());
+        }
+        return enLista;
+    }
+
+    public ArrayList getUtbildningInlaggId() {
+        ArrayList enLista = new ArrayList();
+        try {
+            enLista = databasen.fetchColumn("SELECT INLAGGID FROM INLAGG WHERE BSEKTION='3' ORDER BY DATUM DESC, TID DESC");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("getUtbildningInlaggId error:" + e.getMessage());
+        }
+        return enLista;
+    }
+
+    public ArrayList getForskningInlaggId() {
+        ArrayList enLista = new ArrayList();
+        try {
+            enLista = databasen.fetchColumn("SELECT INLAGGID FROM INLAGG WHERE BSEKTION='4' ORDER BY DATUM DESC, TID DESC");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            System.out.println("getForskningInlaggId error:" + e.getMessage());
+        }
+        return enLista;
+    }
+
+    public boolean inlaggFinns(String inlaggId) {
+        boolean lyckats = false;
+        try {
+            databasen.fetchSingle("select * from inlagg where InlaggID='" + inlaggId + "';");
+            lyckats = true;
+        } catch (Exception e) {
+            System.out.println("inlaggFinns error:" + e.getMessage());
+        }
+        return lyckats;
+    }
+
+    public boolean taBortInlaggFil(String inlaggId) {
+        boolean lyckats = false;
+        try {
+            databasen.delete("delete from filer where InlaggID='" + inlaggId + "';");
+            lyckats = true;
+        } catch (Exception e) {
+            System.out.println("taBortInlaggFil error:" + e.getMessage());
+        }
+        return lyckats;
+    }
+
+    public boolean taBortInlagg(String inlaggId) {
+        boolean lyckats = false;
+        try {
+            databasen.delete("delete from inlagg where InlaggID='" + inlaggId + "';");
+            lyckats = true;
+        } catch (Exception e) {
+            System.out.println("taBortInlagg error:" + e.getMessage());
+        }
+        return lyckats;
+    }
+
+    public boolean arAdmin(int userId) {
+        boolean finns = false;
+        try {
+            ArrayList<String> adminLista = databasen.fetchColumn("select anvandarId from admins");
+            for (String s : adminLista) {
+                if (s.equalsIgnoreCase(Integer.toString(userId))) {
+                    finns = true;
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("arAdmin error:" + e.getMessage());
+        }
+        return finns;
     }
 
 }
