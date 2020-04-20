@@ -284,13 +284,13 @@ public class VisaBloggInlagg extends javax.swing.JFrame {
     }//GEN-LAST:event_lblFormellBMouseClicked
 
     private void btnTaBortInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortInlaggActionPerformed
-        System.out.println(userId);
-        if (dataHanterare.arAdmin(userId)) {
-
-            if (Validering.FaltArTom(tfInlaggnr) || !Validering.arHeltal(tfInlaggnr)) {
-                System.out.println("Inmatning i fältet inläggnr är felaktig");
+        if (Validering.FaltArTom(tfInlaggnr) || !Validering.arHeltal(tfInlaggnr)) {
+            System.out.println("Inmatning i fältet inläggnr är felaktig");
+        } else {
+            String inlaggnr = tfInlaggnr.getText();
+            if (!dataHanterare.arAdmin(userId) && !dataHanterare.arInlaggetsSkribent(userId, inlaggnr)) {
+                JOptionPane.showMessageDialog(null, "Du är inte admin och därför kan bara ta bort dina egna inlägg");
             } else {
-                String inlaggnr = tfInlaggnr.getText();
                 if (dataHanterare.inlaggFinns(inlaggnr)) {
                     if (dataHanterare.inlaggetHarFil(inlaggnr)) {
                         dataHanterare.taBortInlaggFil(inlaggnr);
@@ -303,9 +303,8 @@ public class VisaBloggInlagg extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Det finns inget inlägg med det angivna numret. \n Vänligen ange ett korrekt nummer och försök igen");
                 }
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Du har inga adminrättigheter för att göra detta.");
         }
+
 
     }//GEN-LAST:event_btnTaBortInlaggActionPerformed
 

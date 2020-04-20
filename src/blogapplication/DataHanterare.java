@@ -729,19 +729,37 @@ public class DataHanterare {
     }
 
     public boolean arAdmin(int userId) {
-        boolean finns = false;
+        boolean admin = false;
         try {
             ArrayList<String> adminLista = databasen.fetchColumn("select anvandarId from admins");
             for (String s : adminLista) {
                 if (s.equalsIgnoreCase(Integer.toString(userId))) {
-                    finns = true;
+                    admin = true;
                 }
             }
 
         } catch (Exception e) {
             System.out.println("arAdmin error:" + e.getMessage());
         }
-        return finns;
+        System.out.println("Ar admin returnerar "+admin);
+        return admin;
+    }
+    
+    public boolean arInlaggetsSkribent(int userId, String inlaggId){
+    boolean arSkribenten = false;
+        try {
+            String inlaggetsSkribentS = databasen.fetchSingle("select skribent from inlagg where inlaggId='"+inlaggId+"';");
+            int inlaggetsSkribent=Integer.parseInt(inlaggetsSkribentS);
+                if (inlaggetsSkribent==userId) {
+                    arSkribenten = true;
+                }
+            
+
+        } catch (Exception e) {
+            System.out.println("arInlaggetsSkribent error:" + e.getMessage());
+        }
+         System.out.println("Ar admin returnerar "+arSkribenten);
+        return arSkribenten;
     }
 
 }

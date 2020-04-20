@@ -63,6 +63,8 @@ public class SkapaInlagg extends javax.swing.JFrame {
         tfFilNamn = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         JLSkapainlagg = new javax.swing.JLabel();
+        cmbBS = new javax.swing.JComboBox<>();
+        lblBS = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -126,6 +128,10 @@ public class SkapaInlagg extends javax.swing.JFrame {
 
         JLSkapainlagg.setText("Skapa inlägg");
 
+        cmbBS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Formella bloggen", "Informelal bloggen", "Utbildningsbloggen", "Forskningsbloggen" }));
+
+        lblBS.setText("Bloggsektion");
+
         javax.swing.GroupLayout JpanelLayout = new javax.swing.GroupLayout(Jpanel);
         Jpanel.setLayout(JpanelLayout);
         JpanelLayout.setHorizontalGroup(
@@ -133,11 +139,6 @@ public class SkapaInlagg extends javax.swing.JFrame {
             .addGroup(JpanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JpanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JpanelLayout.createSequentialGroup()
                         .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblFilUrl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -157,9 +158,20 @@ public class SkapaInlagg extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JpanelLayout.createSequentialGroup()
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(tfTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblBS)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(38, 38, 38))))
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JpanelLayout.createSequentialGroup()
+                        .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+                            .addGroup(JpanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(cmbBS, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(32, 32, 32))))
             .addGroup(JpanelLayout.createSequentialGroup()
                 .addGap(180, 180, 180)
                 .addComponent(jButton1)
@@ -171,15 +183,18 @@ public class SkapaInlagg extends javax.swing.JFrame {
                 .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(JpanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(JLSkapainlagg))
+                        .addComponent(JLSkapainlagg)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbBS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(JpanelLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tfTitel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))))
+                            .addComponent(jLabel1)
+                            .addComponent(lblBS))))
                 .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(JpanelLayout.createSequentialGroup()
-                        .addGap(94, 94, 94)
+                        .addGap(92, 92, 92)
                         .addComponent(jLabel3))
                     .addGroup(JpanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -209,7 +224,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Jpanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
 
         pack();
@@ -252,7 +267,22 @@ public class SkapaInlagg extends javax.swing.JFrame {
             int inlaggID = dataHanterare.getNextInlaggId();
             int skribent = userId;
             String inlagg = dataHanterare.stringFormat(jTInlagg.getText());
-            int bsektion = 1;
+            
+            int bsektion = 0;
+            String vald=cmbBS.getSelectedItem().toString();
+            if(vald.equalsIgnoreCase("Formella bloggen")){
+            bsektion=1;
+            }
+            else if(vald.equalsIgnoreCase("Informella bloggen")){
+            bsektion=2;
+            }
+            else if(vald.equalsIgnoreCase("Utbildningsbloggen")){
+            bsektion=3;
+            }
+            else if(vald.equalsIgnoreCase("Forskningsbloggen")){
+            bsektion=4;
+            }
+            
             String titel = tfTitel.getText();
             if (titel.equals("")) {
                 titel = "Unnamed post";
@@ -332,12 +362,14 @@ public class SkapaInlagg extends javax.swing.JFrame {
     private javax.swing.JLabel JLSkapainlagg;
     private javax.swing.JPanel Jpanel;
     private javax.swing.JButton btnBifogaFil;
+    private javax.swing.JComboBox<String> cmbBS;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTInlagg;
+    private javax.swing.JLabel lblBS;
     private javax.swing.JLabel lblFilUrl;
     private javax.swing.JTextField tfFilNamn;
     private javax.swing.JTextField tfFilUrl;
