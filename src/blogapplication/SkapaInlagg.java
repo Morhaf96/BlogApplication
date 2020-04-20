@@ -215,23 +215,15 @@ public class SkapaInlagg extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-//        private void fyllCmbKategoriNamn() {
-//            try {
-//                ArrayList<String> lista = db.fetchColumn("SELECT NAMN FROM KATEGORI");
-//                for (int i = 0; i < lista.size(); i++) {
-//                    cmb.addItem(lista.get(i));
-//                }
-//            } catch (InfException e) {
-//            }
-//        }
-
     private void btnBifogaFilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBifogaFilActionPerformed
         JFileChooser fc = new JFileChooser();
         //FileSystemView.getFileSystemView().getHomeDirectory() (Gets desktop url)
         //"C:\\Users\\HHHLO\\OneDrive\\Documents"
         fc.setDialogTitle("Välj en fil att bifoga");
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
-        fc.setFileFilter(filter);
+        FileNameExtensionFilter filterT = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+        FileNameExtensionFilter filterB = new FileNameExtensionFilter("IMAGE FILES", "jpg", "jpeg","png");
+        fc.setFileFilter(filterT);
+        fc.addChoosableFileFilter(filterB);
         int returnValue = fc.showSaveDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File f = fc.getSelectedFile();
