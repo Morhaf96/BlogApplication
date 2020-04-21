@@ -11,3 +11,4 @@ nbdist/
 *BLOGDB.FDB
 *.FDB
 *.log
+nbproject/project.properties

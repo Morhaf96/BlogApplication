@@ -501,7 +501,10 @@ public class DataHanterare {
            
      return namn;
     }
-    
+    public String getAnvandarnamn() {
+        String anvandarnamn = null;
+        return anvandarnamn;
+    }
 }
     
 
