@@ -15,7 +15,7 @@ import java.util.Date;
 
 /**
  *
- * @author Morhaf
+ * @author Team 14
  */
 public class Validering {
 
@@ -94,22 +94,22 @@ public class Validering {
         return resultat;
     }
 
-    public static boolean arTid(JTextField txtfalt){
-    boolean lyckats=false;
-    try{
-    String time = txtfalt.getText();
+    public static boolean arTid(JTextField txtfalt) {
+        boolean lyckats = false;
+        try {
+            String time = txtfalt.getText();
 
-        DateFormat sdf = new SimpleDateFormat("hh:mm:ss");
-    Date date = sdf.parse(time);
-    lyckats= true;
-    }
-    catch (Exception e){
-        JOptionPane.showMessageDialog(null, "Är inte koreekt tid");
-    System.out.println(e.getMessage());
+            DateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+            Date date = sdf.parse(time);
+            lyckats = true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Är inte koreekt tid");
+            System.out.println(e.getMessage());
+        }
+
+        return lyckats;
     }
 
-    return lyckats;
-    }
     /**
      * Metoden kontrollerar att imatning består av enbart siffror och returnerar
      * true isåfall, och false annars. Om fältet innehåller annat än siffror
@@ -119,13 +119,11 @@ public class Validering {
      * @param ettTextFalt
      * @return
      */
-    
-    
     public static boolean arHeltal(JTextField ettTextFalt) {
-        String stringAttKolla= ettTextFalt.getText();
+        String stringAttKolla = ettTextFalt.getText();
         boolean resultat = true;
         try {
-           Double num = Double.parseDouble(stringAttKolla);
+            Double num = Double.parseDouble(stringAttKolla);
         } catch (NumberFormatException e) {
             resultat = false;
             JOptionPane.showMessageDialog(null, "Textfältet får bara innehålla siffror!");
@@ -226,13 +224,13 @@ public class Validering {
         boolean arTNummer = true;
         int tfLangd = textfalt.getText().toString().length();
 
-      if (tfLangd!=10){
-         arTNummer = false;
-         System.out.println("arHeltal är false");
-         JOptionPane.showMessageDialog(null, "Vänligen ange telefonnumret i formatet bredvid!");
-         textfalt.requestFocus();
+        if (tfLangd != 10) {
+            arTNummer = false;
+            System.out.println("arHeltal är false");
+            JOptionPane.showMessageDialog(null, "Vänligen ange telefonnumret i formatet bredvid!");
+            textfalt.requestFocus();
         }
-        
+
         return arTNummer;
     }
 }

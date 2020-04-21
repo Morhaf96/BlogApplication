@@ -10,7 +10,7 @@ import oru.inf.InfDB;
 
 /**
  *
- * @author Morhaf
+ * @author Team 14
  */
 public class BjudInTillMote extends javax.swing.JFrame {
 
@@ -147,16 +147,16 @@ public class BjudInTillMote extends javax.swing.JFrame {
         int forslagId = dataHanterare.getNextForslagId();
         int andraforslagId = forslagId + 1;
         int tredjeforslagId = andraforslagId + 2;
-        boolean lyckats=dataHanterare.laggTillMotesForslag(anvId, motesId, forslagId, andraforslagId, tredjeforslagId,
+        boolean lyckats = dataHanterare.laggTillMotesForslag(anvId, motesId, forslagId, andraforslagId, tredjeforslagId,
                 datum1, starttid1, sluttid1, datum2, starttid2, sluttid2, datum3, starttid3, sluttid3);
-        if(lyckats){
-        JOptionPane.showMessageDialog(null, "Användaren " + anvandare + " har nu bjudits till detta möte!");
+        if (lyckats) {
+            JOptionPane.showMessageDialog(null, "Användaren " + anvandare + " har nu bjudits till detta möte!");
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
