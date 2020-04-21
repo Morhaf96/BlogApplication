@@ -156,7 +156,14 @@ public class DataHanterare {
     }
 
     public String stringFormat(String enString) {
-        String nyString = enString.substring(0, 1).toUpperCase() + enString.substring(1, enString.length()).toLowerCase();
+        String nyString = "";
+        try {
+            String forstabokstav = enString.substring(0, 1).toUpperCase();
+            String resten = enString.substring(1, enString.length()).toLowerCase();
+            nyString = forstabokstav + resten;
+        } catch (StringIndexOutOfBoundsException e) {
+
+        }
         return nyString;
     }
 
@@ -316,11 +323,11 @@ public class DataHanterare {
         return lyckats;
     }
 
-    public boolean laggTillFil(String namn, String filUrl, int inlaggId) {
+    public boolean laggTillFil(String namn, String filUrl, int inlaggId, String fkid) {
         boolean lyckats = false;
         int filid = getNextFilId();
         try {
-            databasen.insert("insert into filer values('" + filid + "', '" + namn + "', '" + filUrl + "', '" + inlaggId + "');");
+            databasen.insert("insert into filer values('" + filid + "', '" + namn + "', '" + filUrl + "', '" + inlaggId + "', '"+fkid+"');");
             lyckats = true;
         } catch (InfException e) {
 
@@ -741,25 +748,92 @@ public class DataHanterare {
         } catch (Exception e) {
             System.out.println("arAdmin error:" + e.getMessage());
         }
-        System.out.println("Ar admin returnerar "+admin);
+        System.out.println("Ar admin returnerar " + admin);
         return admin;
     }
-    
-    public boolean arInlaggetsSkribent(int userId, String inlaggId){
-    boolean arSkribenten = false;
+
+    public boolean arInlaggetsSkribent(int userId, String inlaggId) {
+        boolean arSkribenten = false;
         try {
-            String inlaggetsSkribentS = databasen.fetchSingle("select skribent from inlagg where inlaggId='"+inlaggId+"';");
-            int inlaggetsSkribent=Integer.parseInt(inlaggetsSkribentS);
-                if (inlaggetsSkribent==userId) {
-                    arSkribenten = true;
-                }
-            
+            String inlaggetsSkribentS = databasen.fetchSingle("select skribent from inlagg where inlaggId='" + inlaggId + "';");
+            int inlaggetsSkribent = Integer.parseInt(inlaggetsSkribentS);
+            if (inlaggetsSkribent == userId) {
+                arSkribenten = true;
+            }
 
         } catch (Exception e) {
             System.out.println("arInlaggetsSkribent error:" + e.getMessage());
         }
-         System.out.println("Ar admin returnerar "+arSkribenten);
+        System.out.println("Ar admin returnerar " + arSkribenten);
         return arSkribenten;
+    }
+
+    public boolean laggTillFilKategori(String kNamn) {
+        boolean lyckats = false;
+        String knamnF = stringFormat(kNamn);
+        ArrayList<String> FKNamn = new ArrayList();
+        try {
+            FKNamn = databasen.fetchColumn("select distinct fknamn from filkategorier");
+            boolean finns = false;
+            for (String s : FKNamn) {
+                if (s.equalsIgnoreCase(knamnF)) {
+                    finns = true;
+                    JOptionPane.showMessageDialog(null, "Den kategorin finns redan. \n Vänligen välj den från listan eller ange en ny kategori");
+                }
+            }
+            if (finns == false) {
+                int nastaFKId = getNextFilkategoriId();
+                databasen.insert("insert into filkategorier values('" + nastaFKId + "','" + knamnF + "');");
+            }
+
+        } catch (Exception e) {
+            System.out.println("laggTillKategori error:" + e.getMessage());
+        }
+        return lyckats;
+    }
+
+    public void fyllCmbFilkategorier(JComboBox cmbFKategori) {
+
+        ArrayList<String> FKNamn = new ArrayList();
+        try {
+            FKNamn = databasen.fetchColumn("select distinct fknamn from filkategorier");
+            for (String s : FKNamn) {
+                cmbFKategori.addItem(s);
+            }
+            cmbFKategori.setSelectedIndex(-1);
+        } catch (Exception e) {
+            System.out.println("fyllCmbFilkategorier error:" + e.getMessage());
+        }
+    }
+    
+    public String getFKID(String FKNamn){
+        String fkid="";
+        try {
+        fkid=databasen.fetchSingle("select fkid from filkategorier where fknamn='"+FKNamn+"';");
+        } catch (Exception e) {
+            System.out.println("fyllCmbFilkategorier error:" + e.getMessage());
+        }
+        return fkid;
+    }
+    
+    public String getFKid2(int filid){
+        String fkid="";
+        try {
+        fkid=databasen.fetchSingle("select fkid from filer where filid='"+filid+"';");
+        } catch (Exception e) {
+            System.out.println("fyllCmbFilkategorier error:" + e.getMessage());
+        }
+        return fkid;
+    }
+    
+     public String getFKnamn(String fkid){
+        String fknamn="";
+        try {
+        fknamn=databasen.fetchSingle("select fknamn from filkategorier where fkid='"+fkid+"';");
+        } catch (Exception e) {
+            System.out.println("fyllCmbFilkategorier error:" + e.getMessage());
+        }
+        return fknamn;
     }
 
 }

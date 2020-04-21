@@ -39,6 +39,12 @@ public class SkapaInlagg extends javax.swing.JFrame {
         initComponents();
         filnamn = "";
         this.setLocationRelativeTo(null);
+        fyllCmbFK();
+    }
+    
+    
+    private void fyllCmbFK(){
+    dataHanterare.fyllCmbFilkategorier(cmbFK);
     }
 
     /**
@@ -58,13 +64,18 @@ public class SkapaInlagg extends javax.swing.JFrame {
         btnBifogaFil = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         tfFilUrl = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         lblFilUrl = new javax.swing.JLabel();
         tfFilNamn = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         JLSkapainlagg = new javax.swing.JLabel();
         cmbBS = new javax.swing.JComboBox<>();
         lblBS = new javax.swing.JLabel();
+        cmbFK = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        tfNyKategori = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -102,13 +113,6 @@ public class SkapaInlagg extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Publicera");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         lblFilUrl.setFocusable(false);
         lblFilUrl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -132,6 +136,24 @@ public class SkapaInlagg extends javax.swing.JFrame {
 
         lblBS.setText("Bloggsektion");
 
+        jLabel2.setText("Välj kategori till filen");
+
+        jButton2.setText("Lägg till");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Lägg till ny kategori");
+
+        jButton1.setText("Publicera");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout JpanelLayout = new javax.swing.GroupLayout(Jpanel);
         Jpanel.setLayout(JpanelLayout);
         JpanelLayout.setHorizontalGroup(
@@ -139,18 +161,6 @@ public class SkapaInlagg extends javax.swing.JFrame {
             .addGroup(JpanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JpanelLayout.createSequentialGroup()
-                        .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblFilUrl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JpanelLayout.createSequentialGroup()
-                                .addComponent(btnBifogaFil)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfFilUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfFilNamn)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JpanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel3)
@@ -167,9 +177,33 @@ public class SkapaInlagg extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cmbBS, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblFilUrl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(JpanelLayout.createSequentialGroup()
+                        .addComponent(btnBifogaFil)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfFilUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfFilNamn)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(JpanelLayout.createSequentialGroup()
+                        .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(JpanelLayout.createSequentialGroup()
+                                .addComponent(cmbFK, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
+                            .addGroup(JpanelLayout.createSequentialGroup()
+                                .addComponent(tfNyKategori)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)
+                                .addGap(26, 26, 26))))))
             .addGroup(JpanelLayout.createSequentialGroup()
-                .addGap(180, 180, 180)
+                .addGap(187, 187, 187)
                 .addComponent(jButton1)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -188,9 +222,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
                     .addGroup(JpanelLayout.createSequentialGroup()
                         .addGap(92, 92, 92)
                         .addComponent(jLabel3))
-                    .addGroup(JpanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBifogaFil)
@@ -198,9 +230,19 @@ public class SkapaInlagg extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(tfFilNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(cmbFK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(JpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfNyKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblFilUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1))
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -257,6 +299,8 @@ public class SkapaInlagg extends javax.swing.JFrame {
             int inlaggID = dataHanterare.getNextInlaggId();
             int skribent = userId;
             String inlagg = dataHanterare.stringFormat(jTInlagg.getText());
+            String kfnamn=cmbFK.getSelectedItem().toString();
+            String fkid=dataHanterare.getFKID(kfnamn);
             
             int bsektion = 0;
             String vald=cmbBS.getSelectedItem().toString();
@@ -285,7 +329,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
                     if (!tfFilNamn.equals(null)) {
                         filNamn = dataHanterare.stringFormat(tfFilNamn.getText());
                     }
-                    dataHanterare.laggTillFil(filNamn, filnamn, inlaggID);
+                    dataHanterare.laggTillFil(filNamn, filnamn, inlaggID, fkid);
                 }
                 JOptionPane.showMessageDialog(null, "Ditt inlägg har skapats!");
                 jTInlagg.setText("");
@@ -347,22 +391,40 @@ public class SkapaInlagg extends javax.swing.JFrame {
         this.filnamn = "";
     }//GEN-LAST:event_formWindowClosed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      if(!Validering.FaltArTom(tfNyKategori)){
+      String inmatning =tfNyKategori.getText().toString();
+          System.out.println(inmatning);
+      String fixatNamn=dataHanterare.stringFormat(inmatning);
+      dataHanterare.laggTillFilKategori(fixatNamn);
+      tfNyKategori.setText("");
+      cmbFK.removeAllItems();
+      fyllCmbFK();
+      
+      }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLSkapainlagg;
     private javax.swing.JPanel Jpanel;
     private javax.swing.JButton btnBifogaFil;
     private javax.swing.JComboBox<String> cmbBS;
+    private javax.swing.JComboBox<String> cmbFK;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTInlagg;
     private javax.swing.JLabel lblBS;
     private javax.swing.JLabel lblFilUrl;
     private javax.swing.JTextField tfFilNamn;
     private javax.swing.JTextField tfFilUrl;
+    private javax.swing.JTextField tfNyKategori;
     private javax.swing.JTextField tfTitel;
     // End of variables declaration//GEN-END:variables
 }
