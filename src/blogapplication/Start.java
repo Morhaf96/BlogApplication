@@ -7,13 +7,14 @@ package blogapplication;
 
 /**
  *
- * @author Team 14
+ * @author Morhaf
  */
 public class Start {
-
-    public static void main(String[] args) {
+    
+      public static void main(String[] args) {
         DataHanterare.dataHanterare();
-        new HuvudMeny().setVisible(true);
+         new HuvudMeny().setVisible(true);
+        
     }
 
 }

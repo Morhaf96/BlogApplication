@@ -10,7 +10,7 @@ import oru.inf.InfDB;
 
 /**
  *
- * @author Team 14
+ * @author Morhaf
  */
 public class HuvudMeny extends javax.swing.JFrame {
 
@@ -25,7 +25,6 @@ public class HuvudMeny extends javax.swing.JFrame {
         databasen = DataHanterare.dataHanterare();
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setTitle("Logga in/Registrera dig");
     }
 
     /**
@@ -104,12 +103,15 @@ public class HuvudMeny extends javax.swing.JFrame {
                 .addComponent(btnRegNy, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addGap(3, 3, 3)
-                .addComponent(tfTel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel9)
+                        .addGap(3, 3, 3)
+                        .addComponent(tfTel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel10)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -119,20 +121,15 @@ public class HuvudMeny extends javax.swing.JFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfRegMail, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lfRegLos, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(tfFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(tfFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addComponent(tfRegMail, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lfRegLos, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +213,7 @@ public class HuvudMeny extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addComponent(lfInlogLos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addComponent(btnLogin)
-                .addGap(41, 41, 41))
+                .addGap(59, 59, 59))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -257,9 +254,11 @@ public class HuvudMeny extends javax.swing.JFrame {
             int userId = dataHanterare.getUserId(usermail);
             if (userId != 0) {
                 if (DataHanterare.kontrolleraInloggning(userId, anvandarLosenord)) {
+
+                    JOptionPane.showMessageDialog(null, "Du är nu inloggad!");
                     tomInlogFalten();
                     new InloggadAnvandare(userId).setVisible(true);
-                    this.dispose();
+                    //this.dispose();
 
                 } else if (!DataHanterare.kontrolleraInloggning(userId, anvandarLosenord)) {
                     JOptionPane.showMessageDialog(null, "Inloggningen lyckades ej! Vänligen försök igen!");
@@ -283,8 +282,8 @@ public class HuvudMeny extends javax.swing.JFrame {
     }
 
     private void btnRegNyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegNyActionPerformed
-        if (Validering.FaltArTom(tfFornamn) || Validering.FaltArTom(tfEfternamn) || Validering.FaltArTom(tfRegMail) || !Validering.arMejl(tfRegMail)
-                || Validering.pwFaltArTom(lfRegLos) || Validering.FaltArTom(tfTel) || !Validering.arHeltal(tfTel) || !Validering.arTelefonnummer(tfTel)) {
+        if (Validering.FaltArTom(tfFornamn) || Validering.FaltArTom(tfEfternamn) || Validering.FaltArTom(tfRegMail) || !Validering.arMejl(tfRegMail) 
+               || Validering.pwFaltArTom(lfRegLos) || Validering.FaltArTom(tfTel) || !Validering.arHeltal(tfTel) || !Validering.arTelefonnummer(tfTel)) {
             System.out.println("Problem med angiven data");
         } else {
 
@@ -298,7 +297,7 @@ public class HuvudMeny extends javax.swing.JFrame {
                 System.out.println("Registreringen lyckades!");
                 tomRegFalten();
 
-            }
+            } 
         }
     }//GEN-LAST:event_btnRegNyActionPerformed
 

@@ -14,30 +14,25 @@ import sun.util.calendar.BaseCalendar;
 
 /**
  *
- * @author Team 14
+ * @author Morhaf
  */
 public class SkapaMote extends javax.swing.JFrame {
 
     private DataHanterare dataHanterare;
     private InfDB databasen;
     public int userId;
-    public int valdInplnaerade;
+    public int valdMote;
     public int valdMotesInbjudanId;
-    public int valdMoteMinaMoten;
 
     /**
      * Creates new form MotesBokning
      */
     public SkapaMote(int userId) {
-
         dataHanterare = new DataHanterare();
         databasen = DataHanterare.dataHanterare();
         this.userId = userId;
         initComponents();
         this.setLocationRelativeTo(null);
-        valdMotesInbjudanId = -1;
-        valdMoteMinaMoten = -1;
-        valdInplnaerade = -1;
     }
 
     public void tomFalten() {
@@ -83,26 +78,17 @@ public class SkapaMote extends javax.swing.JFrame {
         tfSluttid2 = new javax.swing.JTextField();
         tfSluttid3 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        lMinaSkapadeMoten = new javax.swing.JList<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         lMotesInbjud = new javax.swing.JList<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        lIplaneradeMoten = new javax.swing.JList<>();
-        btnVisaInplanerade = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        btnMotesStatus = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lIplaneradeMoten = new javax.swing.JList<>();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -120,16 +106,7 @@ public class SkapaMote extends javax.swing.JFrame {
 
         jLabel5.setText("Datum ");
 
-        dcDatum1.setFocusable(false);
-        dcDatum1.setRequestFocusEnabled(false);
-
         jLabel6.setText("Starttid");
-
-        dcDatum3.setFocusable(false);
-        dcDatum3.setRequestFocusEnabled(false);
-
-        dcDatum2.setFocusable(false);
-        dcDatum2.setRequestFocusEnabled(false);
 
         jLabel7.setText("HH.MM");
 
@@ -181,20 +158,21 @@ public class SkapaMote extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfPlats, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
                                     .addComponent(tfTitel))))
-                        .addGap(0, 38, Short.MAX_VALUE)))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tfSluttid1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabel9))
+                        .addGap(0, 47, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)))
                     .addComponent(tfSluttid2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfSluttid1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfSluttid3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(41, 41, 41))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(96, 96, 96)
+                .addGap(130, 130, 130)
                 .addComponent(jButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,17 +214,9 @@ public class SkapaMote extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(tfStartTid3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tfSluttid3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(19, 19, 19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(jButton1))
         );
-
-        lMinaSkapadeMoten.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lMinaSkapadeMotenMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(lMinaSkapadeMoten);
 
         lMotesInbjud.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -255,6 +225,10 @@ public class SkapaMote extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(lMotesInbjud);
 
+        jLabel10.setText("Mötesinbjudningar");
+
+        jLabel11.setText("Inplanerade möten");
+
         lIplaneradeMoten.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lIplaneradeMotenMouseClicked(evt);
@@ -262,90 +236,19 @@ public class SkapaMote extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(lIplaneradeMoten);
 
-        btnVisaInplanerade.setText("Visa Inplanerade");
-        btnVisaInplanerade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVisaInplaneradeActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Visa inbjudan");
+        jButton2.setText("Visa inbjudningar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        btnMotesStatus.setText("Visa Mötesuppdatering");
-        btnMotesStatus.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.setText("Visa Inplanerade");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMotesStatusActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
-
-        jLabel13.setText("Mina skapade möten status");
-
-        jLabel10.setText("Mötesinbjudningar");
-
-        jLabel11.setText("Inplanerade möten");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(66, 66, 66)
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnMotesStatus)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)
-                                .addGap(73, 73, 73)))))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnVisaInplanerade)
-                                .addGap(12, 12, 12)))
-                        .addGap(30, 30, 30))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(54, 54, 54))))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVisaInplanerade)
-                    .addComponent(jButton2)
-                    .addComponent(btnMotesStatus))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -354,32 +257,44 @@ public class SkapaMote extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel12)
-                        .addGap(527, 527, 527))
+                        .addGap(6, 6, 6)
+                        .addComponent(jButton2)))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(6, 6, 6)
+                        .addComponent(jButton3)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel12)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addComponent(jButton3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -419,106 +334,62 @@ public class SkapaMote extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        dataHanterare.fyllListInplaneradeMoten(userId, lIplaneradeMoten);
-        dataHanterare.fyllListMotesInbjudningar(userId, lMotesInbjud);
-        dataHanterare.fyllListaMinaSkapadeMoten(userId, lMinaSkapadeMoten);
-
+       dataHanterare.fyllListInplaneradeMoten(userId, lIplaneradeMoten);
+       dataHanterare.fyllListMotesInbjudningar(userId, lMotesInbjud);
     }//GEN-LAST:event_formWindowOpened
 
-    private void lMotesInbjudMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lMotesInbjudMouseClicked
-        String motesnamn = lMotesInbjud.getSelectedValue();
-        this.valdMotesInbjudanId = dataHanterare.getMotesId(motesnamn);
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int MID = 0;
+        String datum = "";
+        String starttid = "";
+        String sluttid = "";
+        String plats="";
+        String arrangorFornamn = "";
+        String arrangorEfternamn = "";
+        String titel="";
+        try{
+            MID = valdMote;
+            datum = databasen.fetchSingle("SELECT DATUM FROM MOTEN WHERE MotesId ='"+MID+"';");
+            starttid = databasen.fetchSingle("SELECT starttid FROM MOTEN WHERE MotesId ='"+MID+"';");
+            sluttid= databasen.fetchSingle("SELECT sluttid FROM MOTEN WHERE MotesId ='"+MID+"';");
+            arrangorFornamn = databasen.fetchSingle("SELECT FORNAMN FROM ANVANDARE JOIN MOTEN ON ANVANDARE.ANVANDARID = MOTEN.ARRANGOR AND MOTE.MOTESID ='"+MID+"';");
+            arrangorEfternamn = databasen.fetchSingle("SELECT EFTERNAMN FROM ANVANDARE JOIN MOTEN ON ANVANDARE.ANVANDARID = MOTEN.ARRANGOR AND MOTE.MOTESID ='"+MID+"';");
+            titel = databasen.fetchSingle("SELECT titel FROM MOTEN WHERE MotesId ='"+MID+"';");
+            plats= databasen.fetchSingle("SELECT plats FROM MOTEN WHERE MotesId ='"+MID+"';");
+        }
+        catch(InfException e){
+            
+        } 
+        JOptionPane.showMessageDialog(null, "Mötet: "+titel + " hålls av " + arrangorFornamn + " "+ arrangorEfternamn+ " "+ datum + " " + starttid + "-"+sluttid + "på platsen: " + "\""+plats+"\"");
+       
+    }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void lMotesInbjudMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lMotesInbjudMouseClicked
+        String motesnamn=  lMotesInbjud.getSelectedValue();
+        this.valdMotesInbjudanId = dataHanterare.getMotesId(motesnamn);
+              
     }//GEN-LAST:event_lMotesInbjudMouseClicked
 
     private void lIplaneradeMotenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lIplaneradeMotenMouseClicked
-        String motesnamn = lIplaneradeMoten.getSelectedValue();
-        this.valdInplnaerade = dataHanterare.getMotesId(motesnamn);
+         String motesnamn=  lIplaneradeMoten.getSelectedValue();
+        this.valdMote = dataHanterare.getMotesId(motesnamn);
     }//GEN-LAST:event_lIplaneradeMotenMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (valdMotesInbjudanId != -1) {
-            new AngeTillganglighet(userId, valdMotesInbjudanId).setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Du måste välja en mötesinbjudan från listan!");
-        }
+       new AngeTillganglighet(userId,valdMotesInbjudanId).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void lMinaSkapadeMotenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lMinaSkapadeMotenMouseClicked
-        String motesnamn = lMinaSkapadeMoten.getSelectedValue();
-        this.valdMoteMinaMoten = dataHanterare.getMotesId(motesnamn);
-    }//GEN-LAST:event_lMinaSkapadeMotenMouseClicked
-
-    private void btnMotesStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotesStatusActionPerformed
-        if (valdMoteMinaMoten != -1) {
-            new MinaSkapadeMoten(userId, valdMoteMinaMoten).setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Du måste välja ett befentligt möte från listan!");
-        }
-    }//GEN-LAST:event_btnMotesStatusActionPerformed
-
-    private void btnVisaInplaneradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaInplaneradeActionPerformed
-        if (valdInplnaerade != -1) {
-            int MID = 0;
-            String datum = "";
-            String starttid = "";
-            String sluttid = "";
-            String plats = "";
-            String arrangorFornamn = "";
-            String arrangorEfternamn = "";
-            String titel = "";
-            String tid = "";
-            String datumochtid = "";
-            try {
-                MID = valdInplnaerade;
-                datum = databasen.fetchSingle("SELECT DATUM FROM MOTEN WHERE MotesId ='" + MID + "';");
-                starttid = databasen.fetchSingle("SELECT starttid FROM MOTEN WHERE MotesId ='" + MID + "';");
-                sluttid = databasen.fetchSingle("SELECT sluttid FROM MOTEN WHERE MotesId ='" + MID + "';");
-                tid = starttid.trim() + "-" + sluttid.trim();
-                datumochtid = datum + " " + tid;
-                if (datum.equals("2000-01-01")) {
-                    datum = "ob";
-                }
-                if (starttid.equalsIgnoreCase("00.00") || (sluttid.equalsIgnoreCase("00.00"))) {
-                    tid = "ob";
-                }
-                if (datum.equalsIgnoreCase("ob") || tid.equalsIgnoreCase("ob")) {
-                    datumochtid = " datum och tid är inte bestämda än,";
-                }
-                arrangorFornamn = databasen.fetchSingle("SELECT FORNAMN FROM ANVANDARE JOIN MOTEN ON ANVANDARE.ANVANDARID = MOTEN.ARRANGOR AND MOTEN.MOTESID ='" + MID + "';");
-                arrangorEfternamn = databasen.fetchSingle("SELECT EFTERNAMN FROM ANVANDARE JOIN MOTEN ON ANVANDARE.ANVANDARID = MOTEN.ARRANGOR AND MOTEN.MOTESID ='" + MID + "';");
-                titel = databasen.fetchSingle("SELECT titel FROM MOTEN WHERE MotesId ='" + MID + "';");
-                plats = databasen.fetchSingle("SELECT plats FROM MOTEN WHERE MotesId ='" + MID + "';");
-
-            } catch (InfException e) {
-
-            }
-            JOptionPane.showMessageDialog(null, "Mötet: " + titel + " hålls av " + arrangorFornamn + " " + arrangorEfternamn + " \n" + datumochtid + " på platsen: " + plats);
-        } else {
-            JOptionPane.showMessageDialog(null, "Du måste välja ett inplanerat möte från listan först!");
-        }
-    }//GEN-LAST:event_btnVisaInplaneradeActionPerformed
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        dataHanterare.fyllListInplaneradeMoten(userId, lIplaneradeMoten);
-        dataHanterare.fyllListMotesInbjudningar(userId, lMotesInbjud);
-        dataHanterare.fyllListaMinaSkapadeMoten(userId, lMinaSkapadeMoten);
-    }//GEN-LAST:event_formWindowActivated
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnMotesStatus;
-    private javax.swing.JButton btnVisaInplanerade;
     private com.toedter.calendar.JDateChooser dcDatum1;
     private com.toedter.calendar.JDateChooser dcDatum2;
     private com.toedter.calendar.JDateChooser dcDatum3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -528,12 +399,9 @@ public class SkapaMote extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<String> lIplaneradeMoten;
-    private javax.swing.JList<String> lMinaSkapadeMoten;
     private javax.swing.JList<String> lMotesInbjud;
     private javax.swing.JTextField tfPlats;
     private javax.swing.JTextField tfSluttid1;

@@ -12,7 +12,7 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Team 14
+ * @author Morhaf
  */
 public class AngeTillganglighet extends javax.swing.JFrame {
 
@@ -22,7 +22,6 @@ public class AngeTillganglighet extends javax.swing.JFrame {
     private ArrayList<String> lista;
     private ArrayList<String> listaSTid;
     private int userId;
-
     /**
      * Creates new form AngeTillganglighet
      */
@@ -32,36 +31,37 @@ public class AngeTillganglighet extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         initComponents();
         this.motesId = motesId;
-        this.userId = userId;
+        this.userId=userId;
     }
-
-    private void fyllDatumTid() {
-        try {
-            String namn = dataHanterare.getFullNamn(userId);
-            lblanvnamn.setText(namn);
-            String motesnamn = dataHanterare.getMotesnamn(motesId);
-            String moteskapare = dataHanterare.getMotetsSkapareNamn(motesId);
-            lblMotesRubrik.setText(moteskapare + " bjuder in dig till mötet: " + motesnamn);
-            lista = databasen.fetchColumn("SELECT DATUM FROM Anvandare_moten WHERE mostesid = " + motesId);
-            listaSTid = databasen.fetchColumn("SELECT sluttid FROM Anvandare_moten WHERE mostesid = " + motesId);
-            String slt1 = listaSTid.get(0);
-            String slt2 = listaSTid.get(1);
-            String slt3 = listaSTid.get(2);
-            for (int i = 0; i < lista.size(); i++) {
-                String datum = lista.get(i).substring(0, 10);
-                String tid = lista.get(i).substring(11, 16);
-                lblD1.setText(lista.get(0).substring(0, 10));
-                lblD2.setText(lista.get(1).substring(0, 10));
-                lblD3.setText(lista.get(2).substring(0, 10));
-                lblStt1.setText(lista.get(0).substring(11, 16));
-                lblStt2.setText(lista.get(1).substring(11, 16));
-                lblStt3.setText(lista.get(2).substring(11, 16));
-            }
-            lblSlt1.setText(slt1);
-            lblSlt2.setText(slt2);
-            lblSlt3.setText(slt3);
-        } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "det gick inte att hämta datumen från databasen");
+    
+    
+    private void fyllDatumTid(){
+        try{
+           String namn=dataHanterare.getFullNamn(userId);
+           lblanvnamn.setText(namn);
+           String motesnamn= dataHanterare.getMotesnamn(motesId);
+           lblmotesNamn.setText(motesnamn);
+           lista = databasen.fetchColumn("SELECT DATUM FROM Anvandare_moten WHERE mostesid = "+motesId);
+           listaSTid=databasen.fetchColumn("SELECT sluttid FROM Anvandare_moten WHERE mostesid = "+motesId);
+           String slt1=listaSTid.get(0);
+           String slt2=listaSTid.get(1);
+           String slt3=listaSTid.get(2);
+           for(int i = 0; i < lista.size(); i++){
+              String datum = lista.get(i).substring(0,10);
+              String tid = lista.get(i).substring(11,16);
+              lblD1.setText(lista.get(0).substring(0,10));
+              lblD2.setText(lista.get(1).substring(0,10));
+              lblD3.setText(lista.get(2).substring(0,10));
+              lblStt1.setText(lista.get(0).substring(11,16));
+              lblStt2.setText(lista.get(1).substring(11,16));
+              lblStt3.setText(lista.get(2).substring(11,16));
+           }
+           lblSlt1.setText(slt1);
+           lblSlt2.setText(slt2);
+           lblSlt3.setText(slt3);
+        }
+        catch(InfException e){
+           JOptionPane.showMessageDialog(null, "det gick inte att hämta datumen från databasen");
         }
     }
 
@@ -89,7 +89,7 @@ public class AngeTillganglighet extends javax.swing.JFrame {
         lblStt3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnAngeTillganglighet = new javax.swing.JButton();
-        lblMotesRubrik = new javax.swing.JLabel();
+        lblmotesNamn = new javax.swing.JLabel();
         lblanvnamn = new javax.swing.JLabel();
         kan1 = new javax.swing.JCheckBox();
         kan2 = new javax.swing.JCheckBox();
@@ -104,7 +104,7 @@ public class AngeTillganglighet extends javax.swing.JFrame {
 
         lblNamn.setText("Välkommen");
 
-        jLabel1.setText("Välj de tiderna som passar dig för mötet");
+        jLabel1.setText(" Välj de tiderna som passar dig för mötet:");
 
         lblD1.setText("Datum1");
 
@@ -137,7 +137,7 @@ public class AngeTillganglighet extends javax.swing.JFrame {
             }
         });
 
-        lblMotesRubrik.setText("motesnamn");
+        lblmotesNamn.setText("motesnamn");
 
         lblanvnamn.setText("användarnamn");
 
@@ -147,59 +147,62 @@ public class AngeTillganglighet extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(lblD2))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblD2)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblStt2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblSlt2))
-                            .addComponent(lblD1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblStt1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblSlt1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblStt3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblSlt3))
-                            .addComponent(lblD3))
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(kan3)
-                            .addComponent(kan1)
-                            .addComponent(kan2)
-                            .addComponent(btnAngeTillganglighet)))
+                        .addComponent(lblStt2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblSlt2))
+                    .addComponent(lblD1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNamn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblanvnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblMotesRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(34, 34, 34))
+                        .addComponent(lblStt1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblSlt1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblStt3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblSlt3))
+                    .addComponent(lblD3))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(kan3)
+                    .addComponent(kan1)
+                    .addComponent(kan2)
+                    .addComponent(btnAngeTillganglighet)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblmotesNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel1)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblNamn)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblanvnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNamn)
                     .addComponent(lblanvnamn, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMotesRubrik, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(2, 2, 2)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblmotesNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(lblD1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -221,10 +224,6 @@ public class AngeTillganglighet extends javax.swing.JFrame {
                         .addComponent(kan2)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                        .addComponent(kan3)
-                        .addGap(66, 66, 66))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(lblD3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -232,7 +231,11 @@ public class AngeTillganglighet extends javax.swing.JFrame {
                             .addComponent(lblStt3)
                             .addComponent(jLabel4)
                             .addComponent(lblSlt3))
-                        .addGap(41, 41, 41)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(kan3)
+                        .addGap(66, 66, 66)))
                 .addComponent(btnAngeTillganglighet)
                 .addGap(23, 23, 23))
         );
@@ -241,67 +244,76 @@ public class AngeTillganglighet extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        fyllDatumTid();
+       fyllDatumTid();
     }//GEN-LAST:event_formWindowOpened
 
-    private void uncheckaBoxen() {
-        kan1.setSelected(false);
+    private void uncheckaBoxen(){
+    kan1.setSelected(false);
         kan2.setSelected(false);
-        kan3.setSelected(false);
-
+            kan3.setSelected(false);
+            
     }
-
+    
     private void btnAngeTillganglighetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAngeTillganglighetActionPerformed
         boolean ett = kan1.isSelected();
         boolean tva = kan2.isSelected();
-        boolean tre = kan3.isSelected();
-
-        if (ett) {
-            try {
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '" + lblD1.getText() + " " + lblStt1.getText() + "%' AND Sluttid='" + lblSlt1.getText() + "' And MostesId = '" + motesId + "' AND deltagare = '" + userId + "';");
-            } catch (InfException e) {
-                JOptionPane.showMessageDialog(null, "1N");
+        boolean tre = kan3.isSelected();  
+        
+        if(ett){
+            try{
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '"+lblD1.getText() + " " + lblStt1.getText()+"%' AND Sluttid='"+lblSlt1.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
             }
-        } else {
-            try {
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '" + lblD1.getText() + " " + lblStt1.getText() + "%' AND Sluttid='" + lblSlt1.getText() + "' And MostesId = '" + motesId + "' AND deltagare = '" + userId + "';");
-            } catch (InfException e) {
+            catch(InfException e){
                 JOptionPane.showMessageDialog(null, "1N");
             }
         }
-
-        if (tva) {
-            try {
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '" + lblD2.getText() + " " + lblStt2.getText() + "%' AND Sluttid='" + lblSlt2.getText() + "' And MostesId = '" + motesId + "' AND deltagare = '" + userId + "';");
-            } catch (InfException e) {
+        else{
+            try{
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '"+lblD1.getText() + " " + lblStt1.getText()+"%' AND Sluttid='"+lblSlt1.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
+            }
+            catch(InfException e){
+                JOptionPane.showMessageDialog(null, "1N");
+            }
+        }
+        
+        if(tva){
+            try{
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '"+lblD2.getText() + " " + lblStt2.getText()+"%' AND Sluttid='"+lblSlt2.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
+            }
+            catch(InfException e){
                 JOptionPane.showMessageDialog(null, "2Y");
             }
-        } else {
-            try {
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '" + lblD2.getText() + " " + lblStt2.getText() + "%' AND Sluttid='" + lblSlt2.getText() + "' And MostesId = '" + motesId + "' AND deltagare = '" + userId + "';");
-            } catch (InfException e) {
+        }
+        else{
+            try{
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '"+lblD2.getText() + " " + lblStt2.getText()+"%' AND Sluttid='"+lblSlt2.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
+            }
+            catch(InfException e){
                 JOptionPane.showMessageDialog(null, "2N");
             }
         }
-
-        if (tre) {
-            try {
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '" + lblD3.getText() + " " + lblStt3.getText() + "%' AND Sluttid='" + lblSlt3.getText() + "' And MostesId = '" + motesId + "' AND deltagare = '" + userId + "';");
-            } catch (InfException e) {
+        
+        if(tre){
+        try{
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'Y' WHERE DATUM LIKE '"+lblD3.getText() + " " + lblStt3.getText()+"%' AND Sluttid='"+lblSlt3.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
+            }
+            catch(InfException e){
                 JOptionPane.showMessageDialog(null, "3Y");
             }
-        } else {
-            try {
-                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '" + lblD3.getText() + " " + lblStt3.getText() + "%' AND Sluttid='" + lblSlt3.getText() + "' And MostesId = '" + motesId + "' AND deltagare = '" + userId + "';");
-            } catch (InfException e) {
+        }
+        else{
+            try{
+                databasen.update("UPDATE Anvandare_moten SET KAN = 'N' WHERE DATUM LIKE '"+lblD3.getText() + " " + lblStt3.getText()+"%' AND Sluttid='"+lblSlt3.getText()+"' And MostesId = '"+motesId+"' AND deltagare = '"+userId+"';");
+            }
+            catch(InfException e){
                 JOptionPane.showMessageDialog(null, "3N");
             }
         }
         JOptionPane.showMessageDialog(null, "Dina svar har nu skickats till mötesarrangören.");
         uncheckaBoxen();
-        this.dispose();
     }//GEN-LAST:event_btnAngeTillganglighetActionPerformed
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAngeTillganglighet;
@@ -315,7 +327,6 @@ public class AngeTillganglighet extends javax.swing.JFrame {
     private javax.swing.JLabel lblD1;
     private javax.swing.JLabel lblD2;
     private javax.swing.JLabel lblD3;
-    private javax.swing.JLabel lblMotesRubrik;
     private javax.swing.JLabel lblNamn;
     private javax.swing.JLabel lblSlt1;
     private javax.swing.JLabel lblSlt2;
@@ -324,5 +335,6 @@ public class AngeTillganglighet extends javax.swing.JFrame {
     private javax.swing.JLabel lblStt2;
     private javax.swing.JLabel lblStt3;
     private javax.swing.JLabel lblanvnamn;
+    private javax.swing.JLabel lblmotesNamn;
     // End of variables declaration//GEN-END:variables
 }
