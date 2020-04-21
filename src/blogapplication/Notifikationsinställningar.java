@@ -14,11 +14,11 @@ public class Notifikationsinställningar extends javax.swing.JFrame {
     private final InfDB databasen;
     private String MejlAdress;
    
-    public Notifikationsinställningar() {
+    public Notifikationsinställningar(String userId) {
         initComponents();
         dataHanterare = new DataHanterare();
         databasen = DataHanterare.dataHanterare();
-        MejlAdress = dataHanterare.getAnvandarnamn();
+        MejlAdress = dataHanterare.getAnvandarnamn(userId);
         
     }
 
