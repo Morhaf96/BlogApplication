@@ -36,7 +36,8 @@ public class PublikKalender extends javax.swing.JFrame {
     }
 
     public void setVlkmnMdlnde() {
-        lblVlkmn.setText("Välkommen " + userId + "! Välj ett datum för att visa möten vid den dagen");
+        String anvnamn=dataHanterare.getFullNamn(userId);
+        lblVlkmn.setText("Välkommen " + anvnamn + "! Välj ett datum för att visa möten vid den dagen");
     }
 
     /**
