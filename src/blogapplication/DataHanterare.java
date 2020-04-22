@@ -857,4 +857,67 @@ public class DataHanterare {
         }
         return mejl;
     }
+    
+    public boolean stangAvBloggNotiser(String userId){
+        boolean lyckats=false;
+    try{ databasen.delete("DELETE FROM notiser WHERE anvandarid = '"+ userId +"' ");
+             
+             lyckats=true;
+          }
+          catch(Exception e){
+              JOptionPane.showMessageDialog(null, "stangAvBloggNotiser har misslyckats:"+e.getMessage());
+          }
+    return lyckats;
+    }
+    
+    public boolean faFormellNotiser(String userId){
+        boolean lyckats=false;
+    try{ databasen.insert("insert into notiser values('"+ userId +"', '1');");
+             
+             lyckats=true;
+          }
+          catch(Exception e){
+              JOptionPane.showMessageDialog(null, "stangAvBloggNotiser har misslyckats:"+e.getMessage());
+          }
+    return lyckats;
+    }
+    
+    
+    public boolean faInformellNotiser(String userId){
+        boolean lyckats=false;
+    try{ databasen.insert("insert into notiser values('"+ userId +"', '2');");
+             
+             lyckats=true;
+          }
+          catch(Exception e){
+              JOptionPane.showMessageDialog(null, "stangAvBloggNotiser har misslyckats:"+e.getMessage());
+          }
+    return lyckats;
+    }
+    
+    public boolean faUtbildningNotiser(String userId){
+        boolean lyckats=false;
+    try{ databasen.insert("insert into notiser values('"+ userId +"', '3');");
+             
+             lyckats=true;
+          }
+          catch(Exception e){
+              JOptionPane.showMessageDialog(null, "stangAvBloggNotiser har misslyckats:"+e.getMessage());
+          }
+    return lyckats;
+    }
+    
+    
+    public boolean faForskningNotiser(String userId){
+        boolean lyckats=false;
+    try{ databasen.insert("insert into notiser values('"+ userId +"', '4');");
+             
+             lyckats=true;
+          }
+          catch(Exception e){
+              JOptionPane.showMessageDialog(null, "stangAvBloggNotiser har misslyckats:"+e.getMessage());
+          }
+    return lyckats;
+    }
+    
 }
