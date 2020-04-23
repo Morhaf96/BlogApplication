@@ -7,11 +7,9 @@ package blogapplication;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Desktop;
 import java.io.File;
-import java.net.URI;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -314,8 +312,6 @@ public class SkapaInlagg extends javax.swing.JFrame {
             int inlaggID = dataHanterare.getNextInlaggId();
             int skribent = userId;
             String inlagg = dataHanterare.stringFormat(jTInlagg.getText());
-            String kfnamn = cmbFK.getSelectedItem().toString();
-            String fkid = dataHanterare.getFKID(kfnamn);
 
             int bsektion = 0;
             String vald = cmbBS.getSelectedItem().toString();
@@ -341,6 +337,8 @@ public class SkapaInlagg extends javax.swing.JFrame {
                     if (!tfFilNamn.equals(null)) {
                         filNamn = dataHanterare.stringFormat(tfFilNamn.getText());
                     }
+                    String kfnamn = cmbFK.getSelectedItem().toString();
+                    String fkid = dataHanterare.getFKID(kfnamn);
                     dataHanterare.laggTillFil(filNamn, filnamn, inlaggID, fkid);
                 }
                 JOptionPane.showMessageDialog(null, "Ditt inlägg har skapats!");
@@ -351,6 +349,13 @@ public class SkapaInlagg extends javax.swing.JFrame {
                 filnamn = null;
                 lblFilUrl.setText("");
                 this.dispose();
+                
+                int bloggsektionId=bsektion;
+                ArrayList<String> anvIdNotis=dataHanterare.getBloggNotisLista(bloggsektionId);
+                for(String s:anvIdNotis){
+                int anvid= Integer.parseInt(s);
+                dataHanterare.skickaBloggNotis(anvid, userId, bloggsektionId);
+                }
 
             } else {
                 System.out.print("Misslyckades");

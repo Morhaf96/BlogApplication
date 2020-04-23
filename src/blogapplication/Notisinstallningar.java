@@ -1,9 +1,6 @@
-
 package blogapplication;
 
 import javax.swing.JOptionPane;
-import oru.inf.InfDB;
-import oru.inf.InfException;
 
 /**
  * @author Parisa Mohammadi
@@ -11,16 +8,16 @@ import oru.inf.InfException;
 public class Notisinstallningar extends javax.swing.JFrame {
 
     private final DataHanterare dataHanterare;
-    private final InfDB databasen;
     private String MejlAdress;
     private String userId;
-   
+
     public Notisinstallningar(String userId) {
         initComponents();
         dataHanterare = new DataHanterare();
-        databasen = DataHanterare.dataHanterare();
-        MejlAdress = dataHanterare.getAnvandarnamn(userId);
-        this.userId=userId;
+        int uid=Integer.parseInt(userId);
+        MejlAdress = dataHanterare.getAnvMejl(uid);
+        this.userId = userId;
+        this.setLocationRelativeTo(null);
         lblVlkmn.setText("Välkommen " + dataHanterare.getAnvandarFornamn(Integer.parseInt(userId)) + "!");
     }
 
@@ -109,26 +106,25 @@ public class Notisinstallningar extends javax.swing.JFrame {
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
         String AID = userId;
         dataHanterare.stangAvBloggNotiser(userId);
-                if(chbFormell.isSelected()){
-                    dataHanterare.faFormellNotiser(userId);  
-                }
-                if(chbInformell.isSelected()){
-                dataHanterare.faInformellNotiser(userId); 
-                }
-                if(chbUtbildning.isSelected()){
-                dataHanterare.faUtbildningNotiser(userId); 
-                }
-                if(chbForskning.isSelected()){
-                dataHanterare.faForskningNotiser(userId); 
-                }
-    JOptionPane.showMessageDialog(null, "Dina ändringar har sparats!");
-      chbFormell.setSelected(false);
-      chbInformell.setSelected(false);
-      chbForskning.setSelected(false);
-      chbUtbildning.setSelected(false);
+        if (chbFormell.isSelected()) {
+            dataHanterare.faFormellNotiser(userId);
+        }
+        if (chbInformell.isSelected()) {
+            dataHanterare.faInformellNotiser(userId);
+        }
+        if (chbUtbildning.isSelected()) {
+            dataHanterare.faUtbildningNotiser(userId);
+        }
+        if (chbForskning.isSelected()) {
+            dataHanterare.faForskningNotiser(userId);
+        }
+        JOptionPane.showMessageDialog(null, "Dina ändringar har sparats!");
+        chbFormell.setSelected(false);
+        chbInformell.setSelected(false);
+        chbForskning.setSelected(false);
+        chbUtbildning.setSelected(false);
     }//GEN-LAST:event_btnSparaActionPerformed
 
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSpara;

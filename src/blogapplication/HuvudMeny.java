@@ -297,6 +297,10 @@ public class HuvudMeny extends javax.swing.JFrame {
             if (dataHanterare.registreraNyAnvandare(fornamn, efternamn, email, anvandarLos, tnr)) {
                 System.out.println("Registreringen lyckades!");
                 tomRegFalten();
+                String amne="Välkommen till OruSystemet!";
+                String meddelande="Hej "+fornamn+" "+efternamn+"! Du har nu skapat ditt konto och är redo för att använda systemet! \nDina inloggningsuppgiter är: \n"
+                        + "Mejl: "+email+"\nLösenord: "+anvandarLos;
+                Mejl.skickaMejl(email, amne, meddelande);
 
             }
         }

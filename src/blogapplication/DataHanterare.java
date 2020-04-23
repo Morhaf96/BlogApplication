@@ -848,7 +848,7 @@ public class DataHanterare {
         return lyckats;
     }
     
-    public String getAnvandarnamn(String userId) {
+    public String getAnvMejl(int userId) {
         String mejl = "";
         try {
             mejl = databasen.fetchSingle("Select mejl from anvandare where anvandarid='" + userId + "';");
@@ -918,6 +918,41 @@ public class DataHanterare {
               JOptionPane.showMessageDialog(null, "stangAvBloggNotiser har misslyckats:"+e.getMessage());
           }
     return lyckats;
+    }
+    
+    public ArrayList<String> getBloggNotisLista(int BSId){
+    ArrayList<String> anvIdLista=new ArrayList<>();
+    try{
+    anvIdLista=databasen.fetchColumn("Select distinct anvandarid from notiser where bloggsektionid='"+BSId+"';");
+    }
+    
+    catch(Exception e){
+     System.out.println("faBloggNotisLista error:" + e.getMessage());
+    }
+    return anvIdLista;
+    }
+    
+    public String getBsNamn(int BSId){
+    String namnet="";
+    try{
+    namnet=databasen.fetchSingle("Select bsektionnamn from bloggsektioner where bsektionid='"+BSId+"';");
+    }
+    
+    catch(Exception e){
+    System.out.println("getBsNamn error:" + e.getMessage());
+    }
+    return namnet;
+    
+    }
+    
+    public void skickaBloggNotis(int userId,int skribent, int BSId){
+       String anvNamn= getFullNamn(userId);
+       String skribenten=getFullNamn(skribent);
+       String bsNamn=getBsNamn(BSId);
+       String anvMejl= getAnvMejl(userId);
+       String rubrik="Blogginlägg notis";
+       String innehall="Hej "+anvNamn+"! \nEtt nytt inlägg har lagts i bloggsektionen \""+bsNamn+"\" av "+skribenten+". \nLogga in till systemet för att läsa inläggen.";
+       Mejl.skickaMejl(anvMejl, rubrik, innehall);
     }
     
 }
