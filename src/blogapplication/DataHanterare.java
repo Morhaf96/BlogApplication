@@ -300,7 +300,7 @@ public class DataHanterare {
             lista.setModel(model);
         } catch (Exception e) {
 
-            System.out.println("fyllListMotesInbjudningar error: " + e.getMessage());
+//            System.out.println("fyllListMotesInbjudningar error: " + e.getMessage());
         }
     }
 
@@ -339,7 +339,7 @@ public class DataHanterare {
 
             lista.setModel(model);
         } catch (Exception e) {
-            System.out.println("fyllListaMinaSkapadeMoten error: " + e.getMessage());
+//            System.out.println("fyllListaMinaSkapadeMoten error: " + e.getMessage());
 
         }
     }
@@ -375,7 +375,7 @@ public class DataHanterare {
             }
             lista.setModel(model);
         } catch (Exception e) {
-            System.out.println("fyllListInplaneradeMoten error: " + e.getMessage());
+//            System.out.println("fyllListInplaneradeMoten error: " + e.getMessage());
         }
     }
 
@@ -820,7 +820,6 @@ public class DataHanterare {
         } catch (Exception e) {
             System.out.println("arAdmin error:" + e.getMessage());
         }
-        System.out.println("Ar admin returnerar " + admin);
         return admin;
     }
 
@@ -1044,5 +1043,30 @@ public class DataHanterare {
     System.out.println("getForslagIdPaminnelser error:" + e.getMessage());}
     return fLista;
     }
+    
+    public boolean makeUserAdmin(int userId){
+        boolean lyckats=true;
+     try{
+    databasen.delete("delete from admins where anvandarid='"+userId+"';");
+    databasen.insert("insert into admins values('"+userId+"');");
+    
+    }
+    
+    catch(Exception e){
+    lyckats=false;
+    System.out.println("makeUserAdmin error:" + e.getMessage());}
+    return lyckats;
+    }
    
+     public boolean makeUserIckeAdmin(int userId){
+        boolean lyckats=true;
+     try{
+    databasen.delete("delete from admins where anvandarid='"+userId+"';");
+    }
+    
+    catch(Exception e){
+    lyckats=false;
+    System.out.println("makeUserIckeAdmin error:" + e.getMessage());}
+    return lyckats;
+    }
 }
