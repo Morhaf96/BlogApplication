@@ -123,6 +123,7 @@ public class Notisinstallningar extends javax.swing.JFrame {
         chbInformell.setSelected(false);
         chbForskning.setSelected(false);
         chbUtbildning.setSelected(false);
+        this.dispose();
     }//GEN-LAST:event_btnSparaActionPerformed
 
 

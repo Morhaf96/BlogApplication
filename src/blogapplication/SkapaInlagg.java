@@ -333,12 +333,21 @@ public class SkapaInlagg extends javax.swing.JFrame {
 
             if (dataHanterare.skapaInlagg(inlaggID, skribent, inlagg, bsektion, titel, datum, tid)) {
                 if (!tfFilUrl.getText().equals("")) {
-                    String filNamn = "Unnamed File";
+                    cmbFK.setSelectedItem(5);
+                    String filNamn = "Utan kategori";
                     if (!tfFilNamn.equals(null)) {
                         filNamn = dataHanterare.stringFormat(tfFilNamn.getText());
                     }
-                    String kfnamn = cmbFK.getSelectedItem().toString();
-                    String fkid = dataHanterare.getFKID(kfnamn);
+                    String fknamn="Utan kategori";
+                    String fkid = "5";
+                    try{
+                    fknamn = cmbFK.getSelectedItem().toString();
+                    fkid = dataHanterare.getFKID(fknamn);}
+                    catch(java.lang.NullPointerException e){
+                    fkid="5";
+                    System.out.println("Skapa inlägg error:" + e.getMessage());
+                    }
+                    
                     dataHanterare.laggTillFil(filNamn, filnamn, inlaggID, fkid);
                 }
                 JOptionPane.showMessageDialog(null, "Ditt inlägg har skapats!");
@@ -350,15 +359,20 @@ public class SkapaInlagg extends javax.swing.JFrame {
                 lblFilUrl.setText("");
                 this.dispose();
                 
+                try{
                 int bloggsektionId=bsektion;
                 ArrayList<String> anvIdNotis=dataHanterare.getBloggNotisLista(bloggsektionId);
                 for(String s:anvIdNotis){
                 int anvid= Integer.parseInt(s);
                 dataHanterare.skickaBloggNotis(anvid, userId, bloggsektionId);
+                }}
+                
+                catch(java.lang.NullPointerException e){
+                 System.out.print("Inga användare vill ha notiser från denna blogg");
                 }
 
             } else {
-                System.out.print("Misslyckades");
+                System.out.print("Misslyckades112");
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed

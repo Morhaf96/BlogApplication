@@ -70,7 +70,7 @@ public class DataHanterare {
     }
 
     public int getNextAnvandarId() {
-        String id = "";
+        String id = "1";
         try {
             id = databasen.getAutoIncrement("Anvandare", "AnvandarId");
         } catch (InfException e) {
@@ -81,58 +81,79 @@ public class DataHanterare {
     }
 
     public int getNextInlaggId() {
-        String id = "";
+        int id = 1;
         try {
-            id = databasen.getAutoIncrement("Inlagg", "InlaggId");
+           String idI = databasen.getAutoIncrement("Inlagg", "InlaggId");
+            id=Integer.parseInt(idI);
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Databasfel!");
             System.out.println("getNextAnvandarId felmeddelande: " + e.getMessage());
         }
-        return Integer.parseInt(id);
+        catch(java.lang.NumberFormatException e){
+       id=1;
+        }
+        return id;
     }
 
     public int getNextMotesId() {
-        String id = "";
+        int id = 1;
         try {
-            id = databasen.getAutoIncrement("Moten", "MotesId");
+          String idI = databasen.getAutoIncrement("Moten", "MotesId");
+            id=Integer.parseInt(idI);
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Databasfel!");
             System.out.println("getNextAnvandarId felmeddelande: " + e.getMessage());
         }
-        return Integer.parseInt(id);
+        catch(java.lang.NumberFormatException e){
+       id=1;
+        }
+        return id;
+        
     }
 
     public int getNextFilkategoriId() {
-        String id = "";
+        int id = 1;
         try {
-            id = databasen.getAutoIncrement("Filkategorier", "FKID");
+          String idI = databasen.getAutoIncrement("filkategorier", "fkid");
+            id=Integer.parseInt(idI);
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Databasfel!");
             System.out.println("getNextAnvandarId felmeddelande: " + e.getMessage());
         }
-        return Integer.parseInt(id);
+        catch(java.lang.NumberFormatException e){
+       id=1;
+        }
+        return id;
     }
 
     public int getNextFilId() {
-        String id = "";
+         int id = 1;
         try {
-            id = databasen.getAutoIncrement("Filer", "FILID");
+          String idI = databasen.getAutoIncrement("filer", "filid");
+            id=Integer.parseInt(idI);
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Databasfel!");
             System.out.println("getNextAnvandarId felmeddelande: " + e.getMessage());
         }
-        return Integer.parseInt(id);
+        catch(java.lang.NumberFormatException e){
+       id=1;
+        }
+        return id;
     }
 
     public int getNextForslagId() {
-        String id = "";
+         int id = 1;
         try {
-            id = databasen.getAutoIncrement("Anvandare_moten", "ForslagId");
+          String idI = databasen.getAutoIncrement("Anvandare_moten", "forslagid");
+            id=Integer.parseInt(idI);
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Databasfel!");
             System.out.println("getNextAnvandarId felmeddelande: " + e.getMessage());
         }
-        return Integer.parseInt(id);
+        catch(java.lang.NumberFormatException e){
+       id=1;
+        }
+        return id;
     }
 
     public boolean registreraNyAnvandare(String fornamn, String efternamn, String email, String losenord, String telefonnummer) {
@@ -375,6 +396,9 @@ public class DataHanterare {
 
     public boolean laggTillFil(String namn, String filUrl, int inlaggId, String fkid) {
         boolean lyckats = false;
+        if (namn.isEmpty()||namn.equals(null)){
+        namn="Unnamed File";
+        }
         int filid = getNextFilId();
         try {
             databasen.insert("insert into filer values('" + filid + "', '" + namn + "', '" + filUrl + "', '" + inlaggId + "', '" + fkid + "');");

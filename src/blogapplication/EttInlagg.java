@@ -50,11 +50,13 @@ public class EttInlagg extends javax.swing.JPanel {
                 String filnamn = dataHanterare.getFilNamn(filId);
                 String filUrl = dataHanterare.getFilUrl(filId);
                 String filKID=dataHanterare.getFKid2(filId);
-                System.out.println(filKID);
                 String fknamn=dataHanterare.getFKnamn(filKID);
-                 System.out.println(fknamn);
                 this.filUrl = filUrl;
-                lblBifogadFil.setText("Bifogade filer: " + filnamn+". Filkategori: "+fknamn+".");
+                String bifogadfilNamn="Bifogade filer: " + filnamn+".";
+                if(!filKID.equals("5")){
+                bifogadfilNamn+=" Filkategori: "+fknamn+".";
+                }
+                lblBifogadFil.setText(bifogadfilNamn);
                 lblBifogadFil.setForeground(Color.BLUE.darker());
                 lblBifogadFil.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
