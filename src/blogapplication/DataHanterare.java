@@ -369,12 +369,11 @@ public class DataHanterare {
         try {
             ArrayList<String> listan = databasen.fetchColumn("SELECT distinct MOTEN.titel FROM MOTEN "
                     + "JOIN Anvandare_Moten ON MOTEN.motesId=Anvandare_Moten.MostesId "
-                    + "WHERE Deltagare='" + anvandarId + "' or arrangor='" + anvandarId + "';");
+                    + "WHERE moten.datum not like '2000-01-01' and (Deltagare='" + anvandarId + "' or arrangor='" + anvandarId + "');");
             String svar = "";
             for (int i = 0; i < listan.size(); i++) {
                 svar = listan.get(i);
                 model.addElement(svar);
-                System.out.println("for loopen körs");
             }
             lista.setModel(model);
         } catch (Exception e) {

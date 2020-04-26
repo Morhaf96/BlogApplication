@@ -54,7 +54,7 @@ public class MinaSkapadeMoten extends javax.swing.JFrame {
     }
 
     public void setTider() {
-        forslagidLista=dataHanterare.getForslagId(motesId);
+        forslagidLista = dataHanterare.getForslagId(motesId);
         String f1 = forslagidLista.get(0);
         String datumlang1 = dataHanterare.getMotesTid(f1);
         String datum1 = datumlang1.substring(0, 10);
@@ -221,8 +221,19 @@ public class MinaSkapadeMoten extends javax.swing.JFrame {
             dataHanterare.bestamMotestid(motesId, userId, datum3, stt3, slt3);
             stringAttSkrivaUT = "Mötet " + dataHanterare.getMotesnamn(motesId) + " är nu bestämt till " + datum3 + " " + stt3 + "-" + slt3;
         }
-
         JOptionPane.showMessageDialog(null, stringAttSkrivaUT);
+        try {
+            ArrayList<String> inbjudnaLista = dataHanterare.getDeltagarnasId(motesId);
+            for (String s : inbjudnaLista) {
+                int id = Integer.parseInt(s);
+                String mejl = dataHanterare.getAnvMejl(id);
+                String amne = "Tiden för mötet \"" + dataHanterare.getMotesnamn(motesId) + "\" har nu fastställts";
+                String mejlet = stringAttSkrivaUT + "\nLogga in till ditt konto och välj mötet under \"Inplanerade möten\n om du vill få mötespåminnelse.";
+                Mejl.skickaMejl(mejl, amne, mejlet);
+            }
+        } catch (Exception e) {
+            System.out.println("Mejl utskick efter tidsbestämmelse error: " + e.getMessage());
+        }
         rbtnTid1.setSelected(false);
         rbtnTid2.setSelected(false);
         rbtnTid3.setSelected(false);
