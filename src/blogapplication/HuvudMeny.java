@@ -26,6 +26,8 @@ public class HuvudMeny extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Logga in/Registrera dig");
+        tfInlogMail.setText("morhaf996@gmail.com");
+        lfInlogLos.setText("morhaf123");
     }
 
     /**
@@ -290,14 +292,15 @@ public class HuvudMeny extends javax.swing.JFrame {
             System.out.println("Problem med angiven data");
         } else {
 
-            String fornamn = tfFornamn.getText();
-            String efternamn = tfEfternamn.getText();
-            String email = tfRegMail.getText();
+            String fornamn = dataHanterare.stringFormat(tfFornamn.getText());
+            String efternamn = dataHanterare.stringFormat(tfEfternamn.getText());
+            String email = dataHanterare.stringFormat(tfRegMail.getText());
             String anvandarLos = lfRegLos.getText();
             String tnr = tfTel.getText();
 
             if (dataHanterare.registreraNyAnvandare(fornamn, efternamn, email, anvandarLos, tnr)) {
                 System.out.println("Registreringen lyckades!");
+                tomInlogFalten();
                 tfInlogMail.setText(email);
                 tomRegFalten();
                 String amne="Välkommen till OruSystemet!";
