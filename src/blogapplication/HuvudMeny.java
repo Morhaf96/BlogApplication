@@ -26,6 +26,8 @@ public class HuvudMeny extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Logga in/Registrera dig");
+        
+        System.out.println(dataHanterare.getMotetsSkapareNamn(5));
     }
 
     /**
@@ -296,6 +298,7 @@ public class HuvudMeny extends javax.swing.JFrame {
 
             if (dataHanterare.registreraNyAnvandare(fornamn, efternamn, email, anvandarLos, tnr)) {
                 System.out.println("Registreringen lyckades!");
+                tfInlogMail.setText(email);
                 tomRegFalten();
                 String amne="Välkommen till OruSystemet!";
                 String meddelande="Hej "+fornamn+" "+efternamn+"! Du har nu skapat ditt konto och är redo för att använda systemet! \nDina inloggningsuppgiter är: \n"

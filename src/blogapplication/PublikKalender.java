@@ -133,7 +133,8 @@ public class PublikKalender extends javax.swing.JFrame {
             if(motesIdLista.size()>0){
             for (String s:motesIdLista){
             String motesNamn=dataHanterare.getMotetsnamn(s);
-            String motesArrangor=dataHanterare.getMotetsSkapareNamn(userId);
+            int motesid=dataHanterare.getMotesId(motesNamn);
+            String motesArrangor=dataHanterare.getMotetsSkapareNamn(motesid);
             String motesDatum=dataHanterare.getMotetsDatum(s);
             String motetsSluttid=dataHanterare.getMotetsSluttid(s).trim();
             String motetsStarttid=dataHanterare.getMotetsStarttid(s).trim();

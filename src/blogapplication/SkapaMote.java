@@ -17,7 +17,7 @@ import sun.util.calendar.BaseCalendar;
  * @author Team 14
  */
 public class SkapaMote extends javax.swing.JFrame {
-
+    
     private DataHanterare dataHanterare;
     private InfDB databasen;
     public int userId;
@@ -29,7 +29,7 @@ public class SkapaMote extends javax.swing.JFrame {
      * Creates new form MotesBokning
      */
     public SkapaMote(int userId) {
-
+        
         dataHanterare = new DataHanterare();
         databasen = DataHanterare.dataHanterare();
         this.userId = userId;
@@ -39,7 +39,7 @@ public class SkapaMote extends javax.swing.JFrame {
         valdMoteMinaMoten = -1;
         valdInplnaerade = -1;
     }
-
+    
     public void tomFalten() {
         tfTitel.setText("");
         tfPlats.setText("");
@@ -49,7 +49,7 @@ public class SkapaMote extends javax.swing.JFrame {
         tfStartTid3.setText("");
         tfSluttid2.setText("");
         tfSluttid3.setText("");
-
+        
     }
 
     /**
@@ -412,17 +412,18 @@ public class SkapaMote extends javax.swing.JFrame {
         String sluttid1 = tfSluttid1.getText();
         String sluttid2 = tfSluttid2.getText();
         String sluttid3 = tfSluttid3.getText();
-
+        
         new BjudInTillMote(motesId, datumformat1, datumformat2, datumformat3, starttid1, starttid2, starttid3, sluttid1, sluttid2, sluttid3).setVisible(true);
         tomFalten();
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         dataHanterare.fyllListInplaneradeMoten(userId, lIplaneradeMoten);
         dataHanterare.fyllListMotesInbjudningar(userId, lMotesInbjud);
         dataHanterare.fyllListaMinaSkapadeMoten(userId, lMinaSkapadeMoten);
-
+        dataHanterare.harSkapadeMoten(userId);
+        dataHanterare.harMotesInbjudningar(userId);
+        dataHanterare.harInplaneradeMoten(userId);
     }//GEN-LAST:event_formWindowOpened
 
     private void lMotesInbjudMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lMotesInbjudMouseClicked
@@ -489,9 +490,9 @@ public class SkapaMote extends javax.swing.JFrame {
                 arrangorEfternamn = databasen.fetchSingle("SELECT EFTERNAMN FROM ANVANDARE JOIN MOTEN ON ANVANDARE.ANVANDARID = MOTEN.ARRANGOR AND MOTEN.MOTESID ='" + MID + "';");
                 titel = databasen.fetchSingle("SELECT titel FROM MOTEN WHERE MotesId ='" + MID + "';");
                 plats = databasen.fetchSingle("SELECT plats FROM MOTEN WHERE MotesId ='" + MID + "';");
-
+                
             } catch (InfException e) {
-
+                
             }
             new InbkoatMote(titel, arrangorFornamn, arrangorEfternamn, datumochtid, plats, valdInplnaerade, userId).setVisible(true);
         } else {
