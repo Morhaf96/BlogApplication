@@ -19,7 +19,7 @@ public class Sms {
 
     public static void skickaSms(String sms, String avsandare, String mottagare) {
         try {
-
+            //xtlocal.co.uk
             String apiKey = "apikey=" + "";
             //74wY8g/SAVY-WdrolirP5LObuecEI5BXEU0N6sG4PQ
             //JKBbA3k0XEQ-iaRLZpQidmLDOTW8dkq49k5wzaiQWM

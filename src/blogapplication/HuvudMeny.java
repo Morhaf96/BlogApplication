@@ -26,8 +26,6 @@ public class HuvudMeny extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Logga in/Registrera dig");
-        
-        System.out.println(dataHanterare.getMotetsSkapareNamn(5));
     }
 
     /**

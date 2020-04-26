@@ -45,7 +45,6 @@ public class DataHanterare {
             userId = Integer.parseInt(query);
         } catch (InfException e) {
             System.out.println("getUserId felmeddelande1: " + e.getMessage());
-            System.out.println(userId);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Användaren hiitades ej! \n"
                     + "Vänligen dubbelkolla mejlet du angav och försök igen.");
@@ -235,7 +234,6 @@ public class DataHanterare {
         try {
             String stringId = databasen.fetchSingle("Select anvandarId from Anvandare where fornamn='" + fornamn + "' and efternamn='" + efternamn + "';");
             id = Integer.parseInt(stringId);
-            System.out.println(id);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.out.println("Internt felmeddelande" + ex.getMessage());

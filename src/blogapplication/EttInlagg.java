@@ -53,12 +53,17 @@ public class EttInlagg extends javax.swing.JPanel {
                 String fknamn=dataHanterare.getFKnamn(filKID);
                 this.filUrl = filUrl;
                 String bifogadfilNamn="Bifogade filer: " + filnamn+".";
-                if(!filKID.equals("5")){
+                try{
+                if(!filKID.equals("5") && !fknamn.equals(null)){
                 bifogadfilNamn+=" Filkategori: "+fknamn+".";
                 }
                 lblBifogadFil.setText(bifogadfilNamn);
                 lblBifogadFil.setForeground(Color.BLUE.darker());
                 lblBifogadFil.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }catch(Exception e){
+                    System.out.println("setText i EttInlagg "+ e.getMessage());
+            }
+            
             }
         }
         String inlaggText = dataHanterare.getInlaggText(inlagg);
@@ -137,7 +142,7 @@ public class EttInlagg extends javax.swing.JPanel {
             Runtime.getRuntime().exec("explorer \"" + filUrl + "\"");
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("lblBifogadFilMouseClicked"+e.getMessage());
         }
     }//GEN-LAST:event_lblBifogadFilMouseClicked
 

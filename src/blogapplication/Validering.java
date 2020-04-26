@@ -104,7 +104,7 @@ public class Validering {
             lyckats = true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Är inte koreekt tid");
-            System.out.println(e.getMessage());
+            System.out.println("arTid"+e.getMessage());
         }
 
         return lyckats;

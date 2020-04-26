@@ -338,16 +338,16 @@ public class SkapaInlagg extends javax.swing.JFrame {
                     if (!tfFilNamn.equals(null)) {
                         filNamn = dataHanterare.stringFormat(tfFilNamn.getText());
                     }
-                    String fknamn="Utan kategori";
+                    String fknamn = "Utan kategori";
                     String fkid = "5";
-                    try{
-                    fknamn = cmbFK.getSelectedItem().toString();
-                    fkid = dataHanterare.getFKID(fknamn);}
-                    catch(java.lang.NullPointerException e){
-                    fkid="5";
-                    System.out.println("Skapa inlägg error:" + e.getMessage());
+                    try {
+                        fknamn = cmbFK.getSelectedItem().toString();
+                        fkid = dataHanterare.getFKID(fknamn);
+                    } catch (java.lang.NullPointerException e) {
+                        fkid = "5";
+                        System.out.println("Skapa inlägg error:" + e.getMessage());
                     }
-                    
+
                     dataHanterare.laggTillFil(filNamn, filnamn, inlaggID, fkid);
                 }
                 JOptionPane.showMessageDialog(null, "Ditt inlägg har skapats!");
@@ -358,17 +358,16 @@ public class SkapaInlagg extends javax.swing.JFrame {
                 filnamn = null;
                 lblFilUrl.setText("");
                 this.dispose();
-                
-                try{
-                int bloggsektionId=bsektion;
-                ArrayList<String> anvIdNotis=dataHanterare.getBloggNotisLista(bloggsektionId);
-                for(String s:anvIdNotis){
-                int anvid= Integer.parseInt(s);
-                dataHanterare.skickaBloggNotis(anvid, userId, bloggsektionId);
-                }}
-                
-                catch(java.lang.NullPointerException e){
-                 System.out.print("Inga användare vill ha notiser från denna blogg");
+
+                try {
+                    int bloggsektionId = bsektion;
+                    ArrayList<String> anvIdNotis = dataHanterare.getBloggNotisLista(bloggsektionId);
+                    for (String s : anvIdNotis) {
+                        int anvid = Integer.parseInt(s);
+                        dataHanterare.skickaBloggNotis(anvid, userId, bloggsektionId);
+                    }
+                } catch (java.lang.NullPointerException e) {
+                    System.out.print("Inga användare vill ha notiser från denna blogg");
                 }
 
             } else {
@@ -402,7 +401,7 @@ public class SkapaInlagg extends javax.swing.JFrame {
             Runtime.getRuntime().exec("explorer \"" + filnamn + "\"");
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("lblFilUrlMouseClicked" + e.getMessage());
         }
     }//GEN-LAST:event_lblFilUrlMouseClicked
 
@@ -436,20 +435,23 @@ public class SkapaInlagg extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try{
-        String kfnamn = cmbFK.getSelectedItem().toString();
-        String fkid = dataHanterare.getFKID(kfnamn);
-        boolean lyckats = dataHanterare.taBortFK(fkid);
-        if (lyckats) {
-            JOptionPane.showMessageDialog(null, "Filkategorin har tagits bort.");
-            cmbFK.removeAllItems();
-            fyllCmbFK();
-        } else {
-            System.out.println("TaBortValdKategoriKnapp något gick fel.");
-        }
-        }
-        catch(java.lang.NullPointerException e){
-        JOptionPane.showMessageDialog(null, "Du måste först välja en kategori från listan.");
+        try {
+            String kfnamn = cmbFK.getSelectedItem().toString();
+            String fkid = dataHanterare.getFKID(kfnamn);
+            if (fkid.equals("5")) {
+            JOptionPane.showMessageDialog(null, "Denna kategori är defaultkategoir och kan därför inte tas bort!");
+            } else {
+                boolean lyckats = dataHanterare.taBortFK(fkid);
+                if (lyckats) {
+                    JOptionPane.showMessageDialog(null, "Filkategorin har tagits bort.");
+                    cmbFK.removeAllItems();
+                    fyllCmbFK();
+                } else {
+                    System.out.println("TaBortValdKategoriKnapp något gick fel.");
+                }
+            }
+        } catch (java.lang.NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Du måste först välja en kategori från listan.");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
