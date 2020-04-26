@@ -955,4 +955,15 @@ public class DataHanterare {
        Mejl.skickaMejl(anvMejl, rubrik, innehall);
     }
     
+    public boolean setMotesNotis(int userId, int motesId, String notis){
+        boolean lyckats=false;
+    try{ databasen.update("update ANVANDARE_MOTEN set fapaminnelse='"+notis+"' where deltagare='"+userId+"' and mostesid='"+motesId+"';");
+             
+             lyckats=true;
+          }
+          catch(Exception e){
+              JOptionPane.showMessageDialog(null, "setMotesNotis har misslyckats:"+e.getMessage());
+          }
+    return lyckats;
+    } 
 }

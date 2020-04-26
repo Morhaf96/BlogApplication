@@ -483,7 +483,7 @@ public class SkapaMote extends javax.swing.JFrame {
                     tid = "ob";
                 }
                 if (datum.equalsIgnoreCase("ob") || tid.equalsIgnoreCase("ob")) {
-                    datumochtid = " datum och tid är inte bestämda än,";
+                    datumochtid = " Datum och tid är inte bestämda än,";
                 }
                 arrangorFornamn = databasen.fetchSingle("SELECT FORNAMN FROM ANVANDARE JOIN MOTEN ON ANVANDARE.ANVANDARID = MOTEN.ARRANGOR AND MOTEN.MOTESID ='" + MID + "';");
                 arrangorEfternamn = databasen.fetchSingle("SELECT EFTERNAMN FROM ANVANDARE JOIN MOTEN ON ANVANDARE.ANVANDARID = MOTEN.ARRANGOR AND MOTEN.MOTESID ='" + MID + "';");
@@ -493,7 +493,7 @@ public class SkapaMote extends javax.swing.JFrame {
             } catch (InfException e) {
 
             }
-            JOptionPane.showMessageDialog(null, "Mötet: " + titel + " hålls av " + arrangorFornamn + " " + arrangorEfternamn + " \n" + datumochtid + " på platsen: " + plats);
+            new InbkoatMote(titel, arrangorFornamn, arrangorEfternamn, datumochtid, plats, valdInplnaerade, userId).setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Du måste välja ett inplanerat möte från listan först!");
         }
