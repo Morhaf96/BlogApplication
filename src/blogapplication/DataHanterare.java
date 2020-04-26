@@ -1032,5 +1032,17 @@ public class DataHanterare {
         }
         return lyckats;
     }
+    
+    public ArrayList<String> getForslagIdPaminnelser(){
+    ArrayList<String> fLista=new ArrayList<>();
+    
+    try{
+    fLista = databasen.fetchColumn("SELECT distinct forslagid FROM ANVANDARE_MOTEN");
+    }
+    
+    catch(Exception e){
+    System.out.println("getForslagIdPaminnelser error:" + e.getMessage());}
+    return fLista;
+    }
    
 }
